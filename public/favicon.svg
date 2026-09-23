@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="7" fill="#071426"/>
+  <defs>
+    <linearGradient id="ribbon" x1="4" y1="28" x2="28" y2="3" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A4E96"/>
+      <stop offset="0.45" stop-color="#0B6FE8"/>
+      <stop offset="1" stop-color="#2EB6FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Folded ribbon M: left peak lower, right peak an upward arrow. -->
+  <path d="M5.5 26.2 L12.2 9.2 L16.4 17.4 L22.2 6.2 L27.2 26.2" stroke="url(#ribbon)" stroke-width="4.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M18.6 10.2 L22.2 4.2 L25.8 10.2" stroke="#2EB6FF" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
