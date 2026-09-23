@@ -1,0 +1,165 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { useEffect } from "react";
+import { track } from "@/lib/analytics";
+import { company, faqsFor, projectsIn, steps, type services } from "@/lib/content";
+import { absoluteUrl, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { Button } from "./button";
+import { FaqList } from "./faq";
+import { JsonLd } from "./json-ld";
+import { ProcessSteps } from "./process-steps";
+import { ProjectCard } from "./project-card";
+import { WhatsAppButton } from "./whatsapp";
+
+type Service = (typeof services)[number];
+
+export function ServiceDetail({ service }: { service: Service }) {
+  const related = projectsIn(service.related);
+  const questions = faqsFor(service.id);
+  const path = `/services/${service.slug}`;
+
+  useEffect(() => {
+    track("service_view", { service: service.slug });
+  }, [service.slug]);
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: service.title, path },
+        ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.title,
+          description: service.blurb,
+          url: absoluteUrl(path),
+          areaServed: "IN",
+          provider: {
+            "@type": "Organization",
+            name: company.name,
+            url: absoluteUrl("/"),
+          },
+        }}
+      />
+      {questions.length ? <JsonLd data={faqSchema(questions)} /> : null}
+
+      <section className="border-b border-line bg-card">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 lg:grid-cols-2">
+          <div>
+            <nav aria-label="Breadcrumb" className="text-sm text-mute">
+              <ol className="flex flex-wrap items-center gap-2">
+                <li>
+                  <Link to="/" className="hover:text-ink">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li>
+                  <Link to="/services" className="hover:text-ink">
+                    Services
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li className="text-ink">{service.title}</li>
+              </ol>
+            </nav>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{service.title}</h1>
+            <p className="mt-4 text-base leading-relaxed text-mute">{service.blurb}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button asChild>
+                <Link
+                  to="/contact"
+                  search={{ service: service.id }}
+                  onClick={() => track("quote_click", { source: service.slug })}
+                >
+                  {service.cta} <ArrowRight className="size-4" aria-hidden />
+                </Link>
+              </Button>
+              <WhatsAppButton source={`service-${service.slug}`} message={`Hello, I need help with ${service.title}.`} />
+            </div>
+          </div>
+          <img
+            src={service.image}
+            alt={service.imageAlt}
+            width={1792}
+            height={1008}
+            className="h-72 w-full rounded-3xl object-cover sm:h-96"
+          />
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-4 px-5 py-12 md:grid-cols-2">
+        <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+          <h2 className="text-2xl font-extrabold">The problem</h2>
+          <p className="mt-3 text-sm leading-relaxed text-mute">{service.problem}</p>
+        </article>
+        <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+          <h2 className="text-2xl font-extrabold">Our solution</h2>
+          <p className="mt-3 text-sm leading-relaxed text-mute">{service.solution}</p>
+        </article>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-4">
+        <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+          <h2 className="text-2xl font-extrabold">Deliverables</h2>
+          <p className="mt-2 text-sm text-mute">Typical items. The written scope lists what your project includes.</p>
+          <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+            {service.deliverables.map((item) => (
+              <li key={item} className="flex gap-3 text-sm">
+                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-sm leading-relaxed text-mute">
+            <span className="font-semibold text-ink">Suitable for: </span>
+            {service.suitable}
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-12">
+        <h2 className="text-3xl font-extrabold tracking-tight">Process</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+          {steps.length} steps, the same shape as every other engagement: you always know what happens next.
+        </p>
+        <ProcessSteps />
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-12">
+        <h2 className="text-3xl font-extrabold tracking-tight">Relevant work</h2>
+        {related.length ? (
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {related.map((project) => (
+              <li key={project.slug}>
+                <ProjectCard project={project} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute">
+            Client work in this practice isn’t listed publicly. Ask on a call and we’ll walk through relevant examples.
+          </p>
+        )}
+      </section>
+
+      <section className="mx-auto max-w-3xl px-5 pb-16">
+        <FaqList items={questions} />
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button asChild>
+            <Link to="/contact" search={{ service: service.id }} onClick={() => track("quote_click", { source: `${service.slug}-end` })}>
+              {service.cta} <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </Button>
+          <WhatsAppButton source={`service-end-${service.slug}`} />
+        </div>
+      </section>
+    </>
+  );
+}

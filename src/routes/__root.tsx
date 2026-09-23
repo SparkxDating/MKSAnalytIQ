@@ -1,20 +1,23 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
-import { company } from "@/lib/content";
+import { SiteShell } from "@/components/site/shell";
+import { company, site } from "@/lib/content";
+import { absoluteUrl } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
 const description =
-  "MKSAnalytIQ is a Noida studio for digital marketing, social media, events, and software. Proprietor Manoj Kumar Singh.";
+  "MKSAnalytIQ helps businesses in Noida and across India generate leads, build a digital presence and launch digital products — marketing, software and events from one studio.";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MKSAnalytIQ — Ideas, strategy, growth" },
+      { title: "MKSAnalytIQ — Digital marketing and software in Noida" },
       { name: "description", content: description },
       { name: "theme-color", content: "#071426" },
+      { name: "robots", content: "index,follow" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -30,28 +33,63 @@ export const Route = createRootRoute({
     ],
   }),
   component: Root,
+  notFoundComponent: NotFound,
 });
 
 function Root() {
+  const origin = site.url;
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: company.name,
-    url: "https://mksanalytiq.example",
-    image: "/media/logo.png",
-    email: company.email,
-    telephone: company.phoneTel,
-    founder: company.proprietor,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "C-81, C Block, Sector 8",
-      addressLocality: "Noida",
-      addressRegion: "Uttar Pradesh",
-      postalCode: "201306",
-      addressCountry: "IN",
-    },
-    areaServed: "IN",
-    description,
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${origin}/#organization`,
+        name: company.name,
+        url: origin,
+        email: company.email,
+        telephone: company.phoneTel,
+        logo: absoluteUrl("/media/logo.png"),
+        image: absoluteUrl("/media/logo.png"),
+        founder: {
+          "@type": "Person",
+          name: company.proprietor,
+        },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "C-81, C Block, Sector 8",
+          addressLocality: "Noida",
+          addressRegion: "Uttar Pradesh",
+          postalCode: "201306",
+          addressCountry: "IN",
+        },
+        sameAs: [company.github],
+      },
+      {
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": `${origin}/#local`,
+        name: company.name,
+        url: origin,
+        image: absoluteUrl("/media/office.jpg"),
+        email: company.email,
+        telephone: company.phoneTel,
+        founder: company.proprietor,
+        description,
+        parentOrganization: { "@id": `${origin}/#organization` },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "C-81, C Block, Sector 8",
+          addressLocality: "Noida",
+          addressRegion: "Uttar Pradesh",
+          postalCode: "201306",
+          addressCountry: "IN",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "India",
+        },
+        hasMap: company.maps,
+      },
+    ],
   };
 
   return (
@@ -64,12 +102,25 @@ function Root() {
         <AuthProvider>
           <Outlet />
         </AuthProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         <Scripts />
       </body>
     </html>
   );
 }
+
+function NotFound() {
+  return (
+    <SiteShell cta={false}>
+      <section className="mx-auto max-w-3xl px-5 py-20">
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">404</p>
+        <h1 className="mt-3 text-4xl font-extrabold tracking-tight">Page not found</h1>
+        <p className="mt-3 text-sm leading-relaxed text-mute">That address isn’t on this site.</p>
+        <Link to="/" className="mt-6 inline-flex h-12 items-center font-semibold text-primary">
+          Back to home
+        </Link>
+      </section>
+    </SiteShell>
+  );
+}
+

@@ -2,20 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { SiteShell } from "@/components/site/shell";
+import { WhatsAppButton } from "@/components/site/whatsapp";
 import { extras, services } from "@/lib/content";
 import { cn } from "@/lib/cn";
+import { pageMeta } from "@/lib/seo";
 
-export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services — MKSAnalytIQ" },
-      {
-        name: "description",
-        content:
-          "Digital marketing, social media management, event management, and software and app development from Noida.",
-      },
-    ],
-  }),
+export const Route = createFileRoute("/services/")({
+  head: () =>
+    pageMeta({
+      title: "Services — Digital Marketing, Social, Events & Software | MKSAnalytIQ",
+      description:
+        "Digital marketing, social media, event management, and software development from a studio in Sector 8, Noida.",
+      path: "/services",
+    }),
   component: ServicesPage,
 });
 
@@ -29,9 +28,12 @@ function ServicesPage() {
             Four practices. Hired together or one at a time.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Most clients start with the channel that’s already leaking — ads with no landing page, an
-            event with no list, or a product with no one to tell. We fix the pair, not just the loud part.
+            Most clients start with the channel that’s already leaking — ads with no landing page, an event with no
+            list, or a product with no one to tell. We fix the pair, not just the loud part.
           </p>
+          <div className="mt-6">
+            <WhatsAppButton source="services" message="Hello, I’d like to talk about a service." />
+          </div>
         </div>
       </section>
 
@@ -46,25 +48,45 @@ function ServicesPage() {
               <img
                 src={service.image}
                 alt={service.imageAlt}
+                width={1792}
+                height={1008}
+                loading="lazy"
+                decoding="async"
                 className={cn("h-64 w-full object-cover lg:h-full", index % 2 === 1 && "lg:order-2")}
               />
               <div className={cn("p-6 sm:p-8", index % 2 === 1 && "lg:order-1")}>
                 <p className="text-xs font-semibold uppercase tracking-widest text-primary">0{index + 1}</p>
-                <h2 className="mt-2 text-3xl font-extrabold">{service.title}</h2>
+                <h2 className="mt-2 text-3xl font-extrabold">
+                  <Link to="/services/$service" params={{ service: service.slug }} className="hover:text-primary">
+                    {service.title}
+                  </Link>
+                </h2>
                 <p className="mt-3 text-sm leading-relaxed text-mute">{service.blurb}</p>
-                <ul className="mt-5 space-y-2">
-                  {service.points.map((point) => (
+                <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">Deliverables</p>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {service.deliverables.map((point) => (
                     <li key={point} className="flex gap-3 text-sm">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
                       {point}
                     </li>
                   ))}
                 </ul>
-                <Button asChild className="mt-6">
-                  <Link to="/contact" search={{ service: service.id }}>
-                    Ask about this <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
+                <p className="mt-4 text-sm leading-relaxed text-mute">
+                  <span className="font-semibold text-ink">Suitable for: </span>
+                  {service.suitable}
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild>
+                    <Link to="/contact" search={{ service: service.id }}>
+                      {service.cta} <ArrowRight className="size-4" aria-hidden />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="line">
+                    <Link to="/services/$service" params={{ service: service.slug }}>
+                      View service
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </article>
@@ -84,7 +106,6 @@ function ServicesPage() {
           </div>
         </div>
       </section>
-      <div className="h-16 md:hidden" />
     </SiteShell>
   );
 }

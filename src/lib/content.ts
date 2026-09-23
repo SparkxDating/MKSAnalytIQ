@@ -1,3 +1,20 @@
+/**
+ * Editable business content for MKSAnalytIQ.
+ * Change copy, offers, and public links here — components read from this file.
+ *
+ * GitHub: public product code is published under `github` / `githubHandle`.
+ * Update those fields if the account changes. Do not hardcode the handle in components.
+ * Project repository URLs below are the real public repos; leave a URL blank rather than guessing.
+ */
+
+export const site = {
+  url: "https://mksanalytiq.vercel.app",
+  ogImage: "/og.jpg",
+  locale: "en_IN",
+  /** Shown on legal pages. Update when the text changes. */
+  legalUpdated: "24 September 2026",
+} as const;
+
 export const company = {
   name: "MKSAnalytIQ",
   wordLeft: "MKS",
@@ -10,82 +27,203 @@ export const company = {
   addressLines: ["C-81, C Block", "Sector 8, Noida", "Uttar Pradesh 201306"],
   addressOneLine: "C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306",
   maps: "https://www.google.com/maps/search/?api=1&query=C-81+C+Block+Sector+8+Noida+Uttar+Pradesh+201306",
+  /**
+   * Leave empty until hours are confirmed. An empty string is not shown.
+   * Example once confirmed: "Mon–Sat, 10:00–18:00 IST"
+   */
+  hours: "",
   github: "https://github.com/SparkxDating",
   githubHandle: "SparkxDating",
 } as const;
+
+export function whatsappHref(text?: string) {
+  if (!text) return company.whatsapp;
+  const url = new URL(company.whatsapp);
+  url.searchParams.set("text", text);
+  return url.toString();
+}
+
+export const hero = {
+  title: "Digital Marketing, Software & Growth Systems for Businesses",
+  lede: "MKSAnalytIQ helps businesses generate leads, build their digital presence and launch digital products — combining marketing, technology and growth under one roof.",
+  trust: "Based in Noida • Serving businesses across India",
+  primaryCta: "Book Free Consultation",
+  secondaryCta: "Chat on WhatsApp",
+} as const;
+
+export const finalCta = {
+  title: "Have a project in mind?",
+  text: "Tell us what you're trying to build, market or improve.",
+  primary: "Book Free Consultation",
+  secondary: "Chat on WhatsApp",
+} as const;
+
+export const trustStatement = "Marketing + Technology under one roof";
 
 export const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
-  { to: "/portfolio", label: "Portfolio" },
+  { to: "/portfolio", label: "Work" },
   { to: "/process", label: "Process" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
+export const footerCompany = [
+  { to: "/about", label: "About" },
+  { to: "/portfolio", label: "Work" },
+  { to: "/process", label: "Process" },
+  { to: "/contact", label: "Contact" },
+  { to: "/privacy-policy", label: "Privacy Policy" },
+  { to: "/terms", label: "Terms & Conditions" },
+  { to: "/refund-policy", label: "Refund Policy" },
+] as const;
+
 export type ServiceId = "marketing" | "social" | "events" | "software";
+
+export type ProjectCategory = "software" | "marketing" | "events" | "campaigns";
+
+export const projectCategories: { id: "all" | ProjectCategory; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "software", label: "Software" },
+  { id: "marketing", label: "Marketing" },
+  { id: "events", label: "Events" },
+  { id: "campaigns", label: "Campaigns" },
+];
 
 export const services: {
   id: ServiceId;
+  slug: string;
   title: string;
   blurb: string;
-  points: string[];
+  suitable: string;
+  problem: string;
+  solution: string;
+  deliverables: string[];
+  cta: string;
+  related: ProjectCategory[];
   image: string;
   imageAlt: string;
+  seoTitle: string;
+  seoDescription: string;
 }[] = [
   {
     id: "marketing",
+    slug: "digital-marketing",
     title: "Digital Marketing",
     blurb:
       "Campaigns built around a number you care about — leads, bookings, or sales — not a pile of vanity posts.",
-    points: [
-      "Meta and Google campaigns with weekly reporting",
-      "Offer, landing page and follow-up treated as one system",
-      "Audience, creative and budget decisions you can see",
+    suitable:
+      "Businesses that want enquiries from Google or Meta, with a page and a follow-up path you can actually read.",
+    problem:
+      "Spend often goes out before the offer, the landing page and the tracking agree. Without that, it is hard to tell what a lead cost.",
+    solution:
+      "We treat the offer, ads, landing page, retargeting and reporting as one system. You approve a written scope before anything launches.",
+    deliverables: [
+      "Google Ads",
+      "Meta Ads",
+      "Landing pages",
+      "Conversion tracking",
+      "Retargeting",
+      "Performance reporting",
     ],
+    cta: "Get a Marketing Plan",
+    related: ["marketing", "campaigns"],
     image: "/media/desk.jpg",
     imageAlt: "Campaign planning desk with a laptop and charts",
+    seoTitle: "Digital Marketing in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Digital marketing in Noida: Google Ads, Meta Ads, landing pages, conversion tracking and reporting. Written scope before launch. MKSAnalytIQ.",
   },
   {
     id: "social",
-    title: "Social Media Management",
+    slug: "social-media",
+    title: "Social Media",
     blurb:
       "A steady presence on the platforms your customers already use, written in your voice and posted on a calendar you approve.",
-    points: [
-      "Monthly content plan, reels and stills",
-      "Community replies and comment moderation",
-      "Creator and collaboration coordination when it fits",
+    suitable:
+      "Teams that need a regular presence without staffing a full in-house social desk.",
+    problem:
+      "Posting stalls, or it runs in a voice that doesn’t sound like the business. Replies pile up and nobody owns the calendar.",
+    solution:
+      "A monthly plan you approve, then reels, stills and community replies in that voice — with a review of what to change next month.",
+    deliverables: [
+      "Monthly content plan",
+      "Reels and stills",
+      "Captions in your voice",
+      "Community replies",
+      "Comment moderation",
+      "Monthly review",
     ],
+    cta: "Get a Content Plan",
+    related: ["marketing"],
     image: "/media/studio.jpg",
     imageAlt: "Phone and ring light for social content",
+    seoTitle: "Social Media Marketing in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Social media management from a Noida studio: content calendars, reels, community replies and a monthly review you approve. MKSAnalytIQ.",
   },
   {
     id: "events",
+    slug: "event-management",
     title: "Event Management",
     blurb:
       "Launches, corporate gatherings and community programmes — planned on the ground and promoted before the doors open.",
-    points: [
-      "Run of show, vendors and on-site coordination",
-      "Invites, registration and reminder messages",
-      "Photo, recap content and post-event follow-up",
+    suitable:
+      "Organisers of a launch, a corporate gathering or a community programme who want the room and the promotion planned together.",
+    problem:
+      "The venue, the guest list and the promotion are often three separate jobs. The date arrives and the list is still thin.",
+    solution:
+      "One plan for the run of show, the vendors, registration and the messages that go out before and after the event.",
+    deliverables: [
+      "Run of show",
+      "Vendor coordination",
+      "Invites and registration",
+      "Reminder messages",
+      "On-site coordination",
+      "Recap content",
     ],
+    cta: "Plan an Event",
+    related: ["events"],
     image: "/media/event.jpg",
     imageAlt: "Banquet hall set for a corporate event",
+    seoTitle: "Event Management in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Event management for launches, corporate gatherings and community programmes — planning, registration and promotion. MKSAnalytIQ, Noida.",
   },
   {
     id: "software",
+    slug: "software-development",
     title: "Software & App Development",
     blurb:
       "Websites, dashboards and product software that your team can actually run — from a public site to a working SaaS.",
-    points: [
-      "Marketing sites, portals and internal tools",
-      "Mobile-ready web apps and API integrations",
-      "Handover with a repo you own",
+    suitable:
+      "Teams that need a website, portal or product their own people can operate after launch.",
+    problem:
+      "A site or tool gets delivered without a handover the team can use, or marketing sends people to a page that isn’t ready.",
+    solution:
+      "We scope the build, ship it in the open, and hand over what the written agreement says you keep — including a repository when that is part of the scope.",
+    deliverables: [
+      "Marketing websites",
+      "Web apps and portals",
+      "Dashboards and internal tools",
+      "API integrations",
+      "Mobile-ready interfaces",
+      "Repository handover",
     ],
+    cta: "Discuss a Build",
+    related: ["software"],
     image: "/media/devices.jpg",
     imageAlt: "Laptop and phone on a studio desk",
+    seoTitle: "Software & App Development in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Software and app development in Noida: websites, portals, dashboards and product builds, with a written scope and handover. MKSAnalytIQ.",
   },
 ];
+
+export function getService(slug: string) {
+  return services.find((service) => service.slug === slug);
+}
 
 export const extras = [
   {
@@ -102,11 +240,45 @@ export const extras = [
   },
 ];
 
-export const stats = [
-  { value: "100+", label: "Happy clients" },
-  { value: "300+", label: "Projects completed" },
-  { value: "5+", label: "Years experience" },
-  { value: "India & beyond", label: "Growing reach" },
+/**
+ * Figures the studio may publish later.
+ * `published: false` keeps them off the site until someone confirms the number.
+ * Do not flip these on without a source you can stand behind.
+ */
+export const stats: { value: string; label: string; published: boolean }[] = [
+  { value: "100+", label: "Happy clients", published: false },
+  { value: "300+", label: "Projects completed", published: false },
+  { value: "5+", label: "Years experience", published: false },
+  { value: "India & beyond", label: "Growing reach", published: false },
+];
+
+export const publishedStats = stats.filter((stat) => stat.published);
+
+/** Qualitative notes that match what the site can already support. Not performance claims. */
+export const trustNotes = [
+  { value: "Noida", label: "Sector 8 studio" },
+  { value: "One team", label: "Marketing and technology" },
+  { value: "Direct", label: "Work with the proprietor" },
+  { value: "India", label: "Projects beyond the city" },
+];
+
+export const why = [
+  {
+    title: "One Team",
+    text: "Marketing, design, technology and development under one roof.",
+  },
+  {
+    title: "Direct Communication",
+    text: "Clear communication and direct project collaboration.",
+  },
+  {
+    title: "Transparent Delivery",
+    text: "Clear scope, milestones and deliverables.",
+  },
+  {
+    title: "Built for Business Outcomes",
+    text: "Solutions designed around leads, customers, efficiency and growth.",
+  },
 ];
 
 export const steps = [
@@ -122,7 +294,7 @@ export const steps = [
   },
   {
     n: "03",
-    title: "Make",
+    title: "Build",
     text: "Creative, code or on-ground production. You see work in progress — not a surprise on the last day.",
   },
   {
@@ -137,86 +309,224 @@ export const steps = [
   },
 ];
 
-export const projects = [
+export const projects: {
+  slug: string;
+  name: string;
+  category: ProjectCategory;
+  kind: string;
+  summary: string;
+  features: string[];
+  stack: string[];
+  github: string;
+  live: string;
+  seoTitle: string;
+  seoDescription: string;
+}[] = [
   {
     slug: "shortgen",
     name: "ShortGen",
-    kind: "Product",
+    category: "software",
+    kind: "Software",
     summary:
       "Multi-tenant SaaS that turns a topic into short-form video — workspaces, jobs, templates and credits.",
+    features: ["Multi-tenant workspaces", "Render jobs", "Templates", "Credits"],
     stack: ["Next.js", "Python", "Postgres"],
     github: "https://github.com/SparkxDating/ShortGen",
     live: "https://shortgen-pi.vercel.app",
-    tone: "navy" as const,
+    seoTitle: "ShortGen — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of ShortGen, a multi-tenant SaaS for short-form video: workspaces, jobs, templates and credits.",
   },
   {
     slug: "cpaas",
     name: "Open CPaaS",
-    kind: "Platform",
+    category: "software",
+    kind: "Software",
     summary:
       "Twilio-style communications platform: messaging, verify, voice, email, provider routing and an Android SMS gateway.",
+    features: [
+      "Messaging",
+      "Verify",
+      "Voice",
+      "Email",
+      "Provider routing",
+      "Android SMS gateway",
+    ],
     stack: ["NestJS", "Next.js", "Kotlin"],
     github: "https://github.com/SparkxDating/cpaas",
     live: "",
-    tone: "blue" as const,
+    seoTitle: "Open CPaaS — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of Open CPaaS: messaging, verify, voice, email, provider routing and an Android SMS gateway.",
   },
   {
     slug: "taxpilot",
     name: "TaxPilot AI",
-    kind: "Product",
+    category: "software",
+    kind: "Software",
     summary:
       "Guided ITR-3 / ITR-4 preparation for AY 2026–27, with eligibility checks and official ITR-4 JSON export.",
+    features: [
+      "Guided ITR-3 preparation",
+      "Guided ITR-4 preparation",
+      "Eligibility checks",
+      "Official ITR-4 JSON export",
+    ],
     stack: ["Next.js", "Prisma", "TypeScript"],
     github: "https://github.com/SparkxDating/taxpilot-ai",
     live: "https://taxpilot-ai-beta.vercel.app",
-    tone: "ink" as const,
+    seoTitle: "TaxPilot AI — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of TaxPilot AI: guided ITR-3 and ITR-4 preparation for AY 2026–27, with eligibility checks and ITR-4 JSON export.",
   },
   {
     slug: "eye-camp",
     name: "Eye Camp Registration",
-    kind: "Field system",
+    category: "events",
+    kind: "Events",
     summary:
       "Hindi, mobile-first registration for a free cataract camp by Trishakti Seva Foundation and RJ Shankara Eye Hospital, Varanasi — slips, QR codes and an admin desk.",
+    features: [
+      "Hindi, mobile-first registration",
+      "Registration slips",
+      "QR codes",
+      "Admin desk",
+    ],
     stack: ["TypeScript", "Postgres"],
     github: "https://github.com/SparkxDating/QRLogin",
     live: "",
-    tone: "blue" as const,
+    seoTitle: "Eye Camp Registration — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of the Hindi, mobile-first eye-camp registration system for a free cataract camp in Varanasi.",
   },
   {
     slug: "navi-zindagi",
     name: "Navi Zindagi",
-    kind: "Campaign site",
+    category: "campaigns",
+    kind: "Campaigns",
     summary:
       "Fundraising and volunteer site for the Navi Zindagi Foundation’s flood-relief work in Nepal and Assam.",
+    features: ["Fundraising pages", "Volunteer information", "Flood-relief context for Nepal and Assam"],
     stack: ["TypeScript"],
     github: "https://github.com/SparkxDating/Navizindagi",
     live: "",
-    tone: "navy" as const,
+    seoTitle: "Navi Zindagi — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of the Navi Zindagi fundraising and volunteer site for flood-relief work in Nepal and Assam.",
   },
   {
     slug: "influencer-os",
     name: "AI Influencer OS",
-    kind: "Product",
+    category: "marketing",
+    kind: "Marketing",
     summary:
       "A workspace to create AI influencer profiles, draft content, approve posts and keep sponsored captions disclosed.",
+    features: [
+      "AI influencer profiles",
+      "Content drafts",
+      "Post approval",
+      "Sponsored caption disclosure",
+    ],
     stack: ["Next.js", "Prisma"],
     github: "https://github.com/SparkxDating/ai-influencer-os",
     live: "",
-    tone: "ink" as const,
+    seoTitle: "AI Influencer OS — Project overview | MKSAnalytIQ",
+    seoDescription:
+      "Project overview of AI Influencer OS: profiles, content drafts, post approval and disclosed sponsored captions.",
   },
 ];
 
-export const faqs = [
+export function getProject(slug: string) {
+  return projects.find((project) => project.slug === slug);
+}
+
+export function projectsIn(categories: readonly ProjectCategory[]) {
+  return projects.filter((project) => categories.includes(project.category));
+}
+
+export type Testimonial = {
+  client: string;
+  company: string;
+  role: string;
+  quote: string;
+  photo?: string;
+  /** Only `published: true` entries are rendered. Do not publish placeholders. */
+  published: boolean;
+};
+
+/**
+ * Genuine testimonials only. The sample below is a placeholder and is not rendered.
+ * Replace the text, then set published to true.
+ */
+export const testimonials: Testimonial[] = [
   {
-    q: "Where do you work from?",
-    a: "The studio is at C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306. Projects run across India, and software we ship is used more widely than that.",
-  },
-  {
-    q: "What do you take on?",
-    a: "Digital marketing, social media management, events, and software or app development. A typical start is a website plus the campaigns that send people to it, or an event with registration and promotion.",
-  },
-  {
-    q: "How do we begin?",
-    a: "Send a note with what you sell and when you need it, or call Manoj Kumar Singh on +91 95608 14623. The first conversation is to see if the work is a fit — no deck required.",
+    client: "Placeholder — replace with a real client",
+    company: "Placeholder company",
+    role: "Role",
+    quote: "Placeholder quote. Do not publish this text.",
+    published: false,
   },
 ];
+
+export const publishedTestimonials = testimonials.filter((item) => item.published);
+
+export const budgetOptions = ["₹10k–₹25k", "₹25k–₹50k", "₹50k–₹1L", "₹1L+", "Not sure"] as const;
+
+export const timelineOptions = ["Immediately", "This month", "1–3 months", "Just exploring"] as const;
+
+export const contactMethods = ["WhatsApp", "Phone", "Email"] as const;
+
+export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
+  {
+    id: "cost",
+    q: "How much does digital marketing cost?",
+    a: "There isn’t a single published price. Cost depends on the channels, how long the work runs, and whether a landing page or tracking setup is included. Share a budget range on the consultation form and you’ll get a written scope before anything starts. This site does not list package prices.",
+    tags: ["home", "contact", "marketing"],
+  },
+  {
+    id: "outside",
+    q: "Do you work with businesses outside Noida?",
+    a: "Yes. The studio is in Sector 8, Noida, and projects run with businesses across India. A visit is welcome when it helps; otherwise calls and WhatsApp cover the rest.",
+    tags: ["home", "contact", "about"],
+  },
+  {
+    id: "both",
+    q: "Can you build my website and manage marketing?",
+    a: "Yes. Marketing, design and development can sit in one engagement so the site, the campaigns and the follow-up are planned together. You can also hire one of those practices on its own.",
+    tags: ["home", "contact", "marketing", "software", "social"],
+  },
+  {
+    id: "ownership",
+    q: "Who owns the website/source code?",
+    a: "Ownership is set in the written scope for that project, not on this website. Where a build is part of the work, the scope says what is handed over — including a repository when that is what was agreed. This page is not a contract and does not transfer intellectual property by itself.",
+    tags: ["home", "contact", "software"],
+  },
+  {
+    id: "ads",
+    q: "Do you manage Google and Meta Ads?",
+    a: "Yes. Digital marketing engagements can include Google Ads, Meta Ads, landing pages, conversion tracking, retargeting and performance reporting. What is included is listed in the scope you approve.",
+    tags: ["home", "contact", "marketing"],
+  },
+  {
+    id: "timeline",
+    q: "How long does it take to build a website?",
+    a: "It depends on the number of pages, the content you already have, and any integrations. A timeline is part of the written scope before production starts. This site does not promise a fixed number of days.",
+    tags: ["home", "contact", "software"],
+  },
+  {
+    id: "social-scope",
+    q: "What does social media management include?",
+    a: "Usually a monthly content plan, reels and stills, captions in your voice, community replies and a review of what to change next month. You approve the calendar before it goes out.",
+    tags: ["social"],
+  },
+  {
+    id: "events-scope",
+    q: "What does event management include?",
+    a: "A typical event brief covers the run of show, vendor and on-site coordination, invites and registration, reminder messages, and recap content. Promotion before the event can be added when you want it. The exact list is in the scope.",
+    tags: ["events"],
+  },
+];
+
+export function faqsFor(tag: string) {
+  return faqs.filter((item) => item.tags.includes(tag));
+}

@@ -1,14 +1,28 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
-import { company, nav } from "@/lib/content";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { track } from "@/lib/analytics";
+import { company, footerCompany, nav, services } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { Button } from "./button";
+import { FinalCta } from "./final-cta";
 import { Logo } from "./logo";
+import { WhatsAppButton } from "./whatsapp";
 
-export function SiteShell({ children }: { children: ReactNode }) {
+export function SiteShell({ children, cta = true }: { children: ReactNode; cta?: boolean }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const lastPath = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (lastPath.current === path) return;
+    lastPath.current = path;
+    track("page_view", { path });
+  }, [path]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [path]);
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -21,13 +35,14 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
           <Logo />
-          <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
             {nav.map((item) => {
               const active = item.to === "/" ? path === "/" : path.startsWith(item.to);
               return (
                 <Link
                   key={item.to}
                   to={item.to}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative py-2 text-sm font-medium text-mute transition-colors hover:text-ink",
                     active && "text-ink",
@@ -42,46 +57,54 @@ export function SiteShell({ children }: { children: ReactNode }) {
             })}
           </nav>
           <div className="flex items-center gap-2">
-            <Button asChild className="hidden sm:inline-flex">
-              <Link to="/contact">
-                Get a Quote <span aria-hidden>→</span>
+            <WhatsAppButton source="nav" className="hidden h-11 px-4 xl:inline-flex" />
+            <Button asChild className="hidden h-11 lg:inline-flex">
+              <Link to="/contact" onClick={() => track("quote_click", { source: "nav" })}>
+                Book Free Consultation
               </Link>
             </Button>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-line md:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden"
               aria-expanded={open}
+              aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen((v) => !v)}
+              onClick={() => setOpen((value) => !value)}
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
           </div>
         </div>
         {open ? (
-          <nav className="border-t border-line bg-card px-5 py-3 md:hidden" aria-label="Mobile">
+          <nav id="mobile-nav" className="border-t border-line bg-card px-5 py-3 lg:hidden" aria-label="Mobile">
             {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                onClick={() => setOpen(false)}
                 className="flex h-12 items-center border-b border-line text-base font-medium last:border-b-0"
               >
                 {item.label}
               </Link>
             ))}
-            <Button asChild className="mt-3 w-full">
-              <Link to="/contact" onClick={() => setOpen(false)}>
-                Get a Quote
-              </Link>
-            </Button>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <WhatsAppButton source="nav-menu" className="w-full" />
+              <Button asChild className="w-full">
+                <Link to="/contact" onClick={() => track("quote_click", { source: "nav-menu" })}>
+                  Book Free Consultation
+                </Link>
+              </Button>
+            </div>
           </nav>
         ) : null}
       </header>
-      <main id="main">{children}</main>
+      <main id="main">
+        {children}
+        <div className="h-16 md:hidden" aria-hidden />
+      </main>
+      {cta ? <FinalCta /> : null}
       <footer className="border-t border-line bg-ink pb-24 text-paper md:pb-0">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-4">
-          <div className="md:col-span-1">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
             <Logo tone="paper" />
             <p className="mt-4 text-sm leading-relaxed text-paper/75">
               Digital marketing, social media, events and software — from a studio in Sector 8, Noida.
@@ -93,7 +116,35 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Visit</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Services</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    to="/services/$service"
+                    params={{ service: service.slug }}
+                    className="text-paper/80 hover:text-paper"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Company</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              {footerCompany.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="text-paper/80 hover:text-paper">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Talk</p>
             <address className="mt-3 text-sm not-italic leading-relaxed text-paper/80">
               {company.addressLines.map((line) => (
                 <span key={line} className="block">
@@ -101,15 +152,13 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 </span>
               ))}
             </address>
-            <a className="mt-3 inline-block text-sm font-medium text-accent" href={company.maps}>
-              Open in Maps
-            </a>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Talk</p>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <a className="hover:text-accent" href={`tel:${company.phoneTel}`}>
+                <a
+                  className="hover:text-accent"
+                  href={`tel:${company.phoneTel}`}
+                  onClick={() => track("call_click", { source: "footer" })}
+                >
                   {company.phoneDisplay}
                 </a>
               </li>
@@ -119,27 +168,27 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 </a>
               </li>
               <li>
-                <a className="hover:text-accent" href={company.whatsapp}>
+                <a
+                  className="hover:text-accent"
+                  href={company.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("whatsapp_click", { source: "footer" })}
+                >
                   WhatsApp
                 </a>
               </li>
               <li>
-                <a className="hover:text-accent" href={company.github}>
+                <a className="hover:text-accent" href={company.maps}>
+                  Get Directions
+                </a>
+              </li>
+              <li>
+                <a className="hover:text-accent" href={company.github} target="_blank" rel="noopener noreferrer">
                   GitHub · {company.githubHandle}
                 </a>
               </li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Pages</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              {nav.map((item) => (
-                <li key={item.to}>
-                  <Link to={item.to} className="text-paper/80 hover:text-paper">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {company.hours ? <li className="text-paper/75">{company.hours}</li> : null}
             </ul>
           </div>
         </div>
@@ -154,18 +203,23 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <a
             href={`tel:${company.phoneTel}`}
             className="inline-flex h-11 items-center justify-center gap-1 rounded-full bg-paper text-sm font-semibold text-ink"
+            onClick={() => track("call_click", { source: "mobile-bar" })}
           >
-            <Phone className="size-4" /> Call
+            <Phone className="size-4" aria-hidden /> Call
           </a>
           <a
             href={company.whatsapp}
             className="inline-flex h-11 items-center justify-center rounded-full bg-paper text-sm font-semibold text-ink"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { source: "mobile-bar" })}
           >
             WhatsApp
           </a>
           <Link
             to="/contact"
             className="inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-semibold text-card"
+            onClick={() => track("quote_click", { source: "mobile-bar" })}
           >
             Quote
           </Link>

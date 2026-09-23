@@ -1,6 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { projects } from "@/lib/content";
-import { cn } from "@/lib/cn";
 import { Preview } from "./previews";
 
 type Project = (typeof projects)[number];
@@ -11,25 +11,47 @@ export function ProjectCard({ project }: { project: Project }) {
       <Preview slug={project.slug} />
       <div className="flex flex-1 flex-col p-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
-        <h3 className="mt-1 font-display text-lg font-bold">{project.name}</h3>
+        <h3 className="mt-1 font-display text-lg font-bold">
+          <Link
+            to="/portfolio/$slug"
+            params={{ slug: project.slug }}
+            className="hover:text-primary"
+          >
+            {project.name}
+          </Link>
+        </h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-mute">{project.summary}</p>
-        <ul className="mt-3 flex flex-wrap gap-2">
+        <ul className="mt-3 flex flex-wrap gap-2" aria-label="Technology">
           {project.stack.map((tag) => (
             <li key={tag} className="rounded-full bg-paper px-2.5 py-1 text-xs font-medium text-ink">
               {tag}
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-sm font-semibold">
+          <Link
+            to="/portfolio/$slug"
+            params={{ slug: project.slug }}
+            className="inline-flex h-11 items-center gap-1 text-primary"
+          >
+            View project <ArrowRight className="size-4" aria-hidden />
+          </Link>
           <a
             href={project.github}
-            className={cn("inline-flex items-center gap-1 text-ink hover:text-primary")}
+            className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Repository <ArrowUpRight className="size-4" />
+            Repository <ArrowUpRight className="size-4" aria-hidden />
           </a>
           {project.live ? (
-            <a href={project.live} className="inline-flex items-center gap-1 text-primary">
-              Live <ArrowUpRight className="size-4" />
+            <a
+              href={project.live}
+              className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Live demo <ArrowUpRight className="size-4" aria-hidden />
             </a>
           ) : null}
         </div>

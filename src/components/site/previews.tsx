@@ -73,8 +73,9 @@ function Tax() {
         ))}
       </div>
       <div className="rounded-xl border border-line p-3">
-        <p className="text-xs text-mute">Tax payable</p>
-        <p className="font-display text-xl font-bold tabular-nums">₹ 48,260</p>
+        <p className="text-xs text-mute">Return status</p>
+        <p className="font-display text-lg font-bold">Eligibility check</p>
+        <p className="text-xs text-mute">JSON export when the form is complete</p>
       </div>
     </div>
   );

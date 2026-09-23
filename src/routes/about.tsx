@@ -1,20 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { BusinessInfo } from "@/components/site/business-info";
 import { Button } from "@/components/site/button";
+import { FaqList } from "@/components/site/faq";
+import { JsonLd } from "@/components/site/json-ld";
 import { SiteShell } from "@/components/site/shell";
-import { company, stats } from "@/lib/content";
+import { company, faqsFor, publishedStats, trustNotes } from "@/lib/content";
+import { faqSchema, pageMeta } from "@/lib/seo";
+
+const questions = faqsFor("about");
+const figures = publishedStats.length ? publishedStats : trustNotes;
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — MKSAnalytIQ" },
-      {
-        name: "description",
-        content:
-          "MKSAnalytIQ is the proprietorship of Manoj Kumar Singh in Sector 8, Noida — marketing, social, events and software.",
-      },
-    ],
-  }),
+  head: () =>
+    pageMeta({
+      title: "About MKSAnalytIQ — Noida Studio",
+      description:
+        "MKSAnalytIQ is the proprietorship of Manoj Kumar Singh in Sector 8, Noida — digital marketing, social media, events and software.",
+      path: "/about",
+    }),
   component: About,
 });
 
@@ -36,6 +40,7 @@ const beliefs = [
 function About() {
   return (
     <SiteShell>
+      {questions.length ? <JsonLd data={faqSchema(questions)} /> : null}
       <section className="border-b border-line bg-card">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 lg:grid-cols-2 lg:items-end">
           <div>
@@ -45,9 +50,9 @@ function About() {
             </h1>
           </div>
           <p className="text-base leading-relaxed text-mute">
-            MKSAnalytIQ is run by {company.proprietor}. The work is digital marketing, social media
-            management, event management, and software and app development — usually for owners who
-            are tired of hiring four vendors who never speak to each other.
+            MKSAnalytIQ is run by {company.proprietor}. The work is digital marketing, social media management, event
+            management, and software and app development — usually for owners who are tired of hiring four vendors who
+            never speak to each other.
           </p>
         </div>
       </section>
@@ -56,15 +61,17 @@ function About() {
         <img
           src="/media/office.jpg"
           alt="Meeting room used for client conversations"
+          width={1792}
+          height={1008}
           className="h-80 w-full rounded-3xl object-cover lg:col-span-3 lg:h-full"
         />
         <div className="flex flex-col justify-center rounded-3xl bg-ink p-6 text-paper lg:col-span-2">
           <p className="text-xs font-semibold uppercase tracking-widest text-accent">Proprietor</p>
           <h2 className="mt-3 text-3xl font-extrabold">{company.proprietor}</h2>
           <p className="mt-4 text-sm leading-relaxed text-paper/80">
-            Manoj leads client conversations himself — the brief, the quote and the handover. The
-            studio publishes product software under the GitHub account {company.githubHandle}, alongside
-            client work that stays off the public web.
+            Manoj leads client conversations himself — the brief, the quote and the handover. The studio publishes
+            product software under the GitHub account {company.githubHandle}, alongside client work that stays off the
+            public web.
           </p>
           <a className="mt-6 text-sm font-semibold text-accent" href={company.github}>
             github.com/{company.githubHandle}
@@ -74,7 +81,7 @@ function About() {
 
       <section className="bg-card">
         <div className="mx-auto grid max-w-6xl gap-4 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
+          {figures.map((stat) => (
             <div key={stat.label} className="rounded-3xl border border-line p-5">
               <p className="font-display text-3xl font-extrabold text-primary">{stat.value}</p>
               <p className="mt-1 text-sm text-mute">{stat.label}</p>
@@ -95,31 +102,29 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-6 px-5 pb-20 md:grid-cols-2">
-        <div className="rounded-3xl border border-line bg-card p-6">
-          <MapPin className="size-5 text-primary" />
-          <h2 className="mt-3 text-2xl font-extrabold">The studio</h2>
-          <p className="mt-3 text-sm leading-relaxed text-mute">{company.addressOneLine}</p>
-          <a className="mt-4 inline-block text-sm font-semibold text-primary" href={company.maps}>
-            Get directions
-          </a>
-        </div>
+      <section className="mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-2">
+        <BusinessInfo source="about" />
         <div className="flex flex-col justify-between rounded-3xl bg-navy p-6 text-paper">
           <div>
             <h2 className="text-2xl font-extrabold">Bring the brief</h2>
             <p className="mt-3 text-sm leading-relaxed text-paper/80">
-              A page, a month of social, an event date, or a product you want built. If it isn’t a
-              fit, we’ll say so on the first call.
+              A page, a month of social, an event date, or a product you want built. If it isn’t a fit, we’ll say so
+              on the first call.
             </p>
           </div>
           <Button asChild className="mt-6 w-fit">
             <Link to="/contact">
-              Contact Manoj <ArrowRight className="size-4" />
+              Book Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>
         </div>
       </section>
-      <div className="h-16 md:hidden" />
+
+      {questions.length ? (
+        <section className="mx-auto max-w-3xl px-5 pb-16">
+          <FaqList items={questions} />
+        </section>
+      ) : null}
     </SiteShell>
   );
 }

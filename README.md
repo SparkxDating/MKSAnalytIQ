@@ -10,15 +10,15 @@
   <a href="https://img.shields.io/badge/Software-3EB6FF?style=for-the-badge"><img src="https://img.shields.io/badge/Software-3EB6FF?style=for-the-badge" alt="Software"></a>
 </p>
 
-<h1 align="center">We turn ideas into digital success</h1>
+<h1 align="center">Digital Marketing, Software & Growth Systems for Businesses</h1>
 
 <p align="center">
-  Marketing, social, events and software for businesses that want a clearer offer<br>
-  and a faster way to grow. Studio in Sector 8, Noida.
+  MKSAnalytIQ helps businesses generate leads, build their digital presence and launch digital products —<br>
+  combining marketing, technology and growth under one roof. Studio in Sector 8, Noida.
 </p>
 
 <p align="center">
-  <a href="mailto:MKSAnalytIQ@gmail.com?subject=Quote%20request"><img src="https://img.shields.io/badge/Get%20a%20free%20consultation-0B6FE8?style=for-the-badge" alt="Get a free consultation"></a>
+  <a href="mailto:MKSAnalytIQ@gmail.com?subject=Quote%20request"><img src="https://img.shields.io/badge/Book%20a%20free%20consultation-0B6FE8?style=for-the-badge" alt="Book a free consultation"></a>
   &nbsp;
   <a href="https://wa.me/919560814623"><img src="https://img.shields.io/badge/WhatsApp-071426?style=for-the-badge" alt="WhatsApp"></a>
   &nbsp;
@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <b>100+ clients</b> &nbsp;·&nbsp; <b>300+ projects</b> &nbsp;·&nbsp; <b>5+ years</b> &nbsp;·&nbsp; <b>India and beyond</b>
+  Based in Noida · Serving businesses across India
 </p>
 
 ---
@@ -106,8 +106,8 @@ Also in the brief when you need them: **SEO and content**, **brand and design**,
 
 | | | | |
 |---|---|---|---|
-| **100+** | **300+** | **5+** | **India & beyond** |
-| Happy clients | Projects completed | Years of experience | Growing reach |
+| **Noida** | **One team** | **Direct** | **India** |
+| Sector 8 studio | Marketing and technology | Work with the proprietor | Projects beyond the city |
 
 ---
 
@@ -132,7 +132,7 @@ More on [github.com/SparkxDating](https://github.com/SparkxDating).
 
 | | | |
 |---|---|---|
-| **01 Discover** | **02 Plan** | **03 Make** |
+| **01 Discover** | **02 Plan** | **03 Build** |
 | A call or a visit. Offer, audience, deadline, and what “done” looks like. | A short scope: channels, pages or event flow, timeline and fee. You approve it first. | Creative, code or on-ground production. You see work in progress. |
 | **04 Launch** | **05 Improve** | **What you leave with** |
 | Campaigns go live, the site ships, or the event opens. We stay on the thread. | Keep what worked, cut what didn’t, and set the next month. | A written scope, files in your name, and a note on what moved. |
