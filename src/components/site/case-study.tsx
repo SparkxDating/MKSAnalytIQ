@@ -2,8 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect } from "react";
 import { track } from "@/lib/analytics";
-import { company, type projects } from "@/lib/content";
-import { breadcrumbSchema } from "@/lib/seo";
+import { servicesForProject, site, company, type projects } from "@/lib/content";
+import { absoluteUrl, breadcrumbSchema } from "@/lib/seo";
 import { Button } from "./button";
 import { JsonLd } from "./json-ld";
 import { Preview } from "./previews";
@@ -12,9 +12,13 @@ import { WhatsAppButton } from "./whatsapp";
 type Project = (typeof projects)[number];
 
 export function CaseStudy({ project }: { project: Project }) {
+  const linked = servicesForProject(project);
+
   useEffect(() => {
     track("case_study_view", { project: project.slug });
   }, [project.slug]);
+
+  const sameAs = [project.live, project.github].filter((url) => url.length > 0);
 
   return (
     <>
@@ -24,6 +28,20 @@ export function CaseStudy({ project }: { project: Project }) {
           { name: "Work", path: "/portfolio" },
           { name: project.name, path: `/portfolio/${project.slug}` },
         ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": project.category === "software" ? "SoftwareApplication" : "CreativeWork",
+          name: project.name,
+          description: project.summary,
+          url: absoluteUrl(`/portfolio/${project.slug}`),
+          image: absoluteUrl(`/media/work/${project.slug}.jpg`),
+          featureList: project.features,
+          author: { "@id": `${site.url}/#organization` },
+          isPartOf: { "@id": `${site.url}/#website` },
+          ...(sameAs.length ? { sameAs } : {}),
+        }}
       />
       <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-14">
@@ -53,16 +71,18 @@ export function CaseStudy({ project }: { project: Project }) {
       <article className="mx-auto grid max-w-6xl gap-6 px-5 py-12 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-            <h2 className="text-2xl font-extrabold">Project overview</h2>
+            <h2 className="text-2xl font-extrabold">Project type</h2>
+            <p className="mt-3 text-sm leading-relaxed text-mute">{project.kind}</p>
+            <h2 className="mt-6 text-2xl font-extrabold">What was built</h2>
             <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
             <p className="mt-3 text-sm leading-relaxed text-mute">
-              Public performance results are not listed for this project. What follows is the overview
-              already published with the work — not a results claim.
+              This page describes the published project. It does not add revenue, user counts or other results that
+              were not part of the original overview.
             </p>
           </section>
 
           <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-            <h2 className="text-2xl font-extrabold">Features</h2>
+            <h2 className="text-2xl font-extrabold">Main features</h2>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {project.features.map((feature) => (
                 <li key={feature} className="flex gap-3 text-sm">
@@ -74,11 +94,29 @@ export function CaseStudy({ project }: { project: Project }) {
           </section>
 
           <section className="overflow-hidden rounded-3xl border border-line bg-card">
-            <Preview slug={project.slug} />
+            <h2 className="px-5 pt-5 text-2xl font-extrabold">Screenshot</h2>
+            <div className="mt-4">
+              <Preview slug={project.slug} />
+            </div>
             <p className="px-5 py-4 text-sm leading-relaxed text-mute">
-              Thumbnail of the product. Not a performance report.
+              Screenshot of {project.name}. Not a performance report.
             </p>
           </section>
+
+          {linked.length ? (
+            <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+              <h2 className="text-2xl font-extrabold">Related services</h2>
+              <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold">
+                {linked.map((service) => (
+                  <li key={service.slug}>
+                    <Link to="/services/$service" params={{ service: service.slug }} className="text-primary hover:text-ink">
+                      {service.linkLabel}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
 
         <aside className="space-y-4">
@@ -102,7 +140,7 @@ export function CaseStudy({ project }: { project: Project }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Repository <ArrowUpRight className="size-4" aria-hidden />
+                  GitHub repository <ArrowUpRight className="size-4" aria-hidden />
                 </a>
               ) : (
                 <p className="text-sm font-normal leading-relaxed text-mute">Source repository is private.</p>
@@ -121,6 +159,10 @@ export function CaseStudy({ project }: { project: Project }) {
               )}
             </div>
           </section>
+          <p className="text-xs leading-relaxed text-mute">
+            Public repositories are under {company.githubHandle}. That account publishes product code; it is not a
+            separate office.
+          </p>
           <section className="rounded-3xl bg-navy p-5 text-paper">
             <h2 className="text-lg font-bold">Start a similar brief</h2>
             <p className="mt-2 text-sm leading-relaxed text-paper/80">
@@ -136,10 +178,6 @@ export function CaseStudy({ project }: { project: Project }) {
               message={`Hello, I’d like to talk about a project similar to ${project.name}.`}
             />
           </section>
-          <p className="text-xs leading-relaxed text-mute">
-            Code for public projects is under {company.githubHandle}. Update that account in the site
-            configuration if it changes.
-          </p>
         </aside>
       </article>
     </>

@@ -14,12 +14,12 @@ import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
 const description =
-  "MKSAnalytIQ helps businesses generate leads, build their digital presence and launch digital products. Digital marketing, software and growth from a studio in Noida.";
+  "MKSANALYTIQ is a Noida-based digital marketing, web development, software, app and AI development company serving businesses across Delhi NCR and India.";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "Digital Marketing, Software & Growth Systems | MKSAnalytIQ Noida",
+      title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida",
       description,
       path: "/",
     }),
@@ -27,18 +27,17 @@ export const Route = createFileRoute("/")({
 });
 
 const growth = [
-  { title: "Performance Marketing", to: "/services", hash: "marketing" },
-  { title: "Social Media", to: "/services", hash: "social" },
-  { title: "SEO & Content", to: "/services", hash: "marketing" },
-  { title: "Analytics", to: "/services", hash: "marketing" },
+  { title: "Digital marketing", slug: "digital-marketing" },
+  { title: "Social media", slug: "social-media" },
+  { title: "SEO and content", slug: "digital-marketing" },
+  { title: "Analytics", slug: "digital-marketing" },
 ] as const;
 
 const technology = [
-  { title: "Website Development", to: "/services", hash: "software" },
-  { title: "Web Applications", to: "/services", hash: "software" },
-  { title: "Mobile Apps", to: "/services", hash: "software" },
-  { title: "SaaS Development", to: "/services", hash: "software" },
-  { title: "AI & Automation", to: "/", hash: "technology" },
+  { title: "Web development", slug: "web-development" },
+  { title: "Software development", slug: "software-development" },
+  { title: "App development", slug: "app-development" },
+  { title: "AI development", slug: "ai-development" },
 ] as const;
 
 const featuredSlugs = ["shortgen", "taxpilot", "influencer-os"] as const;
@@ -99,11 +98,15 @@ function Home() {
               Technology + Digital Growth · Noida
             </p>
             <h1 className="mt-5 max-w-full font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-              Build digital.
-              <span className="mt-2 block text-accent">Grow smarter.</span>
+              Build Digital.
+              <span className="mt-2 block text-accent">Grow Smarter.</span>
             </h1>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-paper/80 sm:text-lg">
-              We build websites, apps, AI solutions and digital growth systems that help businesses move forward.
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-paper/80 sm:text-lg">
+              MKSANALYTIQ is a technology and digital growth studio in Noida, helping businesses across{" "}
+              <Link to="/digital-marketing-software-delhi-ncr" className="underline decoration-accent/60 underline-offset-4">
+                Delhi NCR
+              </Link>{" "}
+              and India with digital marketing, websites, software, apps and AI solutions.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild>
@@ -127,7 +130,15 @@ function Home() {
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-mute sm:text-lg">
             From digital strategy and customer acquisition to websites, apps, SaaS and AI automation — we help
-            businesses build and grow their digital presence.
+            businesses build and grow their digital presence.{" "}
+            <Link to="/portfolio" className="font-semibold text-primary">
+              See the portfolio
+            </Link>{" "}
+            or{" "}
+            <Link to="/contact" className="font-semibold text-primary">
+              contact the studio
+            </Link>
+            .
           </p>
         </div>
       </section>
@@ -276,7 +287,7 @@ function ServiceGroup({
   kicker: string;
   index: string;
   tone: "paper" | "ink";
-  items: readonly { title: string; to: "/" | "/services"; hash: string }[];
+  items: readonly { title: string; slug: string }[];
 }) {
   const dark = tone === "ink";
   return (
@@ -289,9 +300,8 @@ function ServiceGroup({
         {items.map((item) => (
           <li key={item.title}>
             <Link
-              to={item.to}
-              hash={item.hash}
-              activeOptions={{ includeHash: true }}
+              to="/services/$service"
+              params={{ service: item.slug }}
               className={
                 dark
                   ? "group flex min-h-14 items-center justify-between border-b border-paper/15 py-3 text-base font-semibold text-paper transition-colors duration-200 hover:text-accent"

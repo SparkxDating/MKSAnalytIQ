@@ -50,9 +50,9 @@ function About() {
             </h1>
           </div>
           <p className="text-base leading-relaxed text-mute">
-            MKSAnalytIQ is run by {company.proprietor}. The work is digital marketing, social media management, event
-            management, and software and app development — usually for owners who are tired of hiring four vendors who
-            never speak to each other.
+            MKSAnalytIQ is run by {company.proprietor}. The studio is in Sector 8, Noida, and works with businesses
+            across Delhi NCR and India. The work is digital marketing, websites, software, apps and AI, plus social
+            media and event management when the brief needs them.
           </p>
         </div>
       </section>
@@ -60,7 +60,7 @@ function About() {
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-14 lg:grid-cols-5">
         <img
           src="/media/office.jpg"
-          alt="Meeting room used for client conversations"
+          alt="MKSAnalytIQ office in Noida"
           width={1792}
           height={1008}
           className="h-80 w-full rounded-3xl object-cover lg:col-span-3 lg:h-full"

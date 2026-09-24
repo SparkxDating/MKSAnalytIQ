@@ -2,8 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import { track } from "@/lib/analytics";
-import { company, faqsFor, projectsIn, steps, type services } from "@/lib/content";
-import { absoluteUrl, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { faqsFor, projectsIn, relatedServices, steps, site, type services } from "@/lib/content";
+import { absoluteUrl, areaServedPlaces, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { Button } from "./button";
 import { FaqList } from "./faq";
 import { JsonLd } from "./json-ld";
@@ -17,6 +17,7 @@ export function ServiceDetail({ service }: { service: Service }) {
   const related = projectsIn(service.related);
   const questions = faqsFor(service.id);
   const path = `/services/${service.slug}`;
+  const linked = relatedServices(service.relatedServices);
 
   useEffect(() => {
     track("service_view", { service: service.slug });
@@ -38,12 +39,9 @@ export function ServiceDetail({ service }: { service: Service }) {
           name: service.title,
           description: service.blurb,
           url: absoluteUrl(path),
-          areaServed: "IN",
-          provider: {
-            "@type": "Organization",
-            name: company.name,
-            url: absoluteUrl("/"),
-          },
+          serviceType: service.h1,
+          areaServed: areaServedPlaces(),
+          provider: { "@id": `${site.url}/#organization` },
         }}
       />
       {questions.length ? <JsonLd data={faqSchema(questions)} /> : null}
@@ -69,7 +67,7 @@ export function ServiceDetail({ service }: { service: Service }) {
               </ol>
             </nav>
             <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{service.title}</h1>
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{service.h1}</h1>
             <p className="mt-4 text-base leading-relaxed text-mute">{service.blurb}</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button asChild>
@@ -105,6 +103,15 @@ export function ServiceDetail({ service }: { service: Service }) {
         </article>
       </section>
 
+      <section className="mx-auto max-w-6xl space-y-4 px-5 py-4">
+        {service.sections.map((section) => (
+          <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+            <h2 className="text-2xl font-extrabold">{section.title}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-mute">{section.text}</p>
+          </article>
+        ))}
+      </section>
+
       <section className="mx-auto max-w-6xl px-5 pb-4">
         <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">Deliverables</h2>
@@ -123,6 +130,21 @@ export function ServiceDetail({ service }: { service: Service }) {
           </p>
         </div>
       </section>
+
+      {linked.length ? (
+        <section className="mx-auto max-w-6xl px-5 pb-4">
+          <h2 className="text-2xl font-extrabold">Related services</h2>
+          <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
+            {linked.map((item) => (
+              <li key={item.slug}>
+                <Link to="/services/$service" params={{ service: item.slug }} className="text-primary hover:text-ink">
+                  {item.linkLabel}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="mx-auto max-w-6xl px-5 py-12">
         <h2 className="text-3xl font-extrabold tracking-tight">Process</h2>

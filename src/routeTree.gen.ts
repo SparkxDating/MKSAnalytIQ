@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DigitalMarketingSoftwareDelhiNcrRouteImport } from './routes/digital-marketing-software-delhi-ncr'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
@@ -36,6 +37,12 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DigitalMarketingSoftwareDelhiNcrRoute =
+  DigitalMarketingSoftwareDelhiNcrRouteImport.update({
+    id: '/digital-marketing-software-delhi-ncr',
+    path: '/digital-marketing-software-delhi-ncr',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -81,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -94,6 +102,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -108,6 +117,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/digital-marketing-software-delhi-ncr'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/digital-marketing-software-delhi-ncr'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
@@ -149,6 +161,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/digital-marketing-software-delhi-ncr'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
@@ -163,6 +176,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  DigitalMarketingSoftwareDelhiNcrRoute: typeof DigitalMarketingSoftwareDelhiNcrRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProcessRoute: typeof ProcessRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
@@ -194,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-marketing-software-delhi-ncr': {
+      id: '/digital-marketing-software-delhi-ncr'
+      path: '/digital-marketing-software-delhi-ncr'
+      fullPath: '/digital-marketing-software-delhi-ncr'
+      preLoaderRoute: typeof DigitalMarketingSoftwareDelhiNcrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -259,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  DigitalMarketingSoftwareDelhiNcrRoute: DigitalMarketingSoftwareDelhiNcrRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProcessRoute: ProcessRoute,
   RefundPolicyRoute: RefundPolicyRoute,

@@ -8,7 +8,7 @@
  */
 
 export const site = {
-  url: "https://mksanalytiq.vercel.app",
+  url: "https://mksanalytiq.in",
   ogImage: "/og.jpg",
   locale: "en_IN",
   /** Shown on legal pages. Update when the text changes. */
@@ -44,9 +44,9 @@ export function whatsappHref(text?: string) {
 }
 
 export const hero = {
-  title: "Digital Marketing, Software & Growth Systems for Businesses",
-  lede: "MKSAnalytIQ helps businesses generate leads, build their digital presence and launch digital products — combining marketing, technology and growth under one roof.",
-  trust: "Based in Noida • Serving businesses across India",
+  title: "Build Digital. Grow Smarter.",
+  lede: "MKSANALYTIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
+  trust: "Based in Noida • Serving Delhi NCR and India",
   primaryCta: "Book Free Consultation",
   secondaryCta: "Chat on WhatsApp",
 } as const;
@@ -72,13 +72,14 @@ export const footerCompany = [
   { to: "/about", label: "About" },
   { to: "/portfolio", label: "Work" },
   { to: "/process", label: "Process" },
+  { to: "/digital-marketing-software-delhi-ncr", label: "Delhi NCR" },
   { to: "/contact", label: "Contact" },
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms", label: "Terms & Conditions" },
   { to: "/refund-policy", label: "Refund Policy" },
 ] as const;
 
-export type ServiceId = "marketing" | "social" | "events" | "software";
+export type ServiceId = "marketing" | "social" | "events" | "software" | "web" | "app" | "ai";
 
 export type ProjectCategory = "software" | "marketing" | "events" | "campaigns";
 
@@ -94,13 +95,17 @@ export const services: {
   id: ServiceId;
   slug: string;
   title: string;
+  h1: string;
+  linkLabel: string;
   blurb: string;
   suitable: string;
   problem: string;
   solution: string;
+  sections: { title: string; text: string }[];
   deliverables: string[];
   cta: string;
   related: ProjectCategory[];
+  relatedServices: string[];
   image: string;
   imageAlt: string;
   seoTitle: string;
@@ -110,14 +115,30 @@ export const services: {
     id: "marketing",
     slug: "digital-marketing",
     title: "Digital Marketing",
+    h1: "Digital Marketing Company in Noida",
+    linkLabel: "digital marketing services",
     blurb:
-      "Campaigns built around a number you care about — leads, bookings, or sales — not a pile of vanity posts.",
+      "Performance marketing, social media, SEO, content and analytics for businesses that want enquiries they can actually follow up.",
     suitable:
-      "Businesses that want enquiries from Google or Meta, with a page and a follow-up path you can actually read.",
+      "Businesses in Noida and across Delhi NCR that want Google or Meta enquiries, with a page and a follow-up path you can read.",
     problem:
       "Spend often goes out before the offer, the landing page and the tracking agree. Without that, it is hard to tell what a lead cost.",
     solution:
       "We treat the offer, ads, landing page, retargeting and reporting as one system. You approve a written scope before anything launches.",
+    sections: [
+      {
+        title: "Performance marketing",
+        text: "Performance marketing here means campaigns aimed at a number you care about — leads, bookings or sales. A typical scope can include Google Ads, Meta Ads, a landing page, conversion tracking and retargeting. Reporting shows what the spend produced, and you see it before the next month is planned.",
+      },
+      {
+        title: "Social media, SEO and content",
+        text: "Social media marketing can run beside the ads, or as its own monthly plan with a calendar you approve. SEO and content strategy mean service pages and articles that answer real questions, so search and the sales conversation describe the same offer. Nothing on this page promises a ranking.",
+      },
+      {
+        title: "Analytics, leads and conversion",
+        text: "Lead generation and conversion optimization, in this studio, are the path from an ad or a page to a form, call or WhatsApp someone can answer — plus a monthly read of spend, reach and enquiries. We keep what is working and change what is not. We do not publish invented results.",
+      },
+    ],
     deliverables: [
       "Google Ads",
       "Meta Ads",
@@ -125,19 +146,218 @@ export const services: {
       "Conversion tracking",
       "Retargeting",
       "Performance reporting",
+      "SEO and content pages",
     ],
     cta: "Get a Marketing Plan",
     related: ["marketing", "campaigns"],
+    relatedServices: ["web-development", "social-media", "software-development"],
     image: "/media/desk.jpg",
-    imageAlt: "Campaign planning desk with a laptop and charts",
-    seoTitle: "Digital Marketing in Noida | MKSAnalytIQ",
+    imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
+    seoTitle: "Digital Marketing Company in Noida | MKSANALYTIQ",
     seoDescription:
-      "Digital marketing in Noida: Google Ads, Meta Ads, landing pages, conversion tracking and reporting. Written scope before launch. MKSAnalytIQ.",
+      "MKSANALYTIQ provides digital marketing services in Noida and Delhi NCR, including performance marketing, social media, SEO, content and analytics.",
+  },
+  {
+    id: "web",
+    slug: "web-development",
+    title: "Web Development",
+    h1: "Web Development Company in Noida",
+    linkLabel: "web development services",
+    blurb:
+      "Business websites, web applications and the admin tools behind them, built so your team can run the site after launch.",
+    suitable:
+      "Companies in Noida, Delhi NCR and across India that need a public website, an online shop, or a web application their own staff can use.",
+    problem:
+      "A site gets launched without a clear page for the offer, or a tool is promised and the team has no screen they can actually operate.",
+    solution:
+      "We scope the pages or the application, build it in the open, and hand over what the written agreement says you keep.",
+    sections: [
+      {
+        title: "Website development",
+        text: "Website development covers business websites, corporate websites and landing pages. The page, the offer and the way a person gets in touch are planned together — a short site for one service, or a larger company site with the sections you actually need.",
+      },
+      {
+        title: "E-commerce websites",
+        text: "E-commerce websites are in scope when you need products, a cart and a checkout your team can operate. Catalogue size, payments and any later channel connections are written down before the build starts.",
+      },
+      {
+        title: "Web applications and admin dashboards",
+        text: "Web applications and admin dashboards are for work that is more than a brochure: roles, records and the screens staff use. These are custom builds, scoped around the job, not a theme with the logo swapped.",
+      },
+      {
+        title: "API integrations and website maintenance",
+        text: "API integrations connect the site to forms, payments, a CRM or another system you already run. Website maintenance — updates, fixes and small changes after launch — is available when you want it, and is listed in the scope rather than assumed.",
+      },
+    ],
+    deliverables: [
+      "Business websites",
+      "Corporate websites",
+      "Landing pages",
+      "E-commerce websites",
+      "Web applications",
+      "Admin dashboards",
+      "API integrations",
+      "Website maintenance",
+    ],
+    cta: "Discuss a Website",
+    related: ["software"],
+    relatedServices: ["software-development", "app-development", "digital-marketing", "ai-development"],
+    image: "/media/work/buildsite.jpg",
+    imageAlt: "BuildSite, a custom web application developed by MKSAnalytIQ",
+    seoTitle: "Web Development Company in Noida | MKSANALYTIQ",
+    seoDescription:
+      "MKSANALYTIQ provides website and web application development in Noida, Delhi NCR and across India, including business websites, web apps, dashboards and custom digital solutions.",
+  },
+  {
+    id: "software",
+    slug: "software-development",
+    title: "Software Development",
+    h1: "Software Development Company in Noida",
+    linkLabel: "custom software development",
+    blurb:
+      "Custom software, SaaS platforms and business systems your team can run after the handover.",
+    suitable:
+      "Teams in Noida, Delhi NCR and across India that need software their own people can operate, not a file they cannot change.",
+    problem:
+      "A tool gets delivered without a handover the team can use, or the public site and the internal system are planned as if they were unrelated.",
+    solution:
+      "We scope the build, ship it in the open, and hand over what the written agreement says you keep — including a repository when that is part of the scope.",
+    sections: [
+      {
+        title: "Custom software and SaaS",
+        text: "Custom software for one operation, or SaaS development when the product needs accounts, roles and a way to charge. Published studio work includes multi-tenant products and internal tools. The scope says what ships and what is handed over.",
+      },
+      {
+        title: "Web applications, dashboards and business software",
+        text: "Web applications, business software and dashboards cover the screens a team uses to do the work: records, pipelines, billing and the rest of the operation. Database-backed applications are part of that when the data has to stay in your system.",
+      },
+      {
+        title: "API development",
+        text: "API development connects the product to the other tools you already use, or exposes your own data to a website or an app. The endpoints and the access rules are part of the written scope.",
+      },
+      {
+        title: "AI-enabled software",
+        text: "AI-enabled software means a feature inside the product — a guided flow, a draft, or an assistant a person reviews. It is an integration or a feature in the scope, not a claim that MKSAnalytIQ trains its own models.",
+      },
+    ],
+    deliverables: [
+      "Custom software",
+      "SaaS development",
+      "Web applications",
+      "Business software",
+      "Dashboards",
+      "API development",
+      "Database-backed applications",
+      "AI-enabled software",
+      "Repository handover",
+    ],
+    cta: "Discuss a Build",
+    related: ["software"],
+    relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
+    image: "/media/devices.jpg",
+    imageAlt: "Laptop and phone used for software development at MKSAnalytIQ",
+    seoTitle: "Software Development Company in Noida | MKSANALYTIQ",
+    seoDescription:
+      "MKSANALYTIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
+  },
+  {
+    id: "app",
+    slug: "app-development",
+    title: "App Development",
+    h1: "App Development Company in Noida",
+    linkLabel: "app development",
+    blurb:
+      "Custom mobile and business applications, with an admin side and an API when the app has to talk to something else.",
+    suitable:
+      "Companies in Noida, Delhi NCR and across India that need an Android, iOS or cross-platform app their customers or staff will actually open.",
+    problem:
+      "An app is commissioned without a clear job, or it ships with no way for the team to manage what is inside it.",
+    solution:
+      "We write down the platforms, the screens and the handover, then build against that scope. Maintenance after launch is included only when the scope says so.",
+    sections: [
+      {
+        title: "Android, iOS and cross-platform apps",
+        text: "Android app development, iOS app development and cross-platform app development are chosen for the brief. Published studio projects have used Expo for cross-platform apps, Swift for an iOS app, and Kotlin for an Android component. A new project does not automatically use every one of those. The scope names the stack.",
+      },
+      {
+        title: "Business apps, admin panels and APIs",
+        text: "Business apps cover a workflow customers or staff repeat. An admin panel and API integration are included when the app has to share data with a website, a database or a system you already run.",
+      },
+      {
+        title: "App maintenance",
+        text: "App maintenance is updates after the first release, when you want them. What continues — fixes, store releases, small changes — is agreed in writing rather than assumed.",
+      },
+    ],
+    deliverables: [
+      "Android app development",
+      "iOS app development",
+      "Cross-platform app development",
+      "API integration",
+      "Admin panels",
+      "Business apps",
+      "App maintenance",
+    ],
+    cta: "Discuss an App",
+    related: ["software"],
+    relatedServices: ["software-development", "web-development", "ai-development"],
+    image: "/media/work/spark-mobile.jpg",
+    imageAlt: "Spark Mobile, an iOS and Android app developed by MKSAnalytIQ",
+    seoTitle: "App Development Company in Noida | MKSANALYTIQ",
+    seoDescription:
+      "MKSANALYTIQ develops custom mobile and business applications for companies in Noida, Delhi NCR and across India.",
+  },
+  {
+    id: "ai",
+    slug: "ai-development",
+    title: "AI Development",
+    h1: "AI Development & Automation in Noida",
+    linkLabel: "AI development",
+    blurb:
+      "AI-powered software, automation and chatbots built as product features your team can review — not as a research claim.",
+    suitable:
+      "Businesses in Noida, Delhi NCR and across India that want a chatbot, a workflow or a tool that uses AI inside a defined job.",
+    problem:
+      "AI is added as a slogan, with no workflow, no review step and no agreement about which tool is actually being used.",
+    solution:
+      "We scope the job: what the software should draft, route or answer, which integrations it uses, and who approves the output. MKSAnalytIQ does not claim a proprietary foundation model.",
+    sections: [
+      {
+        title: "AI-powered applications and chatbots",
+        text: "AI-powered applications and AI chatbots are built for a specific job — answering questions about your offer, guiding a form, or drafting a reply for a person to approve. The value is the workflow around the model, not a claim that the studio trains its own.",
+      },
+      {
+        title: "Automation and AI integrations",
+        text: "Business automation and workflow automation connect steps your team already does: intake, a draft, an approval, a handoff. AI integrations use external AI tools where they help that sequence. The tools and the limits are named in the scope.",
+      },
+      {
+        title: "Dashboards and business tools",
+        text: "AI dashboards and other intelligent business tools put that work in one place so someone can see what was drafted, what was approved and what still needs a person. They are business software with an AI feature, not an unsupervised system.",
+      },
+    ],
+    deliverables: [
+      "AI-powered applications",
+      "AI chatbots",
+      "Business automation",
+      "AI integrations",
+      "Workflow automation",
+      "AI dashboards",
+      "Intelligent business tools",
+    ],
+    cta: "Discuss an AI Build",
+    related: ["software"],
+    relatedServices: ["software-development", "web-development", "app-development"],
+    image: "/media/work/taxpilot.jpg",
+    imageAlt: "TaxPilot AI, a guided software project developed by MKSAnalytIQ",
+    seoTitle: "AI Development & Automation Company in Noida | MKSANALYTIQ",
+    seoDescription:
+      "MKSANALYTIQ builds AI-powered software, automation workflows, chatbots and intelligent business tools for companies in Noida, Delhi NCR and India.",
   },
   {
     id: "social",
     slug: "social-media",
     title: "Social Media",
+    h1: "Social Media",
+    linkLabel: "social media",
     blurb:
       "A steady presence on the platforms your customers already use, written in your voice and posted on a calendar you approve.",
     suitable:
@@ -146,6 +366,12 @@ export const services: {
       "Posting stalls, or it runs in a voice that doesn’t sound like the business. Replies pile up and nobody owns the calendar.",
     solution:
       "A monthly plan you approve, then reels, stills and community replies in that voice — with a review of what to change next month.",
+    sections: [
+      {
+        title: "What a month includes",
+        text: "Usually a content plan, reels and stills, captions in your voice, community replies and a review. You approve the calendar before it goes out. Paid social, when you want it, is scoped with digital marketing rather than assumed here.",
+      },
+    ],
     deliverables: [
       "Monthly content plan",
       "Reels and stills",
@@ -156,8 +382,9 @@ export const services: {
     ],
     cta: "Get a Content Plan",
     related: ["marketing"],
+    relatedServices: ["digital-marketing", "web-development"],
     image: "/media/studio.jpg",
-    imageAlt: "Phone and ring light for social content",
+    imageAlt: "Social content setup at the MKSAnalytIQ studio",
     seoTitle: "Social Media Marketing in Noida | MKSAnalytIQ",
     seoDescription:
       "Social media management from a Noida studio: content calendars, reels, community replies and a monthly review you approve. MKSAnalytIQ.",
@@ -166,6 +393,8 @@ export const services: {
     id: "events",
     slug: "event-management",
     title: "Event Management",
+    h1: "Event Management",
+    linkLabel: "event management",
     blurb:
       "Launches, corporate gatherings and community programmes — planned on the ground and promoted before the doors open.",
     suitable:
@@ -174,6 +403,12 @@ export const services: {
       "The venue, the guest list and the promotion are often three separate jobs. The date arrives and the list is still thin.",
     solution:
       "One plan for the run of show, the vendors, registration and the messages that go out before and after the event.",
+    sections: [
+      {
+        title: "What an event brief covers",
+        text: "A typical brief covers the run of show, vendor and on-site coordination, invites and registration, reminder messages, and recap content. Promotion before the event can be added with digital marketing when you want it. The exact list is in the scope.",
+      },
+    ],
     deliverables: [
       "Run of show",
       "Vendor coordination",
@@ -184,39 +419,12 @@ export const services: {
     ],
     cta: "Plan an Event",
     related: ["events"],
+    relatedServices: ["digital-marketing"],
     image: "/media/event.jpg",
     imageAlt: "Banquet hall set for a corporate event",
     seoTitle: "Event Management in Noida | MKSAnalytIQ",
     seoDescription:
       "Event management for launches, corporate gatherings and community programmes — planning, registration and promotion. MKSAnalytIQ, Noida.",
-  },
-  {
-    id: "software",
-    slug: "software-development",
-    title: "Software & App Development",
-    blurb:
-      "Websites, dashboards and product software that your team can actually run — from a public site to a working SaaS.",
-    suitable:
-      "Teams that need a website, portal or product their own people can operate after launch.",
-    problem:
-      "A site or tool gets delivered without a handover the team can use, or marketing sends people to a page that isn’t ready.",
-    solution:
-      "We scope the build, ship it in the open, and hand over what the written agreement says you keep — including a repository when that is part of the scope.",
-    deliverables: [
-      "Marketing websites",
-      "Web apps and portals",
-      "Dashboards and internal tools",
-      "API integrations",
-      "Mobile-ready interfaces",
-      "Repository handover",
-    ],
-    cta: "Discuss a Build",
-    related: ["software"],
-    image: "/media/devices.jpg",
-    imageAlt: "Laptop and phone on a studio desk",
-    seoTitle: "Software & App Development in Noida | MKSAnalytIQ",
-    seoDescription:
-      "Software and app development in Noida: websites, portals, dashboards and product builds, with a written scope and handover. MKSAnalytIQ.",
   },
 ];
 
@@ -332,7 +540,7 @@ export const projects: {
     stack: ["Next.js", "Python", "Postgres"],
     github: "https://github.com/SparkxDating/ShortGen",
     live: "https://shortgen-pi.vercel.app",
-    seoTitle: "ShortGen — Project overview | MKSAnalytIQ",
+    seoTitle: "ShortGen — Short-Form Video SaaS | MKSAnalytIQ",
     seoDescription:
       "Project overview of ShortGen, a multi-tenant SaaS for short-form video: workspaces, jobs, templates and credits.",
   },
@@ -354,7 +562,7 @@ export const projects: {
     stack: ["NestJS", "Next.js", "Kotlin"],
     github: "https://github.com/SparkxDating/cpaas",
     live: "",
-    seoTitle: "Open CPaaS — Project overview | MKSAnalytIQ",
+    seoTitle: "Open CPaaS — Messaging and Communications Platform | MKSAnalytIQ",
     seoDescription:
       "Project overview of Open CPaaS: messaging, verify, voice, email, provider routing and an Android SMS gateway.",
   },
@@ -374,7 +582,7 @@ export const projects: {
     stack: ["Next.js", "Prisma", "TypeScript"],
     github: "https://github.com/SparkxDating/taxpilot-ai",
     live: "https://taxpilot-ai-beta.vercel.app",
-    seoTitle: "TaxPilot AI — Project overview | MKSAnalytIQ",
+    seoTitle: "TaxPilot AI — Guided ITR Preparation | MKSAnalytIQ",
     seoDescription:
       "Project overview of TaxPilot AI: guided ITR-3 and ITR-4 preparation for AY 2026–27, with eligibility checks and ITR-4 JSON export.",
   },
@@ -394,7 +602,7 @@ export const projects: {
     stack: ["TypeScript", "Postgres"],
     github: "https://github.com/SparkxDating/QRLogin",
     live: "https://qr-login-six.vercel.app",
-    seoTitle: "Eye Camp Registration — Project overview | MKSAnalytIQ",
+    seoTitle: "Eye Camp Registration — Hindi Registration System | MKSAnalytIQ",
     seoDescription:
       "Project overview of the Hindi, mobile-first eye-camp registration system for a free cataract camp in Varanasi.",
   },
@@ -409,7 +617,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "https://github.com/SparkxDating/Navizindagi",
     live: "https://navizindagi.vercel.app",
-    seoTitle: "Navi Zindagi — Project overview | MKSAnalytIQ",
+    seoTitle: "Navi Zindagi — Fundraising and Volunteer Site | MKSAnalytIQ",
     seoDescription:
       "Project overview of the Navi Zindagi fundraising and volunteer site for flood-relief work in Nepal and Assam.",
   },
@@ -429,7 +637,7 @@ export const projects: {
     stack: ["Next.js", "Prisma"],
     github: "https://github.com/SparkxDating/ai-influencer-os",
     live: "",
-    seoTitle: "AI Influencer OS — Project overview | MKSAnalytIQ",
+    seoTitle: "AI Influencer OS — Content Workspace | MKSAnalytIQ",
     seoDescription:
       "Project overview of AI Influencer OS: profiles, content drafts, post approval and disclosed sponsored captions.",
   },
@@ -443,7 +651,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "https://buildsite-one.vercel.app",
-    seoTitle: "BuildSite — Project overview | MKSAnalytIQ",
+    seoTitle: "BuildSite — Construction Operations Software | MKSAnalytIQ",
     seoDescription: "Project overview of BuildSite, a construction product for roles, attendance, stock and billing.",
   },
   {
@@ -456,7 +664,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "",
-    seoTitle: "BrokerFree — Project overview | MKSAnalytIQ",
+    seoTitle: "BrokerFree — Real Estate CRM and Listings | MKSAnalytIQ",
     seoDescription: "Project overview of BrokerFree, a multi-tenant real estate system with CRM, listings and a pipeline.",
   },
   {
@@ -470,7 +678,7 @@ export const projects: {
     stack: ["JavaScript", "Postgres"],
     github: "",
     live: "https://brjbharat.vercel.app",
-    seoTitle: "BRJ Bharat — Project overview | MKSAnalytIQ",
+    seoTitle: "BRJ Bharat — Bilingual Organisation Website | MKSAnalytIQ",
     seoDescription:
       "Project overview of the bilingual Bhartiya Rashtriya Jansatta website, including forms, a news feed and an admin console.",
   },
@@ -484,7 +692,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "",
-    seoTitle: "Carnispora — Project overview | MKSAnalytIQ",
+    seoTitle: "Carnispora — Hyperlocal Delivery Product | MKSAnalytIQ",
     seoDescription: "Project overview of Carnispora, a hyperlocal instant-delivery product.",
   },
   {
@@ -497,7 +705,7 @@ export const projects: {
     stack: ["Next.js", "TypeScript"],
     github: "",
     live: "",
-    seoTitle: "EdgeBot — Project overview | MKSAnalytIQ",
+    seoTitle: "EdgeBot — Crypto Futures Trading Bot | MKSAnalytIQ",
     seoDescription: "Project overview of EdgeBot, a crypto futures trading bot built with Next.js.",
   },
   {
@@ -510,7 +718,7 @@ export const projects: {
     stack: ["Next.js", "TypeScript", "Supabase"],
     github: "",
     live: "https://dating-app-me-5f01.vercel.app",
-    seoTitle: "Spark — Project overview | MKSAnalytIQ",
+    seoTitle: "Spark — Dating App with Chat | MKSAnalytIQ",
     seoDescription: "Project overview of Spark, a dating app with accounts, a swipe deck, matches and chat.",
   },
   {
@@ -523,7 +731,7 @@ export const projects: {
     stack: ["Expo", "TypeScript"],
     github: "",
     live: "",
-    seoTitle: "Spark Mobile — Project overview | MKSAnalytIQ",
+    seoTitle: "Spark Mobile — iOS and Android App | MKSAnalytIQ",
     seoDescription: "Project overview of Spark Mobile, the iOS and Android app for Spark.",
   },
   {
@@ -536,7 +744,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "",
-    seoTitle: "KrushnaAI — Project overview | MKSAnalytIQ",
+    seoTitle: "KrushnaAI — Agent Marketplace | MKSAnalytIQ",
     seoDescription: "Project overview of KrushnaAI, an agent marketplace and agent-as-a-service product.",
   },
   {
@@ -549,7 +757,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "https://krushnalabs.vercel.app",
-    seoTitle: "KrushnaLabs — Project overview | MKSAnalytIQ",
+    seoTitle: "KrushnaLabs — AI Software Builder | MKSAnalytIQ",
     seoDescription: "Project overview of KrushnaLabs, a product for building software by talking to AI.",
   },
   {
@@ -562,7 +770,7 @@ export const projects: {
     stack: ["TypeScript", "Supabase"],
     github: "",
     live: "",
-    seoTitle: "Ludo Kingdom — Project overview | MKSAnalytIQ",
+    seoTitle: "Ludo Kingdom — Multiplayer Mobile Game | MKSAnalytIQ",
     seoDescription: "Project overview of Ludo Kingdom, an Android and iOS Ludo app with multiplayer.",
   },
   {
@@ -575,7 +783,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "https://media-downloader-neon.vercel.app",
-    seoTitle: "MediaGrab — Project overview | MKSAnalytIQ",
+    seoTitle: "MediaGrab — Media Download Tool | MKSAnalytIQ",
     seoDescription:
       "Project overview of MediaGrab, a tool for downloading videos and images from X, Instagram, Facebook and YouTube.",
   },
@@ -589,7 +797,7 @@ export const projects: {
     stack: ["Next.js", "Supabase"],
     github: "",
     live: "https://metasocial-mu.vercel.app",
-    seoTitle: "MetaSocial — Project overview | MKSAnalytIQ",
+    seoTitle: "MetaSocial — Social Post Scheduler | MKSAnalytIQ",
     seoDescription: "Project overview of MetaSocial, a scheduler for posts, mentions, rules and AI drafts.",
   },
   {
@@ -602,7 +810,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "https://omnisell-swart.vercel.app",
-    seoTitle: "OmniSell — Project overview | MKSAnalytIQ",
+    seoTitle: "OmniSell — Multi-Channel Ecommerce Software | MKSAnalytIQ",
     seoDescription: "Project overview of OmniSell, multi-channel ecommerce management.",
   },
   {
@@ -615,7 +823,7 @@ export const projects: {
     stack: ["Next.js", "Expo"],
     github: "",
     live: "https://rajput-rishta-mocha.vercel.app",
-    seoTitle: "Rajput Rishta — Project overview | MKSAnalytIQ",
+    seoTitle: "Rajput Rishta — Community Matrimony Product | MKSAnalytIQ",
     seoDescription: "Project overview of Rajput Rishta, a community matrimony product for web and mobile.",
   },
   {
@@ -628,7 +836,7 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "",
-    seoTitle: "SiteForge — Project overview | MKSAnalytIQ",
+    seoTitle: "SiteForge — Website Generation SaaS | MKSAnalytIQ",
     seoDescription: "Project overview of SiteForge, a SaaS for generating websites from a prompt.",
   },
   {
@@ -641,7 +849,7 @@ export const projects: {
     stack: ["Swift"],
     github: "",
     live: "",
-    seoTitle: "StorageClean — Project overview | MKSAnalytIQ",
+    seoTitle: "StorageClean — iOS Storage App | MKSAnalytIQ",
     seoDescription: "Project overview of StorageClean, an iOS app for freeing device space.",
   },
   {
@@ -654,13 +862,39 @@ export const projects: {
     stack: ["TypeScript"],
     github: "",
     live: "",
-    seoTitle: "TubeForge — Project overview | MKSAnalytIQ",
+    seoTitle: "TubeForge — YouTube Publishing Tool | MKSAnalytIQ",
     seoDescription: "Project overview of TubeForge, a YouTube channel tool for scripts, video and publishing.",
   },
 ];
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+
+export function relatedServices(slugs: readonly string[]) {
+  return slugs.flatMap((slug) => {
+    const service = getService(slug);
+    return service ? [service] : [];
+  });
+}
+
+export function servicesForProject(project: {
+  category: ProjectCategory;
+  name: string;
+  summary: string;
+  features: readonly string[];
+  stack: readonly string[];
+}) {
+  const blob = `${project.name} ${project.summary} ${project.features.join(" ")} ${project.stack.join(" ")}`;
+  const slugs: string[] = [];
+  if (project.category === "marketing") slugs.push("digital-marketing", "social-media");
+  if (project.category === "campaigns") slugs.push("web-development", "digital-marketing");
+  if (project.category === "events") slugs.push("event-management");
+  if (project.category === "software") slugs.push("software-development", "web-development");
+  if (/\b(ios|android|mobile|expo|swift|kotlin)\b/i.test(blob)) slugs.push("app-development");
+  if (/ai\b/i.test(blob)) slugs.push("ai-development");
+  return relatedServices([...new Set(slugs)]);
 }
 
 export function projectsIn(categories: readonly ProjectCategory[]) {
@@ -709,14 +943,14 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
   {
     id: "outside",
     q: "Do you work with businesses outside Noida?",
-    a: "Yes. The studio is in Sector 8, Noida, and projects run with businesses across India. A visit is welcome when it helps; otherwise calls and WhatsApp cover the rest.",
-    tags: ["home", "contact", "about"],
+    a: "Yes. The only office is at C-81, C Block, Sector 8, Noida. From there the studio works with businesses across Delhi NCR — including Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad — and elsewhere in India. Those are service areas, not other offices. A visit to Noida is welcome when it helps; otherwise calls and WhatsApp cover the rest.",
+    tags: ["home", "contact", "about", "marketing", "web", "software", "app", "ai"],
   },
   {
     id: "both",
     q: "Can you build my website and manage marketing?",
     a: "Yes. Marketing, design and development can sit in one engagement so the site, the campaigns and the follow-up are planned together. You can also hire one of those practices on its own.",
-    tags: ["home", "contact", "marketing", "software", "social"],
+    tags: ["home", "contact", "marketing", "software", "social", "web", "app", "ai"],
   },
   {
     id: "ownership",
@@ -747,6 +981,43 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "What does event management include?",
     a: "A typical event brief covers the run of show, vendor and on-site coordination, invites and registration, reminder messages, and recap content. Promotion before the event can be added when you want it. The exact list is in the scope.",
     tags: ["events"],
+  },
+
+  {
+    id: "web-types",
+    q: "What types of websites do you build?",
+    a: "Business and corporate websites, landing pages, e-commerce websites, and custom web applications such as admin dashboards. The written scope lists the pages, integrations and handover for that project.",
+    tags: ["web"],
+  },
+  {
+    id: "web-apps",
+    q: "Do you build custom web applications?",
+    a: "Yes. Alongside marketing websites, the studio builds web applications, dashboards and other tools backed by an API and a database when the brief needs them.",
+    tags: ["web", "software"],
+  },
+  {
+    id: "web-maintain",
+    q: "Do you provide website maintenance?",
+    a: "Yes, when it is included in the scope. Maintenance can cover updates, fixes and small changes after launch. It is agreed in writing, not assumed.",
+    tags: ["web"],
+  },
+  {
+    id: "app-kinds",
+    q: "What kinds of apps do you build?",
+    a: "Business apps, plus Android, iOS and cross-platform apps. Published studio work includes Expo apps, a Swift iOS app and a Kotlin Android component. The stack for a new brief is chosen in the scope.",
+    tags: ["app"],
+  },
+  {
+    id: "app-maintain",
+    q: "Do you maintain apps after launch?",
+    a: "App maintenance can be part of the engagement when you want updates after the first release. What is included is written into the scope.",
+    tags: ["app"],
+  },
+  {
+    id: "ai-what",
+    q: "What does AI development include?",
+    a: "Software that uses AI for a defined job: chatbots, automation, integrations with AI tools, dashboards and other business tools. MKSAnalytIQ does not claim a proprietary foundation model. The scope says which tools and workflows are included.",
+    tags: ["ai", "software"],
   },
 ];
 

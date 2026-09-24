@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mksanalytiq.vercel.app/sitemap.xml
+Sitemap: https://mksanalytiq.in/sitemap.xml

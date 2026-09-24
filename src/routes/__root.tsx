@@ -2,19 +2,18 @@ import { createRootRoute, HeadContent, Link, Outlet, Scripts } from "@tanstack/r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { SiteShell } from "@/components/site/shell";
-import { company, site } from "@/lib/content";
-import { absoluteUrl } from "@/lib/seo";
+import { businessGraph } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
 const description =
-  "MKSAnalytIQ helps businesses in Noida and across India generate leads, build a digital presence and launch digital products — marketing, software and events from one studio.";
+  "MKSANALYTIQ is a Noida-based digital marketing, web development, software, app and AI development company serving businesses across Delhi NCR and India.";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MKSAnalytIQ — Digital marketing and software in Noida" },
+      { title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida" },
       { name: "description", content: description },
       { name: "theme-color", content: "#071426" },
       { name: "robots", content: "index,follow" },
@@ -37,60 +36,7 @@ export const Route = createRootRoute({
 });
 
 function Root() {
-  const origin = site.url;
-  const schema = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${origin}/#organization`,
-        name: company.name,
-        url: origin,
-        email: company.email,
-        telephone: company.phoneTel,
-        logo: absoluteUrl("/media/logo.png"),
-        image: absoluteUrl("/media/logo.png"),
-        founder: {
-          "@type": "Person",
-          name: company.proprietor,
-        },
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "C-81, C Block, Sector 8",
-          addressLocality: "Noida",
-          addressRegion: "Uttar Pradesh",
-          postalCode: "201306",
-          addressCountry: "IN",
-        },
-        sameAs: [company.github],
-      },
-      {
-        "@type": ["LocalBusiness", "ProfessionalService"],
-        "@id": `${origin}/#local`,
-        name: company.name,
-        url: origin,
-        image: absoluteUrl("/media/office.jpg"),
-        email: company.email,
-        telephone: company.phoneTel,
-        founder: company.proprietor,
-        description,
-        parentOrganization: { "@id": `${origin}/#organization` },
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "C-81, C Block, Sector 8",
-          addressLocality: "Noida",
-          addressRegion: "Uttar Pradesh",
-          postalCode: "201306",
-          addressCountry: "IN",
-        },
-        areaServed: {
-          "@type": "Country",
-          name: "India",
-        },
-        hasMap: company.maps,
-      },
-    ],
-  };
+  const schema = businessGraph(description);
 
   return (
     <html lang="en" suppressHydrationWarning>

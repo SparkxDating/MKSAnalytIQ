@@ -10,9 +10,9 @@ import { pageMeta } from "@/lib/seo";
 export const Route = createFileRoute("/services/")({
   head: () =>
     pageMeta({
-      title: "Services — Digital Marketing, Social, Events & Software | MKSAnalytIQ",
+      title: "Services | Digital Marketing, Web, Software, Apps and AI | MKSANALYTIQ",
       description:
-        "Digital marketing, social media, event management, and software development from a studio in Sector 8, Noida.",
+        "Digital marketing, web development, software, app and AI development from MKSAnalytIQ in Noida, serving Delhi NCR and India. Event management remains available.",
       path: "/services",
     }),
   component: ServicesPage,
@@ -25,11 +25,12 @@ function ServicesPage() {
         <div className="mx-auto max-w-6xl px-5 py-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Services</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Four practices. Hired together or one at a time.
+            Digital marketing, websites, software, apps and AI.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Most clients start with the channel that’s already leaking — ads with no landing page, an event with no
-            list, or a product with no one to tell. We fix the pair, not just the loud part.
+            Hire one practice or several. Digital marketing, web development, custom software, app development and AI
+            development are the main work. Social media sits with the marketing. Event management is available when a
+            launch or gathering is part of the brief.
           </p>
           <div className="mt-6">
             <WhatsAppButton source="services" message="Hello, I’d like to talk about a service." />

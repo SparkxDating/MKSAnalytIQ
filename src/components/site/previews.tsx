@@ -2,12 +2,14 @@ import { projects } from "@/lib/content";
 import { cn } from "@/lib/cn";
 
 export function Preview({ slug, className }: { slug: string; className?: string }) {
-  const name = projects.find((project) => project.slug === slug)?.name ?? "Project";
+  const project = projects.find((item) => item.slug === slug);
+  const name = project?.name ?? "Project";
+  const alt = project ? `${project.name} — ${project.summary}` : `${name} project image`;
   return (
     <div className={cn("relative h-44 overflow-hidden bg-navy", className)}>
       <img
         src={`/media/work/${slug}.jpg`}
-        alt={`${name} thumbnail`}
+        alt={alt}
         width={1280}
         height={720}
         className="h-full w-full object-cover object-center"

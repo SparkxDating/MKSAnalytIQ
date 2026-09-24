@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProjectBrowser } from "@/components/site/project-browser";
 import { SiteShell } from "@/components/site/shell";
 import { company, projectCategories, type ProjectCategory } from "@/lib/content";
@@ -34,8 +34,24 @@ function Portfolio() {
             Projects that make an impact
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Products built by the studio. Public repositories are linked. Where the source stays private, the
-            project is still listed and a live site is linked when one is published.
+            Products built by the studio. Each case study lists the project type, what was built, the main features,
+            the technology, a screenshot, and a live demo or repository when one is public. Related work links to{" "}
+            <Link to="/services/$service" params={{ service: "web-development" }} className="font-semibold text-primary">
+              web development services
+            </Link>
+            ,{" "}
+            <Link to="/services/$service" params={{ service: "software-development" }} className="font-semibold text-primary">
+              custom software development
+            </Link>
+            ,{" "}
+            <Link to="/services/$service" params={{ service: "digital-marketing" }} className="font-semibold text-primary">
+              digital marketing services
+            </Link>{" "}
+            or{" "}
+            <Link to="/services/$service" params={{ service: "ai-development" }} className="font-semibold text-primary">
+              AI development
+            </Link>{" "}
+            where the project matches.
           </p>
           <a className="mt-4 inline-block text-sm font-semibold text-primary" href={company.github}>
             All repositories
