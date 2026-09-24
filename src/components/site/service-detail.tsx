@@ -69,6 +69,9 @@ export function ServiceDetail({ service }: { service: Service }) {
             <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{service.h1}</h1>
             <p className="mt-4 text-base leading-relaxed text-mute">{service.blurb}</p>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
+              Based in Noida • Serving Delhi NCR and India
+            </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button asChild>
                 <Link
@@ -173,7 +176,10 @@ export function ServiceDetail({ service }: { service: Service }) {
 
       <section className="mx-auto max-w-3xl px-5 pb-16">
         <FaqList items={questions} />
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-mute">
+          Based in Noida • Serving Delhi NCR and India
+        </p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
             <Link to="/contact" search={{ service: service.id }} onClick={() => track("quote_click", { source: `${service.slug}-end` })}>
               {service.cta} <ArrowRight className="size-4" aria-hidden />

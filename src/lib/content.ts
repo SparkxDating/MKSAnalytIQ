@@ -138,6 +138,10 @@ export const services: {
         title: "Analytics, leads and conversion",
         text: "Lead generation and conversion optimization, in this studio, are the path from an ad or a page to a form, call or WhatsApp someone can answer — plus a monthly read of spend, reach and enquiries. We keep what is working and change what is not. We do not publish invented results.",
       },
+      {
+        title: "How to start",
+        text: "Book a consultation or send a WhatsApp message with the offer and whether a page already exists. You get a written scope before any campaign launches. The studio is in Noida and takes this work for businesses across Delhi NCR and India.",
+      },
     ],
     deliverables: [
       "Google Ads",
@@ -148,7 +152,7 @@ export const services: {
       "Performance reporting",
       "SEO and content pages",
     ],
-    cta: "Get a Marketing Plan",
+    cta: "Book Free Consultation",
     related: ["marketing", "campaigns"],
     relatedServices: ["web-development", "social-media", "software-development"],
     image: "/media/desk.jpg",
@@ -188,6 +192,10 @@ export const services: {
         title: "API integrations and website maintenance",
         text: "API integrations connect the site to forms, payments, a CRM or another system you already run. Website maintenance — updates, fixes and small changes after launch — is available when you want it, and is listed in the scope rather than assumed.",
       },
+      {
+        title: "How to start",
+        text: "Say whether you need a business site, an online shop or a web application, and what content or systems you already have. The consultation fixes the pages, integrations and handover before anyone builds.",
+      },
     ],
     deliverables: [
       "Business websites",
@@ -199,7 +207,7 @@ export const services: {
       "API integrations",
       "Website maintenance",
     ],
-    cta: "Discuss a Website",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "app-development", "digital-marketing", "ai-development"],
     image: "/media/work/buildsite.jpg",
@@ -239,6 +247,10 @@ export const services: {
         title: "AI-enabled software",
         text: "AI-enabled software means a feature inside the product — a guided flow, a draft, or an assistant a person reviews. It is an integration or a feature in the scope, not a claim that MKSAnalytIQ trains its own models.",
       },
+      {
+        title: "How to start",
+        text: "Describe the operation the software has to support. The first conversation decides whether that is custom software, a SaaS product or a dashboard, and whether a repository is part of the handover.",
+      },
     ],
     deliverables: [
       "Custom software",
@@ -251,7 +263,7 @@ export const services: {
       "AI-enabled software",
       "Repository handover",
     ],
-    cta: "Discuss a Build",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
     image: "/media/devices.jpg",
@@ -287,6 +299,10 @@ export const services: {
         title: "App maintenance",
         text: "App maintenance is updates after the first release, when you want them. What continues — fixes, store releases, small changes — is agreed in writing rather than assumed.",
       },
+      {
+        title: "How to start",
+        text: "Say who will use the app and whether you already know if it should be Android, iOS or cross-platform. The scope names the platforms, the admin panel and any API. You can book that conversation from Noida or remotely across Delhi NCR and India.",
+      },
     ],
     deliverables: [
       "Android app development",
@@ -297,7 +313,7 @@ export const services: {
       "Business apps",
       "App maintenance",
     ],
-    cta: "Discuss an App",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "web-development", "ai-development"],
     image: "/media/work/spark-mobile.jpg",
@@ -310,7 +326,7 @@ export const services: {
     id: "ai",
     slug: "ai-development",
     title: "AI Development",
-    h1: "AI Development & Automation in Noida",
+    h1: "AI Development & Automation Company in Noida",
     linkLabel: "AI development",
     blurb:
       "AI-powered software, automation and chatbots built as product features your team can review — not as a research claim.",
@@ -333,6 +349,10 @@ export const services: {
         title: "Dashboards and business tools",
         text: "AI dashboards and other intelligent business tools put that work in one place so someone can see what was drafted, what was approved and what still needs a person. They are business software with an AI feature, not an unsupervised system.",
       },
+      {
+        title: "How to start",
+        text: "Describe the job — a chatbot, a draft step, or automation inside a system you already run. The consultation names the integration and what a person still approves. That is how an AI feature is scoped, not a research engagement.",
+      },
     ],
     deliverables: [
       "AI-powered applications",
@@ -343,7 +363,7 @@ export const services: {
       "AI dashboards",
       "Intelligent business tools",
     ],
-    cta: "Discuss an AI Build",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "web-development", "app-development"],
     image: "/media/work/taxpilot.jpg",
@@ -528,6 +548,12 @@ export const projects: {
   live: string;
   seoTitle: string;
   seoDescription: string;
+  /** When set, these service pages are the related links. Otherwise a category heuristic is used. */
+  serviceSlugs?: string[];
+  /** Published job of the product. Omit when it would only repeat the summary. */
+  objective?: string;
+  /** How the published product addresses that job. Omit when it is not in the project data. */
+  approach?: string;
 }[] = [
   {
     slug: "shortgen",
@@ -543,6 +569,9 @@ export const projects: {
     seoTitle: "ShortGen — Short-Form Video SaaS | MKSAnalytIQ",
     seoDescription:
       "Project overview of ShortGen, a multi-tenant SaaS for short-form video: workspaces, jobs, templates and credits.",
+    serviceSlugs: ["software-development", "ai-development"],
+    objective: "Turn a topic into short-form video for more than one workspace.",
+    approach: "The published product is a multi-tenant SaaS with workspaces, render jobs, templates and credits.",
   },
   {
     slug: "cpaas",
@@ -585,6 +614,9 @@ export const projects: {
     seoTitle: "TaxPilot AI — Guided ITR Preparation | MKSAnalytIQ",
     seoDescription:
       "Project overview of TaxPilot AI: guided ITR-3 and ITR-4 preparation for AY 2026–27, with eligibility checks and ITR-4 JSON export.",
+    serviceSlugs: ["ai-development", "software-development"],
+    objective: "Guide ITR-3 and ITR-4 preparation for AY 2026–27.",
+    approach: "The published product includes eligibility checks and an official ITR-4 JSON export.",
   },
   {
     slug: "eye-camp",
@@ -640,6 +672,9 @@ export const projects: {
     seoTitle: "AI Influencer OS — Content Workspace | MKSAnalytIQ",
     seoDescription:
       "Project overview of AI Influencer OS: profiles, content drafts, post approval and disclosed sponsored captions.",
+    serviceSlugs: ["ai-development", "digital-marketing"],
+    objective: "Draft and approve influencer content, including a disclosure on sponsored captions.",
+    approach: "The published workspace covers profiles, drafts, approval and that disclosure step.",
   },
   {
     slug: "buildsite",
@@ -653,6 +688,9 @@ export const projects: {
     live: "https://buildsite-one.vercel.app",
     seoTitle: "BuildSite — Construction Operations Software | MKSAnalytIQ",
     seoDescription: "Project overview of BuildSite, a construction product for roles, attendance, stock and billing.",
+    serviceSlugs: ["software-development", "web-development"],
+    objective: "Handle roles, attendance, stock and billing for a construction product.",
+    approach: "The published product lists those functions and a mobile view. No further operating detail is published here.",
   },
   {
     slug: "brokerfree",
@@ -694,6 +732,8 @@ export const projects: {
     live: "",
     seoTitle: "Carnispora — Hyperlocal Delivery Product | MKSAnalytIQ",
     seoDescription: "Project overview of Carnispora, a hyperlocal instant-delivery product.",
+    serviceSlugs: ["software-development", "app-development"],
+    objective: "Support hyperlocal instant delivery.",
   },
   {
     slug: "edgebot",
@@ -733,6 +773,9 @@ export const projects: {
     live: "",
     seoTitle: "Spark Mobile — iOS and Android App | MKSAnalytIQ",
     seoDescription: "Project overview of Spark Mobile, the iOS and Android app for Spark.",
+    serviceSlugs: ["app-development"],
+    objective: "Ship the iOS and Android app for Spark.",
+    approach: "The published app shares a backend with the Spark web app.",
   },
   {
     slug: "krushnaai",
@@ -885,7 +928,9 @@ export function servicesForProject(project: {
   summary: string;
   features: readonly string[];
   stack: readonly string[];
+  serviceSlugs?: readonly string[];
 }) {
+  if (project.serviceSlugs?.length) return relatedServices(project.serviceSlugs);
   const blob = `${project.name} ${project.summary} ${project.features.join(" ")} ${project.stack.join(" ")}`;
   const slugs: string[] = [];
   if (project.category === "marketing") slugs.push("digital-marketing", "social-media");
@@ -968,7 +1013,7 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     id: "timeline",
     q: "How long does it take to build a website?",
     a: "It depends on the number of pages, the content you already have, and any integrations. A timeline is part of the written scope before production starts. This site does not promise a fixed number of days.",
-    tags: ["home", "contact", "software"],
+    tags: ["home", "contact", "software", "web"],
   },
   {
     id: "social-scope",
@@ -1017,6 +1062,36 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     id: "ai-what",
     q: "What does AI development include?",
     a: "Software that uses AI for a defined job: chatbots, automation, integrations with AI tools, dashboards and other business tools. MKSAnalytIQ does not claim a proprietary foundation model. The scope says which tools and workflows are included.",
+    tags: ["ai", "software"],
+  },
+  {
+    id: "dm-what",
+    q: "What does a digital marketing company in Noida do?",
+    a: "At MKSAnalytIQ it means writing down the offer, then running the channels in the scope: Google Ads, Meta Ads, landing pages, tracking, SEO, content and a monthly read of enquiries. Social media can be part of that or a separate plan. This page does not promise rankings or a number of leads.",
+    tags: ["marketing", "home"],
+  },
+  {
+    id: "web-noida",
+    q: "Does MKSANALYTIQ provide web development in Noida?",
+    a: "Yes. From the Sector 8 studio, MKSAnalytIQ builds business websites, landing pages, e-commerce sites and custom web applications for companies in Noida, across Delhi NCR and elsewhere in India.",
+    tags: ["web"],
+  },
+  {
+    id: "software-custom",
+    q: "Can you build custom software for a business?",
+    a: "Yes. Custom software, SaaS products, dashboards and database-backed tools are scoped in writing, then built and handed over as that scope describes. A repository is included when the agreement says so.",
+    tags: ["software"],
+  },
+  {
+    id: "app-platforms",
+    q: "Do you develop Android and iOS applications?",
+    a: "Yes, when the brief needs them. Published studio work includes Android and iOS apps, Expo for cross-platform builds, Swift for an iOS app and Kotlin for an Android component. The platforms for a new project are named in the scope.",
+    tags: ["app"],
+  },
+  {
+    id: "ai-existing",
+    q: "Can you integrate AI into an existing business application?",
+    a: "Yes, when that is the brief. It means adding a defined job — a draft, a chatbot, a check or a workflow — using AI tools named in the scope. MKSAnalytIQ does not claim a proprietary model, and the existing system is not changed beyond what the scope lists.",
     tags: ["ai", "software"],
   },
 ];

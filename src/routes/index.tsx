@@ -27,17 +27,34 @@ export const Route = createFileRoute("/")({
 });
 
 const growth = [
-  { title: "Digital marketing", slug: "digital-marketing" },
-  { title: "Social media", slug: "social-media" },
-  { title: "SEO and content", slug: "digital-marketing" },
-  { title: "Analytics", slug: "digital-marketing" },
+  {
+    title: "Digital Marketing",
+    slug: "digital-marketing",
+    text: "Ads, search, content and reporting aimed at enquiries you can follow up.",
+  },
+  {
+    title: "Web Development",
+    slug: "web-development",
+    text: "Business sites, shops and web applications your team can run after launch.",
+  },
 ] as const;
 
 const technology = [
-  { title: "Web development", slug: "web-development" },
-  { title: "Software development", slug: "software-development" },
-  { title: "App development", slug: "app-development" },
-  { title: "AI development", slug: "ai-development" },
+  {
+    title: "Software Development",
+    slug: "software-development",
+    text: "Custom software, SaaS and dashboards, scoped and handed over in writing.",
+  },
+  {
+    title: "App Development",
+    slug: "app-development",
+    text: "Android, iOS and cross-platform apps, with an admin side when you need one.",
+  },
+  {
+    title: "AI Development & Automation",
+    slug: "ai-development",
+    text: "Chatbots, workflows and AI features inside a product a person still reviews.",
+  },
 ] as const;
 
 const featuredSlugs = ["shortgen", "taxpilot", "influencer-os"] as const;
@@ -152,6 +169,20 @@ function Home() {
           <ServiceGroup kicker="Digital Growth" index="01" tone="paper" items={growth} />
           <ServiceGroup kicker="Technology" index="02" tone="ink" items={technology} />
         </div>
+        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-mute">
+          <Link to="/services/$service" params={{ service: "social-media" }} className="font-semibold text-primary">
+            Social media
+          </Link>{" "}
+          is available as its own monthly plan. The studio is in Noida and works with businesses across{" "}
+          <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
+            Delhi NCR
+          </Link>
+          . Published builds are in the{" "}
+          <Link to="/portfolio" className="font-semibold text-primary">
+            portfolio
+          </Link>
+          .
+        </p>
       </section>
 
       <section id="work" className="scroll-mt-20 border-y border-line bg-card">
@@ -287,7 +318,7 @@ function ServiceGroup({
   kicker: string;
   index: string;
   tone: "paper" | "ink";
-  items: readonly { title: string; slug: string }[];
+  items: readonly { title: string; slug: string; text: string }[];
 }) {
   const dark = tone === "ink";
   return (
@@ -298,22 +329,27 @@ function ServiceGroup({
       <h3 className="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight">{kicker}</h3>
       <ul className={dark ? "mt-6 border-t border-paper/15" : "mt-6 border-t border-line"}>
         {items.map((item) => (
-          <li key={item.title}>
+          <li key={item.slug}>
             <Link
               to="/services/$service"
               params={{ service: item.slug }}
               className={
                 dark
-                  ? "group flex min-h-14 items-center justify-between border-b border-paper/15 py-3 text-base font-semibold text-paper transition-colors duration-200 hover:text-accent"
-                  : "group flex min-h-14 items-center justify-between border-b border-line py-3 text-base font-semibold transition-colors duration-200 hover:text-primary"
+                  ? "group flex min-h-14 items-start justify-between gap-4 border-b border-paper/15 py-4 text-paper transition-colors duration-200 hover:text-accent"
+                  : "group flex min-h-14 items-start justify-between gap-4 border-b border-line py-4 transition-colors duration-200 hover:text-primary"
               }
             >
-              {item.title}
+              <span>
+                <span className="block text-base font-semibold">{item.title}</span>
+                <span className={dark ? "mt-1 block text-sm font-normal leading-relaxed text-paper/70" : "mt-1 block text-sm font-normal leading-relaxed text-mute"}>
+                  {item.text}
+                </span>
+              </span>
               <ArrowRight
                 className={
                   dark
-                    ? "size-4 text-paper/50 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent"
-                    : "size-4 text-mute transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+                    ? "mt-1 size-4 shrink-0 text-paper/50 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent"
+                    : "mt-1 size-4 shrink-0 text-mute transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
                 }
                 aria-hidden
               />

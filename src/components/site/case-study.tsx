@@ -71,18 +71,34 @@ export function CaseStudy({ project }: { project: Project }) {
       <article className="mx-auto grid max-w-6xl gap-6 px-5 py-12 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-            <h2 className="text-2xl font-extrabold">Project type</h2>
-            <p className="mt-3 text-sm leading-relaxed text-mute">{project.kind}</p>
-            <h2 className="mt-6 text-2xl font-extrabold">What was built</h2>
+            <h2 className="text-2xl font-extrabold">Project overview</h2>
+            <p className="mt-3 text-sm leading-relaxed text-mute">
+              <span className="font-semibold text-ink">Project type: </span>
+              {project.kind}
+            </p>
             <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
             <p className="mt-3 text-sm leading-relaxed text-mute">
-              This page describes the published project. It does not add revenue, user counts or other results that
-              were not part of the original overview.
+              This page uses the published project description only. It does not add revenue, users, ROI or other
+              results.
             </p>
           </section>
 
+          {project.objective ? (
+            <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+              <h2 className="text-2xl font-extrabold">Objective</h2>
+              <p className="mt-3 text-sm leading-relaxed text-mute">{project.objective}</p>
+            </section>
+          ) : null}
+
+          {project.approach ? (
+            <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+              <h2 className="text-2xl font-extrabold">Solution</h2>
+              <p className="mt-3 text-sm leading-relaxed text-mute">{project.approach}</p>
+            </section>
+          ) : null}
+
           <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-            <h2 className="text-2xl font-extrabold">Main features</h2>
+            <h2 className="text-2xl font-extrabold">Key features</h2>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {project.features.map((feature) => (
                 <li key={feature} className="flex gap-3 text-sm">
@@ -92,6 +108,16 @@ export function CaseStudy({ project }: { project: Project }) {
               ))}
             </ul>
           </section>
+
+          {project.stack.length ? (
+            <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+              <h2 className="text-2xl font-extrabold">Implementation</h2>
+              <p className="mt-3 text-sm leading-relaxed text-mute">
+                The published build uses {project.stack.join(", ")}. No timeline, cost or performance figure is listed
+                for this project.
+              </p>
+            </section>
+          ) : null}
 
           <section className="overflow-hidden rounded-3xl border border-line bg-card">
             <h2 className="px-5 pt-5 text-2xl font-extrabold">Screenshot</h2>

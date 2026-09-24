@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 export function Preview({ slug, className }: { slug: string; className?: string }) {
   const project = projects.find((item) => item.slug === slug);
   const name = project?.name ?? "Project";
-  const alt = project ? `${project.name} — ${project.summary}` : `${name} project image`;
+  const alt = project ? `${project.name}, a ${project.kind.toLowerCase()} project by MKSAnalytIQ` : `${name} project image`;
   return (
     <div className={cn("relative h-44 overflow-hidden bg-navy", className)}>
       <img
