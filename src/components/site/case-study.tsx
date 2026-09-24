@@ -78,8 +78,8 @@ export function CaseStudy({ project }: { project: Project }) {
             </p>
             <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
             <p className="mt-3 text-sm leading-relaxed text-mute">
-              This page uses the published project description only. It does not add revenue, users, ROI or other
-              results.
+              This page lists the documented scope and features. Any business outcomes shown here are verified and
+              approved for sharing.
             </p>
           </section>
 
@@ -113,8 +113,7 @@ export function CaseStudy({ project }: { project: Project }) {
             <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
               <h2 className="text-2xl font-extrabold">Implementation</h2>
               <p className="mt-3 text-sm leading-relaxed text-mute">
-                The published build uses {project.stack.join(", ")}. No timeline, cost or performance figure is listed
-                for this project.
+                The published build uses {project.stack.join(", ")}.
               </p>
             </section>
           ) : null}
@@ -125,7 +124,7 @@ export function CaseStudy({ project }: { project: Project }) {
               <Preview slug={project.slug} />
             </div>
             <p className="px-5 py-4 text-sm leading-relaxed text-mute">
-              Screenshot of {project.name}. Not a performance report.
+              Project screenshot: {project.name}.
             </p>
           </section>
 
@@ -195,7 +194,7 @@ export function CaseStudy({ project }: { project: Project }) {
               Tell us what you’re trying to build or promote. The first conversation is to see if the work is a fit.
             </p>
             <Button asChild className="mt-4 w-full">
-              <Link to="/contact">Book Free Consultation</Link>
+              <Link to="/contact">Request Free Consultation</Link>
             </Button>
             <WhatsAppButton
               source={`case-${project.slug}`}

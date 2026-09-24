@@ -114,7 +114,7 @@ function About() {
           </div>
           <Button asChild className="mt-6 w-fit">
             <Link to="/contact">
-              Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+              Request Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>
         </div>

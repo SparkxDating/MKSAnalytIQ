@@ -10,18 +10,24 @@ import { track } from "@/lib/analytics";
 import {
   budgetOptions,
   company,
-  contactMethods,
   faqsFor,
   services,
   timelineOptions,
+  whatsappHref,
 } from "@/lib/content";
 import { faqSchema, pageMeta } from "@/lib/seo";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Add your name."),
-  company: z.string().trim().min(2, "Add the company or business name."),
-  phone: z.string().trim().regex(/^[6-9]\d{9}$/, "Use a 10-digit Indian mobile number."),
-  email: z.string().trim().email("That email doesn’t look right."),
+  company: z.string().trim().max(120, "Keep the business name under 120 characters."),
+  phone: z
+    .string()
+    .trim()
+    .refine((value) => !value || /^[6-9]\d{9}$/.test(value), "Use a 10-digit Indian mobile number."),
+  email: z
+    .string()
+    .trim()
+    .refine((value) => !value || z.email().safeParse(value).success, "Add a valid email address or leave this blank."),
   website: z
     .string()
     .trim()
@@ -32,10 +38,17 @@ const schema = z.object({
       return /^(https?:\/\/)?[^\s]+\.[^\s]{2,}$/i.test(value);
     }, "Add a website, domain, or @handle — or leave this blank."),
   service: z.string().min(1, "Pick a service."),
-  budget: z.enum(budgetOptions, { error: "Pick a budget range." }),
-  timeline: z.enum(timelineOptions, { error: "Pick a timeline." }),
-  contactMethod: z.enum(contactMethods, { error: "Pick how we should reply." }),
+  budget: z.union([z.enum(budgetOptions), z.literal("")]),
+  timeline: z.union([z.enum(timelineOptions), z.literal("")]),
   message: z.string().trim().min(12, "A sentence or two is enough — at least 12 characters."),
+}).superRefine((data, context) => {
+  if (!data.phone && !data.email) {
+    context.addIssue({
+      code: "custom",
+      path: ["phone"],
+      message: "Add a mobile number or email so we can reply.",
+    });
+  }
 });
 
 type Fields = z.infer<typeof schema>;
@@ -50,9 +63,9 @@ export const Route = createFileRoute("/contact")({
   },
   head: () =>
     pageMeta({
-      title: "Book a Free Consultation | MKSAnalytIQ Noida",
+      title: "Contact MKSAnalytIQ | Start a Project Conversation",
       description:
-        "Book a free consultation with MKSAnalytIQ in Sector 8, Noida. Call, WhatsApp or email Manoj Kumar Singh.",
+        "Start a project conversation with MKSAnalytIQ in Noida. Send a short brief by WhatsApp or email, or call the studio.",
       path: "/contact",
     }),
   component: Contact,
@@ -65,7 +78,7 @@ function Contact() {
   const started = useRef(false);
   const lastKey = useRef("");
   const [busy, setBusy] = useState(false);
-  const draft = useRef<Fields | null>(null);
+  const draft = useRef<{ data: Fields; channel: "email" | "whatsapp" } | null>(null);
 
   function onStart() {
     if (started.current) return;
@@ -73,28 +86,32 @@ function Contact() {
     track("contact_form_start");
   }
 
-  function openDraft(data: Fields) {
+  function openComposer(data: Fields, channel: "email" | "whatsapp") {
     const serviceLabel = services.find((item) => item.id === data.service)?.title ?? data.service;
     const body = [
       `Name: ${data.name}`,
-      `Company: ${data.company}`,
-      `Mobile: ${data.phone}`,
-      `Email: ${data.email}`,
+      `Company: ${data.company || "—"}`,
+      `Mobile: ${data.phone || "—"}`,
+      `Email: ${data.email || "—"}`,
       `Website / Instagram: ${data.website || "—"}`,
       `Service: ${serviceLabel}`,
-      `Budget: ${data.budget}`,
-      `Timeline: ${data.timeline}`,
-      `Preferred contact: ${data.contactMethod}`,
+      `Budget: ${data.budget || "Not specified"}`,
+      `Timeline: ${data.timeline || "Not specified"}`,
       "",
       data.message,
     ].join("\n");
-    const href = `mailto:${company.email}?subject=${encodeURIComponent(`Consultation — ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
+    const href =
+      channel === "whatsapp"
+        ? whatsappHref(body)
+        : `mailto:${company.email}?subject=${encodeURIComponent(`Project enquiry — ${serviceLabel}`)}&body=${encodeURIComponent(body)}`;
     window.location.href = href;
   }
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
+    const submitter = (event.nativeEvent as SubmitEvent).submitter;
+    const channel = submitter instanceof HTMLButtonElement && submitter.value === "email" ? "email" : "whatsapp";
     const data = Object.fromEntries(new FormData(event.currentTarget));
     const parsed = schema.safeParse({
       ...data,
@@ -113,9 +130,9 @@ function Contact() {
       return;
     }
 
-    const key = JSON.stringify(parsed.data);
+    const key = JSON.stringify([channel, parsed.data]);
     if (key === lastKey.current) {
-      draft.current = parsed.data;
+      draft.current = { data: parsed.data, channel };
       setErrors({});
       setStatus("duplicate");
       return;
@@ -123,16 +140,16 @@ function Contact() {
 
     setBusy(true);
     lastKey.current = key;
-    draft.current = parsed.data;
+    draft.current = { data: parsed.data, channel };
     setErrors({});
     setStatus("opened");
     track("contact_form_submit", {
       service: parsed.data.service,
-      budget: parsed.data.budget,
-      timeline: parsed.data.timeline,
-      contact_method: parsed.data.contactMethod,
+      budget: parsed.data.budget || "not_specified",
+      timeline: parsed.data.timeline || "not_specified",
+      delivery_channel: channel,
     });
-    openDraft(parsed.data);
+    openComposer(parsed.data, channel);
     window.setTimeout(() => setBusy(false), 2000);
   }
 
@@ -142,10 +159,10 @@ function Contact() {
       <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Contact</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Book a free consultation</h1>
+          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Start a project conversation</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            The form opens an email to {company.email}. Nothing is stored on this site. You can also call or use
-            WhatsApp.
+            Share your name, what you need, and one way for us to reply. Continue in WhatsApp or prepare an email; this
+            site does not store your brief.
           </p>
         </div>
       </section>
@@ -162,31 +179,36 @@ function Contact() {
               Please fix the highlighted fields.
             </p>
           ) : null}
+          <p className="text-sm leading-relaxed text-mute">
+            Required: name, service, message, and either a mobile number or email. Business details, budget and timing
+            are optional.
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field id="name" label="Name" name="name" error={errors.name} autoComplete="name" />
-            <Field id="company" label="Company / Business" name="company" error={errors.company} autoComplete="organization" />
+            <Field id="name" label="Name" name="name" error={errors.name} autoComplete="name" required />
+            <Field id="company" label="Company / business (optional)" name="company" error={errors.company} autoComplete="organization" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field
               id="phone"
-              label="Mobile"
+              label="Mobile (optional)"
               name="phone"
               error={errors.phone}
               inputMode="numeric"
               autoComplete="tel"
               placeholder="9560814623"
             />
-            <Field id="email" label="Email" name="email" error={errors.email} type="email" autoComplete="email" />
+            <Field id="email" label="Email (optional)" name="email" error={errors.email} type="email" autoComplete="email" />
           </div>
+          <p className="-mt-2 text-xs text-mute">Enter at least one contact detail so we can reply.</p>
           <Field
             id="website"
-            label="Website / Instagram"
+            label="Website / Instagram (optional)"
             name="website"
             error={errors.website}
             autoComplete="url"
             placeholder="example.com or @handle"
           />
-          <Select id="service" label="Service" name="service" error={errors.service} defaultValue={preset}>
+          <Select id="service" label="Service" name="service" error={errors.service} defaultValue={preset} required>
             <option value="">Choose one</option>
             {services.map((service) => (
               <option key={service.id} value={service.id}>
@@ -196,7 +218,7 @@ function Contact() {
             <option value="unsure">Not sure yet</option>
           </Select>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Select id="budget" label="Budget range" name="budget" error={errors.budget} defaultValue="">
+            <Select id="budget" label="Budget range (optional)" name="budget" error={errors.budget} defaultValue="">
               <option value="">Choose one</option>
               {budgetOptions.map((option) => (
                 <option key={option} value={option}>
@@ -204,7 +226,7 @@ function Contact() {
                 </option>
               ))}
             </Select>
-            <Select id="timeline" label="Timeline" name="timeline" error={errors.timeline} defaultValue="">
+            <Select id="timeline" label="Timeline (optional)" name="timeline" error={errors.timeline} defaultValue="">
               <option value="">Choose one</option>
               {timelineOptions.map((option) => (
                 <option key={option} value={option}>
@@ -213,28 +235,13 @@ function Contact() {
               ))}
             </Select>
           </div>
-          <fieldset>
-            <legend className="text-sm font-semibold">Preferred contact method</legend>
-            <div className="mt-2 grid gap-2 sm:grid-cols-3">
-              {contactMethods.map((method) => (
-                <label key={method} className="flex h-12 items-center gap-2 rounded-2xl border border-line bg-paper px-3 text-sm font-medium">
-                  <input type="radio" name="contactMethod" value={method} className="size-4 accent-primary" />
-                  {method}
-                </label>
-              ))}
-            </div>
-            {errors.contactMethod ? (
-              <span id="contactMethod-error" className="mt-1 block text-xs font-normal text-deep" role="alert">
-                {errors.contactMethod}
-              </span>
-            ) : null}
-          </fieldset>
           <label className="block text-sm font-semibold" htmlFor="message">
-            Message
+            Message <span className="text-primary">*</span>
             <textarea
               id="message"
               name="message"
               rows={5}
+              required
               aria-invalid={errors.message ? true : undefined}
               aria-describedby={errors.message ? "message-error" : undefined}
               className="mt-1.5 w-full rounded-2xl border border-line bg-paper px-3 py-3 text-sm font-normal"
@@ -246,13 +253,18 @@ function Contact() {
               </span>
             ) : null}
           </label>
-          <Button type="submit" disabled={busy}>
-            Book Free Consultation
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button type="submit" name="channel" value="whatsapp" disabled={busy} className="flex-1">
+              Continue in WhatsApp
+            </Button>
+            <Button type="submit" name="channel" value="email" variant="line" disabled={busy} className="flex-1">
+              Prepare email
+            </Button>
+          </div>
           {status === "opened" ? (
             <p className="rounded-2xl bg-paper p-4 text-sm leading-relaxed text-ink" role="status">
-              Your email app should open with this brief to {company.email}. If it doesn’t, send the same details
-              yourself. We don’t store the form on this website.
+              Your chosen app should open with the brief. Review the details there before sending. We don’t store the
+              form on this website.
             </p>
           ) : null}
           {status === "duplicate" ? (
@@ -262,10 +274,10 @@ function Contact() {
                 type="button"
                 className="mt-3 font-semibold text-primary"
                 onClick={() => {
-                  if (draft.current) openDraft(draft.current);
+                  if (draft.current) openComposer(draft.current.data, draft.current.channel);
                 }}
               >
-                Open the email draft again
+                {draft.current?.channel === "whatsapp" ? "Open WhatsApp again" : "Open the email draft again"}
               </button>
             </div>
           ) : null}
@@ -315,6 +327,7 @@ function Field({
   label,
   name,
   error,
+  required,
   ...props
 }: {
   id: string;
@@ -328,6 +341,7 @@ function Field({
       <input
         id={id}
         name={name}
+        required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className="mt-1.5 h-12 w-full rounded-2xl border border-line bg-paper px-3 text-sm font-normal"
@@ -348,6 +362,7 @@ function Select({
   name,
   error,
   defaultValue,
+  required = false,
   children,
 }: {
   id: string;
@@ -355,6 +370,7 @@ function Select({
   name: string;
   error?: string;
   defaultValue?: string;
+  required?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -364,6 +380,7 @@ function Select({
         id={id}
         name={name}
         defaultValue={defaultValue}
+        required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className="mt-1.5 h-12 w-full rounded-2xl border border-line bg-paper px-3 text-sm font-normal"

@@ -47,14 +47,14 @@ export const hero = {
   title: "Build Digital. Grow Smarter.",
   lede: "MKSANALYTIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
   trust: "Based in Noida • Serving Delhi NCR and India",
-  primaryCta: "Book Free Consultation",
+  primaryCta: "Request Free Consultation",
   secondaryCta: "Chat on WhatsApp",
 } as const;
 
 export const finalCta = {
   title: "Have a project in mind?",
   text: "Tell us what you're trying to build, market or improve.",
-  primary: "Book Free Consultation",
+  primary: "Request Free Consultation",
   secondary: "Chat on WhatsApp",
 } as const;
 
@@ -153,7 +153,7 @@ export const services: {
       "Performance reporting",
       "SEO and content pages",
     ],
-    cta: "Book Free Consultation",
+    cta: "Request Free Consultation",
     related: ["marketing", "campaigns"],
     relatedServices: ["web-development", "social-media", "software-development"],
     image: "/media/desk.jpg",
@@ -208,7 +208,7 @@ export const services: {
       "API integrations",
       "Website maintenance",
     ],
-    cta: "Book Free Consultation",
+    cta: "Request Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "app-development", "digital-marketing", "ai-development"],
     image: "/media/work/buildsite.jpg",
@@ -264,7 +264,7 @@ export const services: {
       "AI-enabled software",
       "Repository handover",
     ],
-    cta: "Book Free Consultation",
+    cta: "Request Free Consultation",
     related: ["software"],
     relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
     image: "/media/devices.jpg",
@@ -314,7 +314,7 @@ export const services: {
       "Business apps",
       "App maintenance",
     ],
-    cta: "Book Free Consultation",
+    cta: "Request Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "web-development", "ai-development"],
     image: "/media/work/spark-mobile.jpg",
@@ -364,7 +364,7 @@ export const services: {
       "AI dashboards",
       "Intelligent business tools",
     ],
-    cta: "Book Free Consultation",
+    cta: "Request Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "web-development", "app-development"],
     image: "/media/work/taxpilot.jpg",
@@ -976,8 +976,6 @@ export const publishedTestimonials = testimonials.filter((item) => item.publishe
 export const budgetOptions = ["₹10k–₹25k", "₹25k–₹50k", "₹50k–₹1L", "₹1L+", "Not sure"] as const;
 
 export const timelineOptions = ["Immediately", "This month", "1–3 months", "Just exploring"] as const;
-
-export const contactMethods = ["WhatsApp", "Phone", "Email"] as const;
 
 export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
   {

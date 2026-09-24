@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  ArrowUpRight,
   Brain,
   Code2,
   Compass,
@@ -167,11 +168,16 @@ function Home() {
               </span>
             </h1>
             <p className="mt-5 max-w-[33.5rem] text-base leading-relaxed text-white/70">
-              MKSANALYTIQ is a Noida-based technology and digital growth studio helping businesses across{" "}
+              Need more qualified enquiries, or a digital product your team can use? MKSANALYTIQ brings marketing and
+              technology together for businesses in Noida, Delhi NCR, and across India. Explore our{" "}
               <Link to="/digital-marketing-software-delhi-ncr" className="text-white underline decoration-white/30 underline-offset-4">
-                Delhi NCR
+                Delhi NCR services
               </Link>{" "}
-              and India with digital marketing, web development, software, apps and AI solutions.
+              or browse our{" "}
+              <Link to="/portfolio" className="text-white underline decoration-white/30 underline-offset-4">
+                selected work
+              </Link>
+              .
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
@@ -179,7 +185,7 @@ function Home() {
                 className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_28px_rgba(70,110,255,0.4)] hover:brightness-110"
               >
                 <Link to="/contact" onClick={() => track("hero_cta_click", { source: "hero" })}>
-                  Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                Request Free Consultation <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
               <WhatsAppButton source="hero" variant="ghost">
@@ -282,24 +288,52 @@ function Home() {
           <ul className="flex gap-4 overflow-x-auto pb-2 lg:col-span-8 lg:grid lg:grid-cols-3 lg:overflow-visible">
             {featured.map((project) => (
               <li key={project.slug} className="w-[78%] shrink-0 sm:w-[46%] lg:w-auto">
-                <article className="work-card glass-card group overflow-hidden rounded-3xl">
-                  <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="block">
-                    <div className="relative">
-                      <Preview slug={project.slug} loading="lazy" className="h-56 rounded-t-3xl sm:h-60" />
-                      <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur">
-                        <ArrowRight className="size-4" aria-hidden />
-                        <span className="sr-only">View {project.name}</span>
-                      </span>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-display text-lg font-bold">{project.name}</h3>
-                      <p className="mt-1 text-xs text-white/55">{project.kind}</p>
-                      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/65">{project.summary}</p>
-                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white">
-                        View {project.name} <ArrowRight className="size-4" aria-hidden />
-                      </span>
-                    </div>
+                <article className="work-card glass-card group flex h-full flex-col overflow-hidden rounded-3xl">
+                  <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="relative block">
+                    <Preview slug={project.slug} loading="lazy" className="h-56 rounded-t-3xl sm:h-60" />
+                    <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur">
+                      <ArrowRight className="size-4" aria-hidden />
+                      <span className="sr-only">View {project.name}</span>
+                    </span>
                   </Link>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="font-display text-lg font-bold">
+                      <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="hover:text-cyan-100">
+                        {project.name}
+                      </Link>
+                    </h3>
+                    <p className="mt-1 text-xs text-white/55">{project.kind}</p>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/65">{project.summary}</p>
+                    <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-semibold">
+                      <Link
+                        to="/portfolio/$slug"
+                        params={{ slug: project.slug }}
+                        className="inline-flex min-h-11 items-center gap-1 text-white"
+                      >
+                        Project details <ArrowRight className="size-4" aria-hidden />
+                      </Link>
+                      {project.live ? (
+                        <a
+                          href={project.live}
+                          className="inline-flex min-h-11 items-center gap-1 text-white/75 hover:text-white"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Live demo <ArrowUpRight className="size-4" aria-hidden />
+                        </a>
+                      ) : null}
+                      {project.github ? (
+                        <a
+                          href={project.github}
+                          className="inline-flex min-h-11 items-center gap-1 text-white/75 hover:text-white"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Source <ArrowUpRight className="size-4" aria-hidden />
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
                 </article>
               </li>
             ))}
@@ -390,7 +424,7 @@ function Home() {
                   className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_28px_rgba(70,110,255,0.4)] hover:brightness-110"
                 >
                   <Link to="/contact" onClick={() => track("quote_click", { source: "home-final" })}>
-                    Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                    Request Free Consultation <ArrowRight className="size-4" aria-hidden />
                   </Link>
                 </Button>
                 <WhatsAppButton source="home-final" variant="ghost">
@@ -463,10 +497,21 @@ function HeroVisual() {
       <div className="absolute bottom-4 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full border border-blue-400/15" />
       <div className="laptop absolute bottom-8 left-1/2 w-[88%] max-w-[30rem] -translate-x-1/2">
         <div className="rounded-t-[1.35rem] border border-cyan-100/25 bg-gradient-to-b from-slate-400/70 to-[#090f1c] p-2 shadow-[0_28px_50px_rgba(0,0,0,0.45)]">
-          <div className="laptop-screen flex h-40 flex-col items-center justify-center rounded-xl sm:h-52">
-            <span className="font-display text-5xl font-extrabold leading-none text-cyan-50 sm:text-6xl">A</span>
-            <span className="mt-2 text-xs font-semibold tracking-[0.22em] text-white">MKSANALYTIQ</span>
-            <span className="mt-1 text-[10px] text-white/60">Ideas. Technology. Growth.</span>
+          <div className="laptop-screen relative aspect-video overflow-hidden rounded-xl">
+            <img
+              src="/media/work/shortgen.jpg"
+              alt=""
+              width={1280}
+              height={720}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/50 via-transparent to-white/5" aria-hidden />
+            <span className="absolute bottom-3 left-3 rounded-full border border-white/20 bg-[#050816]/75 px-3 py-1 text-[10px] font-semibold tracking-wide text-white backdrop-blur">
+              Selected project · ShortGen
+            </span>
           </div>
         </div>
         <div className="relative mx-auto h-4 w-[114%] -translate-x-[6%] rounded-b-2xl bg-gradient-to-b from-slate-300/70 via-slate-600 to-[#05070d] shadow-[0_18px_24px_rgba(0,0,0,0.5)]">

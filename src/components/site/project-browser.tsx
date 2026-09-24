@@ -18,15 +18,14 @@ export function ProjectBrowser({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects">
         {projectCategories.map((category) => {
           const selected = filter === category.id;
           return (
             <button
               key={category.id}
               type="button"
-              role="tab"
-              aria-selected={selected}
+              aria-pressed={selected}
               className={cn(
                 "h-11 rounded-full border px-4 text-sm font-semibold transition-colors",
                 selected

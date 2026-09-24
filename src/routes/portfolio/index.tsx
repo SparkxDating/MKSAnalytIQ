@@ -15,9 +15,9 @@ export const Route = createFileRoute("/portfolio/")({
   },
   head: () =>
     pageMeta({
-      title: "Work — Software, Campaigns & Events | MKSAnalytIQ",
+      title: "Portfolio — Public Products & Projects | MKSAnalytIQ",
       description:
-        "Public software, campaign and event projects from MKSAnalytIQ. Client retainers stay private. Repositories are listed under the configured GitHub account.",
+        "Explore public work from MKSAnalytIQ. Project pages share documented scope, features and technology, with a live demo or repository when available.",
       path: "/portfolio",
     }),
   component: Portfolio,
@@ -31,11 +31,12 @@ function Portfolio() {
         <div className="mx-auto max-w-6xl px-5 py-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Work</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Projects that make an impact
+            Selected work, shown in detail
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Products built by the studio. Each case study lists the project type, what was built, the main features,
-            the technology, a screenshot, and a live demo or repository when one is public. Related work links to{" "}
+            Browse public projects from the studio. Each project page covers its documented scope, features and
+            technology, with a live demo or repository when one is available. Client results appear only when approved
+            for sharing. Related work links to{" "}
             <Link to="/services/$service" params={{ service: "web-development" }} className="font-semibold text-primary">
               web development services
             </Link>
