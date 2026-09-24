@@ -76,7 +76,7 @@ export function CaseStudy({ project }: { project: Project }) {
           <section className="overflow-hidden rounded-3xl border border-line bg-card">
             <Preview slug={project.slug} />
             <p className="px-5 py-4 text-sm leading-relaxed text-mute">
-              Illustrated interface — not a photograph or a live screenshot of the product.
+              Thumbnail of the product. Not a performance report.
             </p>
           </section>
         </div>
