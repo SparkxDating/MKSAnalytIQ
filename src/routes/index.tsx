@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { FaqList } from "@/components/site/faq";
 import { HeroStage } from "@/components/site/hero-stage";
@@ -9,7 +9,7 @@ import { SiteShell } from "@/components/site/shell";
 import { Testimonials } from "@/components/site/testimonials";
 import { WhatsAppButton } from "@/components/site/whatsapp";
 import { track } from "@/lib/analytics";
-import { faqsFor, projects, trustNotes } from "@/lib/content";
+import { faqsFor, projects } from "@/lib/content";
 import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
@@ -38,13 +38,30 @@ const technology = [
   { title: "Web Applications", to: "/services", hash: "software" },
   { title: "Mobile Apps", to: "/services", hash: "software" },
   { title: "SaaS Development", to: "/services", hash: "software" },
-  { title: "AI & Automation", to: "/", hash: "ai" },
+  { title: "AI & Automation", to: "/", hash: "technology" },
 ] as const;
+
+const featuredSlugs = ["shortgen", "taxpilot", "cpaas", "influencer-os"] as const;
+
+const featured = featuredSlugs.flatMap((slug) => {
+  const project = projects.find((item) => item.slug === slug);
+  return project ? [project] : [];
+});
+
+const stackNames = new Set(projects.flatMap((project) => project.stack));
+const technologies = ["Next.js", "TypeScript", "Python", "Postgres", "Prisma", "NestJS", "Kotlin"].filter((name) =>
+  stackNames.has(name),
+);
+if (
+  projects.some((project) => `${project.name} ${project.summary} ${project.features.join(" ")}`.includes("AI"))
+) {
+  technologies.push("AI");
+}
 
 const reasons = [
   {
     title: "Strategy-first",
-    text: "The offer, the audience and the number that matters are written down before anyone designs or codes.",
+    text: "The offer, the audience and the scope are written down before anyone designs or codes.",
   },
   {
     title: "Technology-driven",
@@ -76,13 +93,15 @@ function Home() {
         <div className="tech-grid pointer-events-none absolute inset-0 opacity-70" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-16 sm:py-20 lg:grid-cols-2 lg:py-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">MKSAnalytIQ · Noida</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+              Technology + Digital Growth · Noida
+            </p>
             <h1 className="mt-5 max-w-full font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
               Build digital.
               <span className="mt-2 block text-accent">Grow smarter.</span>
             </h1>
             <p className="mt-6 max-w-md text-base leading-relaxed text-paper/80 sm:text-lg">
-              We build websites, apps, AI solutions and digital marketing systems that help businesses grow.
+              We build websites, apps, AI solutions and digital growth systems that help businesses move forward.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild>
@@ -99,54 +118,55 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-b border-line bg-card" aria-label="Studio">
-        <ul className="mx-auto grid max-w-6xl gap-6 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
-          {trustNotes.map((item) => (
-            <li key={item.label}>
-              <p className="font-display text-lg font-bold">{item.value}</p>
-              <p className="mt-1 text-sm text-mute">{item.label}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section id="solutions" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-20 sm:py-24">
+      <section id="solutions" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">What we do</p>
-        <h2 className="mt-3 max-w-xl text-3xl font-extrabold tracking-tight sm:text-4xl">Two practices. One studio.</h2>
-        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <ServiceGroup kicker="Digital growth" items={growth} />
-          <ServiceGroup kicker="Technology" items={technology} />
+        <h2 className="mt-3 max-w-xl text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Technology and digital growth.
+        </h2>
+        <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <ServiceGroup kicker="Digital Growth" index="01" tone="paper" items={growth} />
+          <ServiceGroup kicker="Technology" index="02" tone="ink" items={technology} />
         </div>
       </section>
 
       <section id="work" className="scroll-mt-20 border-y border-line bg-card">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">Selected work</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Products we have shipped</h2>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">Products we have shipped</h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
                 Public software from the studio. Client marketing stays private to each engagement.
               </p>
             </div>
-            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+            <Link to="/portfolio" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-primary">
               All work <ArrowRight className="size-4" aria-hidden />
             </Link>
           </div>
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {projects.slice(0, 4).map((project) => (
-              <article key={project.slug} className="overflow-hidden border border-line bg-paper">
-                <Preview slug={project.slug} className="h-56 sm:h-64" />
-                <div className="p-6">
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {featured.map((project, index) => (
+              <article
+                key={project.slug}
+                className={
+                  index === 0
+                    ? "overflow-hidden border border-line bg-paper lg:col-span-2 lg:grid lg:grid-cols-5"
+                    : "overflow-hidden border border-line bg-paper"
+                }
+              >
+                <Preview
+                  slug={project.slug}
+                  className={index === 0 ? "h-72 sm:h-96 lg:col-span-3 lg:h-full lg:min-h-96" : "h-64 sm:h-72"}
+                />
+                <div className={index === 0 ? "flex flex-col justify-end p-6 sm:p-8 lg:col-span-2" : "p-6"}>
                   <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
                   <h3 className="mt-2 font-display text-2xl font-bold">{project.name}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
+                  <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-mute">{project.summary}</p>
                   <Link
                     to="/portfolio/$slug"
                     params={{ slug: project.slug }}
-                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-ink hover:text-primary"
+                    className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-ink hover:text-primary"
                   >
-                    View Case Study <ArrowUpRight className="size-4" aria-hidden />
+                    View Case Study <ArrowRight className="size-4" aria-hidden />
                   </Link>
                 </div>
               </article>
@@ -156,10 +176,7 @@ function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Why MKSAnalytIQ</p>
-        <h2 className="mt-3 max-w-lg text-3xl font-extrabold tracking-tight sm:text-4xl">
-          A technology studio that also runs the growth.
-        </h2>
+        <h2 className="max-w-lg text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Why MKSAnalytIQ</h2>
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((item) => (
             <article key={item.title} className="border-t border-line pt-5">
@@ -170,7 +187,25 @@ function Home() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-card">
+      <section id="technology" className="scroll-mt-20 border-y border-line bg-ink text-paper">
+        <div className="tech-grid">
+          <div className="mx-auto max-w-6xl px-5 py-12 sm:py-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Technology</p>
+            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+              {technologies.map((name) => (
+                <li key={name} className="font-display text-sm font-bold uppercase tracking-widest text-paper sm:text-base">
+                  {name}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 max-w-2xl text-sm text-paper/65">
+              Taken from products the studio has shipped. Not a claim about every engagement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Process</p>
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">How a project moves</h2>
@@ -183,21 +218,6 @@ function Home() {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      <section id="ai" className="scroll-mt-20 bg-ink text-paper">
-        <div className="tech-grid">
-          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-16 sm:py-20 lg:grid-cols-12">
-            <div className="lg:col-span-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent">Capability</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight">AI & Automation</h2>
-            </div>
-            <p className="text-base leading-relaxed text-paper/80 lg:col-span-8">
-              Automate workflows, connect your tools and build AI-powered experiences that make your business faster
-              and smarter.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -230,26 +250,42 @@ function Home() {
 
 function ServiceGroup({
   kicker,
+  index,
+  tone,
   items,
 }: {
   kicker: string;
+  index: string;
+  tone: "paper" | "ink";
   items: readonly { title: string; to: "/" | "/services"; hash: string }[];
 }) {
+  const dark = tone === "ink";
   return (
-    <div>
-      <h3 className="text-xs font-semibold uppercase tracking-widest text-mute">{kicker}</h3>
-      <ul className="mt-5 grid gap-3">
+    <div className={dark ? "border border-ink bg-ink px-6 py-8 text-paper sm:px-8 sm:py-10" : "border border-line bg-card px-6 py-8 sm:px-8 sm:py-10"}>
+      <p className={dark ? "text-xs font-semibold uppercase tracking-widest text-accent" : "text-xs font-semibold uppercase tracking-widest text-primary"}>
+        {index}
+      </p>
+      <h3 className="mt-3 font-display text-2xl font-extrabold uppercase tracking-tight">{kicker}</h3>
+      <ul className={dark ? "mt-6 border-t border-paper/15" : "mt-6 border-t border-line"}>
         {items.map((item) => (
           <li key={item.title}>
             <Link
               to={item.to}
               hash={item.hash}
               activeOptions={{ includeHash: true }}
-              className="group flex items-center justify-between border border-line bg-card px-4 py-4 text-base font-semibold transition-colors duration-200 hover:border-primary/50 hover:text-primary"
+              className={
+                dark
+                  ? "group flex min-h-14 items-center justify-between border-b border-paper/15 py-3 text-base font-semibold text-paper transition-colors duration-200 hover:text-accent"
+                  : "group flex min-h-14 items-center justify-between border-b border-line py-3 text-base font-semibold transition-colors duration-200 hover:text-primary"
+              }
             >
               {item.title}
               <ArrowRight
-                className="size-4 text-mute transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+                className={
+                  dark
+                    ? "size-4 text-paper/50 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-accent"
+                    : "size-4 text-mute transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+                }
                 aria-hidden
               />
             </Link>
