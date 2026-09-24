@@ -17,6 +17,9 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as StudioRouteImport } from './routes/studio'
+import { Route as ApiAuthRouteImport } from './routes/api/auth/$'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio/$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
@@ -83,6 +86,21 @@ const ServicesServiceRoute = ServicesServiceRouteImport.update({
   path: '/services/$service',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRoute = ApiAuthRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -93,6 +111,9 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/login': typeof LoginRoute
+  '/studio': typeof StudioRoute
+  '/api/auth/$': typeof ApiAuthRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/portfolio/': typeof PortfolioIndexRoute
@@ -107,6 +128,9 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/login': typeof LoginRoute
+  '/studio': typeof StudioRoute
+  '/api/auth/$': typeof ApiAuthRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/portfolio': typeof PortfolioIndexRoute
@@ -122,6 +146,9 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
+  '/login': typeof LoginRoute
+  '/studio': typeof StudioRoute
+  '/api/auth/$': typeof ApiAuthRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/portfolio/': typeof PortfolioIndexRoute
@@ -138,6 +165,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/refund-policy'
     | '/terms'
+    | '/login'
+    | '/studio'
+    | '/api/auth/$'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/portfolio/'
@@ -152,6 +182,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/refund-policy'
     | '/terms'
+    | '/login'
+    | '/studio'
+    | '/api/auth/$'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/portfolio'
@@ -166,6 +199,9 @@ export interface FileRouteTypes {
     | '/process'
     | '/refund-policy'
     | '/terms'
+    | '/login'
+    | '/studio'
+    | '/api/auth/$'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/portfolio/'
@@ -181,6 +217,9 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   TermsRoute: typeof TermsRoute
+  LoginRoute: typeof LoginRoute
+  StudioRoute: typeof StudioRoute
+  ApiAuthRoute: typeof ApiAuthRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesServiceRoute: typeof ServicesServiceRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
@@ -245,6 +284,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio/': {
       id: '/portfolio/'
       path: '/portfolio'
@@ -285,6 +345,9 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   TermsRoute: TermsRoute,
+  LoginRoute: LoginRoute,
+  StudioRoute: StudioRoute,
+  ApiAuthRoute: ApiAuthRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesServiceRoute: ServicesServiceRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,

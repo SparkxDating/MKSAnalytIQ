@@ -7,7 +7,7 @@ export const Route = createFileRoute("/privacy-policy")({
   head: () =>
     pageMeta({
       title: "Privacy Policy | MKSAnalytIQ",
-      description: "How the MKSAnalytIQ website handles enquiries. The contact form opens your email app and is not stored on this site.",
+      description: "How MKSAnalytIQ handles website enquiries, email subscribers, and campaign delivery.",
       path: "/privacy-policy",
     }),
   component: Privacy,
@@ -26,11 +26,18 @@ function Privacy() {
         draft addressed to {company.email}. If you send that email, call, or message on WhatsApp, we use those details
         to reply to the enquiry.
       </p>
+      <h2>Marketing email contacts</h2>
+      <p>
+        The private MKSAnalytIQ email studio stores the email address, optional first name, consent source and date,
+        and subscription status for contacts who agreed to receive marketing emails. Contacts are managed by approved
+        workspace members. Active contacts and campaign content are shared with Brevo for email delivery when the
+        delivery account is connected. Contacts marked unsubscribed are excluded from future sends, and Brevo suppression
+        is preserved during contact sync.
+      </p>
       <h2>What we don’t do here</h2>
       <p>
-        This site does not ask you to create an account. It does not publish a list of form submissions. Analytics, if
-        added later, should receive event names such as “form submitted” — not your name, phone number, email or
-        message.
+        The public website does not ask visitors to create an account or publish enquiry details. Analytics, if added,
+        should receive event names such as “form submitted” — not your name, phone number, email or message.
       </p>
       <h2>Links that leave the site</h2>
       <p>
