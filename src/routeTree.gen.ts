@@ -13,17 +13,26 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DigitalMarketingSoftwareDelhiNcrRouteImport } from './routes/digital-marketing-software-delhi-ncr'
+import { Route as GoogleAdsAgencyNoidaRouteImport } from './routes/google-ads-agency-noida'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
-import { Route as TermsRouteImport } from './routes/terms'
-import { Route as LoginRouteImport } from './routes/login'
+import { Route as SeoServicesNoidaRouteImport } from './routes/seo-services-noida'
 import { Route as StudioRouteImport } from './routes/studio'
-import { Route as ApiAuthRouteImport } from './routes/api/auth/$'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as WorkRouteImport } from './routes/work'
+import { Route as ApiLeadsRouteImport } from './routes/api/leads'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio/$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
 import { Route as ServicesServiceRouteImport } from './routes/services/$service'
+import { Route as ServicesAdsRouteImport } from './routes/services/ads'
+import { Route as ServicesEventsRouteImport } from './routes/services/events'
+import { Route as ServicesSeoRouteImport } from './routes/services/seo'
+import { Route as ServicesSocialRouteImport } from './routes/services/social'
+import { Route as ServicesSoftwareRouteImport } from './routes/services/software'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +55,16 @@ const DigitalMarketingSoftwareDelhiNcrRoute =
     path: '/digital-marketing-software-delhi-ncr',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GoogleAdsAgencyNoidaRoute = GoogleAdsAgencyNoidaRouteImport.update({
+  id: '/google-ads-agency-noida',
+  path: '/google-ads-agency-noida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -61,9 +80,29 @@ const RefundPolicyRoute = RefundPolicyRouteImport.update({
   path: '/refund-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SeoServicesNoidaRoute = SeoServicesNoidaRouteImport.update({
+  id: '/seo-services-noida',
+  path: '/seo-services-noida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiLeadsRoute = ApiLeadsRouteImport.update({
+  id: '/api/leads',
+  path: '/api/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
@@ -86,17 +125,32 @@ const ServicesServiceRoute = ServicesServiceRouteImport.update({
   path: '/services/$service',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const ServicesAdsRoute = ServicesAdsRouteImport.update({
+  id: '/services/ads',
+  path: '/services/ads',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StudioRoute = StudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
+const ServicesEventsRoute = ServicesEventsRouteImport.update({
+  id: '/services/events',
+  path: '/services/events',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthRoute = ApiAuthRouteImport.update({
+const ServicesSeoRoute = ServicesSeoRouteImport.update({
+  id: '/services/seo',
+  path: '/services/seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSocialRoute = ServicesSocialRouteImport.update({
+  id: '/services/social',
+  path: '/services/social',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSoftwareRoute = ServicesSoftwareRouteImport.update({
+  id: '/services/software',
+  path: '/services/software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
@@ -107,34 +161,52 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
+  '/google-ads-agency-noida': typeof GoogleAdsAgencyNoidaRoute
+  '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
-  '/terms': typeof TermsRoute
-  '/login': typeof LoginRoute
+  '/seo-services-noida': typeof SeoServicesNoidaRoute
   '/studio': typeof StudioRoute
-  '/api/auth/$': typeof ApiAuthRoute
+  '/terms': typeof TermsRoute
+  '/work': typeof WorkRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
+  '/services/ads': typeof ServicesAdsRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/seo': typeof ServicesSeoRoute
+  '/services/social': typeof ServicesSocialRoute
+  '/services/software': typeof ServicesSoftwareRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
+  '/google-ads-agency-noida': typeof GoogleAdsAgencyNoidaRoute
+  '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
-  '/terms': typeof TermsRoute
-  '/login': typeof LoginRoute
+  '/seo-services-noida': typeof SeoServicesNoidaRoute
   '/studio': typeof StudioRoute
-  '/api/auth/$': typeof ApiAuthRoute
+  '/terms': typeof TermsRoute
+  '/work': typeof WorkRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
+  '/services/ads': typeof ServicesAdsRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/seo': typeof ServicesSeoRoute
+  '/services/social': typeof ServicesSocialRoute
+  '/services/software': typeof ServicesSoftwareRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/services': typeof ServicesIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,17 +214,26 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/digital-marketing-software-delhi-ncr': typeof DigitalMarketingSoftwareDelhiNcrRoute
+  '/google-ads-agency-noida': typeof GoogleAdsAgencyNoidaRoute
+  '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/process': typeof ProcessRoute
   '/refund-policy': typeof RefundPolicyRoute
-  '/terms': typeof TermsRoute
-  '/login': typeof LoginRoute
+  '/seo-services-noida': typeof SeoServicesNoidaRoute
   '/studio': typeof StudioRoute
-  '/api/auth/$': typeof ApiAuthRoute
+  '/terms': typeof TermsRoute
+  '/work': typeof WorkRoute
+  '/api/leads': typeof ApiLeadsRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
+  '/services/ads': typeof ServicesAdsRoute
+  '/services/events': typeof ServicesEventsRoute
+  '/services/seo': typeof ServicesSeoRoute
+  '/services/social': typeof ServicesSocialRoute
+  '/services/software': typeof ServicesSoftwareRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -161,51 +242,78 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/digital-marketing-software-delhi-ncr'
+    | '/google-ads-agency-noida'
+    | '/login'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
-    | '/terms'
-    | '/login'
+    | '/seo-services-noida'
     | '/studio'
-    | '/api/auth/$'
+    | '/terms'
+    | '/work'
+    | '/api/leads'
     | '/portfolio/$slug'
     | '/services/$service'
+    | '/services/ads'
+    | '/services/events'
+    | '/services/seo'
+    | '/services/social'
+    | '/services/software'
     | '/portfolio/'
     | '/services/'
+    | '/api/auth/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/contact'
     | '/digital-marketing-software-delhi-ncr'
+    | '/google-ads-agency-noida'
+    | '/login'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
-    | '/terms'
-    | '/login'
+    | '/seo-services-noida'
     | '/studio'
-    | '/api/auth/$'
+    | '/terms'
+    | '/work'
+    | '/api/leads'
     | '/portfolio/$slug'
     | '/services/$service'
+    | '/services/ads'
+    | '/services/events'
+    | '/services/seo'
+    | '/services/social'
+    | '/services/software'
     | '/portfolio'
     | '/services'
+    | '/api/auth/$'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/digital-marketing-software-delhi-ncr'
+    | '/google-ads-agency-noida'
+    | '/login'
     | '/privacy-policy'
     | '/process'
     | '/refund-policy'
-    | '/terms'
-    | '/login'
+    | '/seo-services-noida'
     | '/studio'
-    | '/api/auth/$'
+    | '/terms'
+    | '/work'
+    | '/api/leads'
     | '/portfolio/$slug'
     | '/services/$service'
+    | '/services/ads'
+    | '/services/events'
+    | '/services/seo'
+    | '/services/social'
+    | '/services/software'
     | '/portfolio/'
     | '/services/'
+    | '/api/auth/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -213,17 +321,26 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   DigitalMarketingSoftwareDelhiNcrRoute: typeof DigitalMarketingSoftwareDelhiNcrRoute
+  GoogleAdsAgencyNoidaRoute: typeof GoogleAdsAgencyNoidaRoute
+  LoginRoute: typeof LoginRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProcessRoute: typeof ProcessRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
-  TermsRoute: typeof TermsRoute
-  LoginRoute: typeof LoginRoute
+  SeoServicesNoidaRoute: typeof SeoServicesNoidaRoute
   StudioRoute: typeof StudioRoute
-  ApiAuthRoute: typeof ApiAuthRoute
+  TermsRoute: typeof TermsRoute
+  WorkRoute: typeof WorkRoute
+  ApiLeadsRoute: typeof ApiLeadsRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesServiceRoute: typeof ServicesServiceRoute
+  ServicesAdsRoute: typeof ServicesAdsRoute
+  ServicesEventsRoute: typeof ServicesEventsRoute
+  ServicesSeoRoute: typeof ServicesSeoRoute
+  ServicesSocialRoute: typeof ServicesSocialRoute
+  ServicesSoftwareRoute: typeof ServicesSoftwareRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -256,6 +373,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DigitalMarketingSoftwareDelhiNcrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/google-ads-agency-noida': {
+      id: '/google-ads-agency-noida'
+      path: '/google-ads-agency-noida'
+      fullPath: '/google-ads-agency-noida'
+      preLoaderRoute: typeof GoogleAdsAgencyNoidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -277,18 +408,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RefundPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/seo-services-noida': {
+      id: '/seo-services-noida'
+      path: '/seo-services-noida'
+      fullPath: '/seo-services-noida'
+      preLoaderRoute: typeof SeoServicesNoidaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/studio': {
@@ -298,11 +422,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/leads': {
+      id: '/api/leads'
+      path: '/api/leads'
+      fullPath: '/api/leads'
+      preLoaderRoute: typeof ApiLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio/': {
@@ -333,6 +471,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/ads': {
+      id: '/services/ads'
+      path: '/services/ads'
+      fullPath: '/services/ads'
+      preLoaderRoute: typeof ServicesAdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/events': {
+      id: '/services/events'
+      path: '/services/events'
+      fullPath: '/services/events'
+      preLoaderRoute: typeof ServicesEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/seo': {
+      id: '/services/seo'
+      path: '/services/seo'
+      fullPath: '/services/seo'
+      preLoaderRoute: typeof ServicesSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/social': {
+      id: '/services/social'
+      path: '/services/social'
+      fullPath: '/services/social'
+      preLoaderRoute: typeof ServicesSocialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/software': {
+      id: '/services/software'
+      path: '/services/software'
+      fullPath: '/services/software'
+      preLoaderRoute: typeof ServicesSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -341,17 +521,26 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   DigitalMarketingSoftwareDelhiNcrRoute: DigitalMarketingSoftwareDelhiNcrRoute,
+  GoogleAdsAgencyNoidaRoute: GoogleAdsAgencyNoidaRoute,
+  LoginRoute: LoginRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProcessRoute: ProcessRoute,
   RefundPolicyRoute: RefundPolicyRoute,
-  TermsRoute: TermsRoute,
-  LoginRoute: LoginRoute,
+  SeoServicesNoidaRoute: SeoServicesNoidaRoute,
   StudioRoute: StudioRoute,
-  ApiAuthRoute: ApiAuthRoute,
+  TermsRoute: TermsRoute,
+  WorkRoute: WorkRoute,
+  ApiLeadsRoute: ApiLeadsRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesServiceRoute: ServicesServiceRoute,
+  ServicesAdsRoute: ServicesAdsRoute,
+  ServicesEventsRoute: ServicesEventsRoute,
+  ServicesSeoRoute: ServicesSeoRoute,
+  ServicesSocialRoute: ServicesSocialRoute,
+  ServicesSoftwareRoute: ServicesSoftwareRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

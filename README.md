@@ -18,11 +18,11 @@
 </p>
 
 <p align="center">
-  <a href="mailto:MKSAnalytIQ@gmail.com?subject=Quote%20request"><img src="https://img.shields.io/badge/Book%20a%20free%20consultation-0B6FE8?style=for-the-badge" alt="Book a free consultation"></a>
-  &nbsp;
-  <a href="https://wa.me/919560814623"><img src="https://img.shields.io/badge/WhatsApp-071426?style=for-the-badge" alt="WhatsApp"></a>
-  &nbsp;
-  <a href="tel:+919560814623"><img src="https://img.shields.io/badge/Call%20%2B91%2095608%2014623-084A9E?style=for-the-badge" alt="Call"></a>
+  <a href="mailto:hello@mksanalytiq.in?subject=Quote%20request"><b>Book a free consultation</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://wa.me/919560814623"><b>WhatsApp</b></a>
+  &nbsp;·&nbsp;
+  <a href="tel:+919560814623"><b>Call +91 95608 14623</b></a>
 </p>
 
 <p align="center">
@@ -150,7 +150,7 @@ More on [github.com/SparkxDating](https://github.com/SparkxDating).
 </p>
 
 <p align="center">
-  <a href="mailto:MKSAnalytIQ@gmail.com"><b>MKSAnalytIQ@gmail.com</b></a><br>
+  <a href="mailto:hello@mksanalytiq.in"><b>hello@mksanalytiq.in</b></a><br>
   <a href="tel:+919560814623"><b>+91 95608 14623</b></a><br>
   <a href="https://wa.me/919560814623"><b>WhatsApp</b></a><br>
   <a href="https://www.google.com/maps/search/?api=1&query=C-81+C+Block+Sector+8+Noida+Uttar+Pradesh+201306"><b>Open the studio in Maps</b></a>

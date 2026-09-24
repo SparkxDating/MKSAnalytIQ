@@ -28,12 +28,12 @@ import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
 const description =
-  "MKSANALYTIQ is a Noida-based digital marketing, web development, software, app and AI development company serving businesses across Delhi NCR and India.";
+  "MKSAnalytIQ is a digital marketing agency in Noida Sector 8 for SEO, Google Ads, social media, websites and software across Delhi NCR.";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida",
+      title: "Digital Marketing Agency in Noida Sector 8 | MKSAnalytIQ",
       description,
       path: "/",
     }),

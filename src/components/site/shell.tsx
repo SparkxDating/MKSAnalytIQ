@@ -5,6 +5,7 @@ import { track } from "@/lib/analytics";
 import { company, footerCompany, nav, services } from "@/lib/content";
 import { cn } from "@/lib/cn";
 import { Button } from "./button";
+import { ExitIntent } from "./exit-intent";
 import { FinalCta } from "./final-cta";
 import { Logo } from "./logo";
 import { WhatsAppButton } from "./whatsapp";
@@ -200,6 +201,13 @@ export function SiteShell({
                 </span>
               ))}
             </address>
+            <iframe
+              title="Map of MKSAnalytIQ, C-81 Sector 8 Noida"
+              src="https://maps.google.com/maps?q=C-81%20C%20Block%20Sector%208%20Noida&z=15&output=embed"
+              className="mt-3 h-36 w-full rounded-2xl border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <a
@@ -246,6 +254,16 @@ export function SiteShell({
           </p>
         </div>
       </footer>
+      <a
+        href={company.whatsapp}
+        className="fixed bottom-5 right-5 z-30 hidden h-12 items-center rounded-full bg-[#128C7E] px-4 text-sm font-semibold text-white shadow-lg md:inline-flex"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => track("whatsapp_click", { source: "floating" })}
+      >
+        WhatsApp
+      </a>
+      <ExitIntent />
       <div
         className={cn(
           "fixed inset-x-0 bottom-0 z-40 border-t p-2 md:hidden",

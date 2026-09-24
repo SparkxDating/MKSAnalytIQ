@@ -23,7 +23,7 @@ export const company = {
   phoneDisplay: "+91 95608 14623",
   phoneTel: "+919560814623",
   whatsapp: "https://wa.me/919560814623",
-  email: "MKSAnalytIQ@gmail.com",
+  email: "hello@mksanalytiq.in",
   addressLines: ["C-81, C Block", "Sector 8, Noida", "Uttar Pradesh 201306"],
   addressOneLine: "C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306",
   maps: "https://www.google.com/maps/search/?api=1&query=C-81+C+Block+Sector+8+Noida+Uttar+Pradesh+201306",

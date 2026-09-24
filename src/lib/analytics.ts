@@ -8,6 +8,8 @@ export const analyticsEvents = [
   "case_study_view",
   "contact_form_start",
   "contact_form_submit",
+  "lead_form_submit",
+  "cta_click",
   "directions_click",
 ] as const;
 
@@ -35,7 +37,13 @@ export function track(name: AnalyticsEventName, props: AnalyticsProps = {}) {
 
   const detail = { event: name, ...clean };
   window.dispatchEvent(new CustomEvent("mks-analytics", { detail }));
+  forward(name, clean);
+  if (name === "contact_form_submit") forward("lead_form_submit", clean);
+  if (name === "hero_cta_click" || name === "quote_click") forward("cta_click", clean);
+}
 
+function forward(name: string, clean: Record<string, string | number | boolean>) {
+  const detail = { event: name, ...clean };
   const host = window as AnalyticsWindow;
   if (Array.isArray(host.dataLayer) || typeof host.gtag === "function") {
     host.dataLayer = host.dataLayer ?? [];
