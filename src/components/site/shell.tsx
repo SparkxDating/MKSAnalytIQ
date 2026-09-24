@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Phone, X } from "lucide-react";
+import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { track } from "@/lib/analytics";
 import { company, footerCompany, nav, services } from "@/lib/content";
@@ -9,10 +9,20 @@ import { FinalCta } from "./final-cta";
 import { Logo } from "./logo";
 import { WhatsAppButton } from "./whatsapp";
 
-export function SiteShell({ children, cta = true }: { children: ReactNode; cta?: boolean }) {
+export function SiteShell({
+  children,
+  cta = true,
+  tone = "paper",
+}: {
+  children: ReactNode;
+  cta?: boolean;
+  tone?: "paper" | "night";
+}) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const lastPath = useRef<string | null>(null);
+  const night = tone === "night";
 
   useEffect(() => {
     if (lastPath.current === path) return;
@@ -24,17 +34,34 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
     setOpen(false);
   }, [path]);
 
+  useEffect(() => {
+    if (!night) return;
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [night]);
+
   return (
-    <div className="min-h-screen bg-paper text-ink">
+    <div className={night ? "min-h-screen bg-[#050816] text-white" : "min-h-screen bg-paper text-ink"}>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-card focus:px-4 focus:py-2"
       >
         Skip to content
       </a>
-      <header className="sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur">
+      <header
+        className={
+          night
+            ? cn(
+                "fixed inset-x-0 top-0 z-40 border-b transition-colors duration-200",
+                scrolled ? "border-white/10 bg-[#050816]/85 backdrop-blur-xl" : "border-transparent bg-transparent",
+              )
+            : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
+        }
+      >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
-          <Logo />
+          <Logo tone={night ? "paper" : "ink"} />
           <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
             {nav.map((item) => {
               const active = item.to === "/" ? path === "/" : path.startsWith(item.to);
@@ -42,16 +69,16 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
                 <Link
                   key={item.label}
                   to={item.to}
-                  hash={"hash" in item ? item.hash : undefined}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative py-2 text-sm font-medium text-mute transition-colors hover:text-ink",
-                    active && "text-ink",
+                    "relative py-2 text-sm font-medium transition-colors",
+                    night ? "text-white/70 hover:text-white" : "text-mute hover:text-ink",
+                    active && (night ? "text-white" : "text-ink"),
                   )}
                 >
                   {item.label}
                   {active ? (
-                    <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />
+                    <span className={cn("absolute inset-x-0 -bottom-px h-0.5 rounded-full", night ? "bg-[#7aa2ff]" : "bg-primary")} />
                   ) : null}
                 </Link>
               );
@@ -59,14 +86,23 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           </nav>
           <div className="flex items-center gap-2">
             <WhatsAppButton source="nav" className="hidden h-11 px-4 xl:inline-flex" />
-            <Button asChild className="hidden h-11 lg:inline-flex">
+            <Button
+              asChild
+              className={cn(
+                "hidden h-11 lg:inline-flex",
+                night && "border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_24px_rgba(70,110,255,0.45)] hover:brightness-110",
+              )}
+            >
               <Link to="/contact" onClick={() => track("quote_click", { source: "nav" })}>
-                Start a Project
+                Let’s Talk <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
             <button
               type="button"
-              className="inline-flex size-11 items-center justify-center rounded-full border border-line lg:hidden"
+              className={cn(
+                "inline-flex size-11 items-center justify-center rounded-full border lg:hidden",
+                night ? "border-white/15 text-white" : "border-line",
+              )}
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -77,13 +113,19 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           </div>
         </div>
         {open ? (
-          <nav id="mobile-nav" className="border-t border-line bg-card px-5 py-3 lg:hidden" aria-label="Mobile">
+          <nav
+            id="mobile-nav"
+            className={cn("border-t px-5 py-3 lg:hidden", night ? "border-white/10 bg-[#070b16]" : "border-line bg-card")}
+            aria-label="Mobile"
+          >
             {nav.map((item) => (
               <Link
                 key={item.label}
                 to={item.to}
-                hash={"hash" in item ? item.hash : undefined}
-                className="flex h-12 items-center border-b border-line text-base font-medium last:border-b-0"
+                className={cn(
+                  "flex h-12 items-center border-b text-base font-medium last:border-b-0",
+                  night ? "border-white/10" : "border-line",
+                )}
               >
                 {item.label}
               </Link>
@@ -92,14 +134,14 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
               <WhatsAppButton source="nav-menu" className="w-full" />
               <Button asChild className="w-full">
                 <Link to="/contact" onClick={() => track("quote_click", { source: "nav-menu" })}>
-                  Start a Project
+                  Let’s Talk
                 </Link>
               </Button>
             </div>
           </nav>
         ) : null}
       </header>
-      <main id="main">
+      <main id="main" className={night ? "pt-16" : undefined}>
         {children}
         <div className="h-16 md:hidden" aria-hidden />
       </main>
@@ -200,18 +242,29 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           </p>
         </div>
       </footer>
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-card p-2 md:hidden">
+      <div
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-40 border-t p-2 md:hidden",
+          night ? "border-white/10 bg-[#050816]/92 backdrop-blur" : "border-line bg-card",
+        )}
+      >
         <div className="grid grid-cols-3 gap-2">
           <a
             href={`tel:${company.phoneTel}`}
-            className="inline-flex h-11 items-center justify-center gap-1 rounded-full bg-paper text-sm font-semibold text-ink"
+            className={cn(
+              "inline-flex h-11 items-center justify-center gap-1 rounded-full text-sm font-semibold",
+              night ? "bg-white/10 text-white" : "bg-paper text-ink",
+            )}
             onClick={() => track("call_click", { source: "mobile-bar" })}
           >
             <Phone className="size-4" aria-hidden /> Call
           </a>
           <a
             href={company.whatsapp}
-            className="inline-flex h-11 items-center justify-center rounded-full bg-paper text-sm font-semibold text-ink"
+            className={cn(
+              "inline-flex h-11 items-center justify-center rounded-full text-sm font-semibold",
+              night ? "bg-white/10 text-white" : "bg-paper text-ink",
+            )}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("whatsapp_click", { source: "mobile-bar" })}
@@ -220,10 +273,10 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           </a>
           <Link
             to="/contact"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-semibold text-card"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
             onClick={() => track("quote_click", { source: "mobile-bar" })}
           >
-            Quote
+            Let’s Talk
           </Link>
         </div>
       </div>

@@ -145,3 +145,73 @@
 .rise {
   animation: rise 0.45s ease both;
 }
+
+.home-stage {
+  perspective: 1200px;
+}
+
+.float-card {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+.laptop {
+  transform: rotateX(8deg) rotateY(-12deg);
+  transform-style: preserve-3d;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(160, 190, 255, 0.16);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+}
+
+.svc-card {
+  transform: perspective(900px) translateZ(0);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.svc-card:hover {
+  transform: perspective(900px) translateY(-8px) rotateX(4deg) scale(1.02);
+  border-color: rgba(120, 160, 255, 0.55);
+  box-shadow: 0 22px 50px rgba(40, 80, 255, 0.18);
+}
+
+.svc-card:hover .svc-icon {
+  transform: scale(1.08);
+}
+
+.svc-icon {
+  transition: transform 0.35s ease;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+.globe {
+  background:
+    radial-gradient(circle at 35% 35%, rgba(140, 190, 255, 0.55), transparent 28%),
+    radial-gradient(circle at 60% 55%, #163a86, #07111f 72%);
+  box-shadow:
+    inset -18px -10px 30px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(60, 120, 255, 0.35);
+}
+
+.globe-spin {
+  animation: spin-slow 28s linear infinite;
+}
+
+.home-faq h2 {
+  color: white;
+}
+
+.home-faq .bg-card {
+  color: #071426;
+}
