@@ -8,7 +8,7 @@
  */
 
 export const site = {
-  url: "https://mksanalytiq.in",
+  url: "https://www.mksanalytiq.in",
   ogImage: "/og.jpg",
   locale: "en_IN",
   /** Shown on legal pages. Update when the text changes. */
@@ -45,7 +45,7 @@ export function whatsappHref(text?: string) {
 
 export const hero = {
   title: "Build Digital. Grow Smarter.",
-  lede: "MKSANALYTIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
+  lede: "MKSAnalytIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
   trust: "Based in Noida • Serving Delhi NCR and India",
   primaryCta: "Request Free Consultation",
   secondaryCta: "Chat on WhatsApp",
@@ -74,6 +74,8 @@ export const footerCompany = [
   { to: "/portfolio", label: "Work" },
   { to: "/process", label: "Process" },
   { to: "/digital-marketing-software-delhi-ncr", label: "Delhi NCR" },
+  { to: "/seo-services-noida", label: "SEO in Noida" },
+  { to: "/google-ads-agency-noida", label: "Google Ads in Noida" },
   { to: "/contact", label: "Contact" },
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms", label: "Terms & Conditions" },
@@ -158,9 +160,9 @@ export const services: {
     relatedServices: ["web-development", "social-media", "software-development"],
     image: "/media/desk.jpg",
     imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
-    seoTitle: "Digital Marketing Company in Noida | MKSANALYTIQ",
+    seoTitle: "Digital Marketing Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSANALYTIQ provides digital marketing services in Noida and Delhi NCR, including performance marketing, social media, SEO, content and analytics.",
+      "MKSAnalytIQ provides digital marketing services in Noida and Delhi NCR, including performance marketing, social media, SEO, content and analytics.",
   },
   {
     id: "web",
@@ -213,9 +215,9 @@ export const services: {
     relatedServices: ["software-development", "app-development", "digital-marketing", "ai-development"],
     image: "/media/work/buildsite.jpg",
     imageAlt: "BuildSite, a custom web application developed by MKSAnalytIQ",
-    seoTitle: "Web Development Company in Noida | MKSANALYTIQ",
+    seoTitle: "Web Development Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSANALYTIQ provides website and web application development in Noida, Delhi NCR and across India, including business websites, web apps, dashboards and custom digital solutions.",
+      "MKSAnalytIQ provides website and web application development in Noida, Delhi NCR and across India, including business websites, web apps, dashboards and custom digital solutions.",
   },
   {
     id: "software",
@@ -269,9 +271,9 @@ export const services: {
     relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
     image: "/media/devices.jpg",
     imageAlt: "Laptop and phone used for software development at MKSAnalytIQ",
-    seoTitle: "Software Development Company in Noida | MKSANALYTIQ",
+    seoTitle: "Software Development Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSANALYTIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
+      "MKSAnalytIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
   },
   {
     id: "app",
@@ -319,9 +321,9 @@ export const services: {
     relatedServices: ["software-development", "web-development", "ai-development"],
     image: "/media/work/spark-mobile.jpg",
     imageAlt: "Spark Mobile, an iOS and Android app developed by MKSAnalytIQ",
-    seoTitle: "App Development Company in Noida | MKSANALYTIQ",
+    seoTitle: "App Development Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSANALYTIQ develops custom mobile and business applications for companies in Noida, Delhi NCR and across India.",
+      "MKSAnalytIQ develops custom mobile and business applications for companies in Noida, Delhi NCR and across India.",
   },
   {
     id: "ai",
@@ -369,9 +371,9 @@ export const services: {
     relatedServices: ["software-development", "web-development", "app-development"],
     image: "/media/work/taxpilot.jpg",
     imageAlt: "TaxPilot AI, a guided software project developed by MKSAnalytIQ",
-    seoTitle: "AI Development & Automation Company in Noida | MKSANALYTIQ",
+    seoTitle: "AI Development & Automation Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSANALYTIQ builds AI-powered software, automation workflows, chatbots and intelligent business tools for companies in Noida, Delhi NCR and India.",
+      "MKSAnalytIQ builds AI-powered software, automation workflows, chatbots and intelligent business tools for companies in Noida, Delhi NCR and India.",
   },
   {
     id: "social",
@@ -987,7 +989,7 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
   {
     id: "outside",
     q: "Do you work with businesses outside Noida?",
-    a: "Yes. The only office is at C-81, C Block, Sector 8, Noida. From there the studio works with businesses across Delhi NCR — including Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad — and elsewhere in India. Those are service areas, not other offices. A visit to Noida is welcome when it helps; otherwise calls and WhatsApp cover the rest.",
+    a: "Yes. The studio is at C-81, C Block, Sector 8, Noida. From there we work with businesses across Delhi NCR — including Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad — and elsewhere in India. A visit to Noida is welcome when it helps; otherwise calls and WhatsApp cover the rest.",
     tags: ["home", "contact", "about", "marketing", "web", "software", "app", "ai"],
   },
   {
@@ -1071,7 +1073,7 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
   },
   {
     id: "web-noida",
-    q: "Does MKSANALYTIQ provide web development in Noida?",
+    q: "Does MKSAnalytIQ provide web development in Noida?",
     a: "Yes. From the Sector 8 studio, MKSAnalytIQ builds business websites, landing pages, e-commerce sites and custom web applications for companies in Noida, across Delhi NCR and elsewhere in India.",
     tags: ["web"],
   },

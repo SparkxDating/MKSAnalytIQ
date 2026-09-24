@@ -72,6 +72,19 @@ export function ServiceDetail({ service }: { service: Service }) {
             <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
               Based in Noida • Serving Delhi NCR and India
             </p>
+            {service.slug === "digital-marketing" ? (
+              <p className="mt-4 text-sm leading-relaxed text-mute">
+                For a narrower brief, see{" "}
+                <Link to="/seo-services-noida" className="font-semibold text-primary">
+                  SEO services in Noida
+                </Link>{" "}
+                and{" "}
+                <Link to="/google-ads-agency-noida" className="font-semibold text-primary">
+                  Google Ads in Noida
+                </Link>
+                .
+              </p>
+            ) : null}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Button asChild>
                 <Link

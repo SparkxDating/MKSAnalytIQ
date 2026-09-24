@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/seo";
 export const Route = createFileRoute("/services/")({
   head: () =>
     pageMeta({
-      title: "Services | Digital Marketing, Web, Software, Apps and AI | MKSANALYTIQ",
+      title: "Services | Digital Marketing, Web, Software, Apps and AI | MKSAnalytIQ",
       description:
         "Digital marketing, web development, software, app and AI development from MKSAnalytIQ in Noida, serving Delhi NCR and India. Event management remains available.",
       path: "/services",

@@ -10,21 +10,21 @@ import { company, site, steps } from "@/lib/content";
 import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
 
 const path = "/digital-marketing-software-delhi-ncr";
-const title = "Digital Marketing & Software Development in Delhi NCR | MKSANALYTIQ";
+const title = "Digital Marketing & Software Development in Delhi NCR | MKSAnalytIQ";
 const description =
-  "MKSANALYTIQ is a Noida-based digital marketing and software development company serving businesses across Delhi NCR with websites, apps, custom software, AI and growth services.";
+  "MKSAnalytIQ is a Noida-based digital marketing and software development company serving businesses across Delhi NCR with websites, apps, custom software, AI and growth services.";
 
 const questions = [
   {
     id: "ncr-office",
     q: "Where is MKSAnalytIQ based?",
-    a: "The office is at C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306, India. That is the only office.",
+    a: "The studio is at C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306, India.",
     tags: ["ncr"],
   },
   {
     id: "ncr-branches",
     q: "Do you have offices in Delhi, Gurugram or other NCR cities?",
-    a: "No. Noida, Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad are places the studio serves. They are not additional offices. Work is done from Noida, with calls and WhatsApp when a visit is not needed.",
+    a: "Delhi, Gurugram, Ghaziabad, Faridabad and Greater Noida are served from the Noida studio, with calls and WhatsApp when a visit is not needed.",
     tags: ["ncr"],
   },
   {
@@ -108,9 +108,8 @@ function DelhiNcrPage() {
             Digital Marketing & Software Development for Delhi NCR
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            MKSAnalytIQ is based at {company.addressOneLine}. That Noida address is the only office. From there the
-            studio works with businesses in Noida, Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad, and
-            elsewhere in India.
+            MKSAnalytIQ is based at {company.addressOneLine}. From there the studio works with businesses in
+            Noida, Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad, and elsewhere in India.
           </p>
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
             Based in Noida • Serving Delhi NCR and India

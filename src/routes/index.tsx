@@ -168,7 +168,7 @@ function Home() {
               </span>
             </h1>
             <p className="mt-5 max-w-[33.5rem] text-base leading-relaxed text-white/70">
-              Need more qualified enquiries, or a digital product your team can use? MKSANALYTIQ brings marketing and
+              Need more qualified enquiries, or a digital product your team can use? MKSAnalytIQ brings marketing and
               technology together for businesses in Noida, Delhi NCR, and across India. Explore our{" "}
               <Link to="/digital-marketing-software-delhi-ncr" className="text-white underline decoration-white/30 underline-offset-4">
                 Delhi NCR services

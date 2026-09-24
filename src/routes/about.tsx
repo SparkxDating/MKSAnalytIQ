@@ -61,8 +61,8 @@ function About() {
         <img
           src="/media/office.jpg"
           alt="MKSAnalytIQ office in Noida"
-          width={1792}
-          height={1008}
+          width={1280}
+          height={720}
           className="h-80 w-full rounded-3xl object-cover lg:col-span-3 lg:h-full"
         />
         <div className="flex flex-col justify-center rounded-3xl bg-ink p-6 text-paper lg:col-span-2">

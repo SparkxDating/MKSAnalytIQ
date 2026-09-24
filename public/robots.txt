@@ -4,4 +4,4 @@ Disallow: /studio
 Disallow: /login
 Disallow: /api
 
-Sitemap: https://mksanalytiq.in/sitemap.xml
+Sitemap: https://www.mksanalytiq.in/sitemap.xml

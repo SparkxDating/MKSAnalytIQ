@@ -4,7 +4,7 @@ export function absoluteUrl(path: string) {
   return new URL(path, site.url).toString();
 }
 
-/** Cities and regions MKSAnalytIQ serves. The only office is in Noida. */
+/** Cities and regions MKSAnalytIQ serves. The studio address is in Noida. */
 export function areaServedPlaces() {
   return [
     { "@type": "City", name: "Noida" },
