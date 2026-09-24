@@ -62,7 +62,7 @@ export function SiteShell({
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
           <Logo tone={night ? "paper" : "ink"} />
-          <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
             {nav.map((item) => {
               const active = item.to === "/" ? path === "/" : path.startsWith(item.to);
               return (
@@ -72,7 +72,7 @@ export function SiteShell({
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative py-2 text-sm font-medium transition-colors",
-                    night ? "text-white/70 hover:text-white" : "text-mute hover:text-ink",
+                    night ? "text-[13px] text-white/75 hover:text-white" : "text-mute hover:text-ink",
                     active && (night ? "text-white" : "text-ink"),
                   )}
                 >

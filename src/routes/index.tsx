@@ -45,7 +45,7 @@ const services = [
     slug: "digital-marketing",
     text: "SEO, Google Ads, Meta Ads, social media, content and lead generation.",
     icon: Megaphone,
-    glow: "from-fuchsia-500/30 to-violet-500/10",
+    glow: "from-fuchsia-500/18 to-violet-500/5",
     iconBg: "bg-fuchsia-500/20 text-fuchsia-200",
   },
   {
@@ -53,7 +53,7 @@ const services = [
     slug: "web-development",
     text: "Business websites, web applications, ecommerce and custom digital experiences.",
     icon: Code2,
-    glow: "from-blue-500/30 to-cyan-500/10",
+    glow: "from-blue-500/18 to-cyan-500/5",
     iconBg: "bg-blue-500/20 text-blue-200",
   },
   {
@@ -61,7 +61,7 @@ const services = [
     slug: "software-development",
     text: "Custom software, SaaS, dashboards, APIs and business automation.",
     icon: Target,
-    glow: "from-orange-500/30 to-amber-500/10",
+    glow: "from-amber-500/18 to-orange-500/5",
     iconBg: "bg-orange-500/20 text-orange-200",
   },
   {
@@ -69,7 +69,7 @@ const services = [
     slug: "app-development",
     text: "Android, iOS and cross-platform mobile applications.",
     icon: Smartphone,
-    glow: "from-emerald-500/30 to-teal-500/10",
+    glow: "from-teal-500/18 to-emerald-500/5",
     iconBg: "bg-emerald-500/20 text-emerald-200",
   },
   {
@@ -77,7 +77,7 @@ const services = [
     slug: "ai-development",
     text: "AI applications, chatbots, automation workflows and intelligent business solutions.",
     icon: Brain,
-    glow: "from-violet-500/30 to-indigo-500/10",
+    glow: "from-indigo-500/18 to-violet-500/5",
     iconBg: "bg-violet-500/20 text-violet-200",
   },
 ] as const;
@@ -120,12 +120,22 @@ const trust = [
   { icon: Sparkles, title: "Noida Based", text: "Pan India" },
 ];
 
-const floats: { title: string; icon: LucideIcon; className: string; delay: string; z: number; rotate: number }[] = [
-  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[14%]", delay: "0s", z: 36, rotate: -8 },
-  { title: "Web Development", icon: Code2, className: "right-[0%] top-[4%]", delay: "0.8s", z: 72, rotate: 8 },
-  { title: "Software Development", icon: Target, className: "right-[2%] top-[36%]", delay: "1.3s", z: 24, rotate: 4 },
-  { title: "App Development", icon: Smartphone, className: "left-[2%] bottom-[2%]", delay: "0.4s", z: 48, rotate: -4 },
-  { title: "AI & Automation", icon: Brain, className: "left-[24%] top-[0%]", delay: "1.6s", z: 96, rotate: -2 },
+const floats: {
+  title: string;
+  icon: LucideIcon;
+  className: string;
+  delay: string;
+  z: number;
+  rotate: number;
+  rx: number;
+  ry: number;
+  scale: number;
+}[] = [
+  { title: "AI & Automation", icon: Brain, className: "left-[26%] top-[2%]", delay: "0.2s", z: -48, rotate: -6, rx: 10, ry: -8, scale: 0.9 },
+  { title: "Web Development", icon: Code2, className: "right-[1%] top-[8%]", delay: "1.1s", z: -18, rotate: 7, rx: 8, ry: 10, scale: 0.94 },
+  { title: "Software Development", icon: Target, className: "right-[4%] top-[40%]", delay: "0.6s", z: 28, rotate: 4, rx: 4, ry: 12, scale: 1 },
+  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[20%]", delay: "0s", z: 70, rotate: -8, rx: 2, ry: -12, scale: 1.05 },
+  { title: "App Development", icon: Smartphone, className: "left-[8%] bottom-[2%]", delay: "1.5s", z: 92, rotate: -3, rx: 0, ry: -6, scale: 1.06 },
 ];
 
 function Home() {
@@ -134,10 +144,10 @@ function Home() {
       <JsonLd data={faqSchema(homeFaqs)} />
       <div className="relative overflow-x-clip">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute left-1/2 top-16 h-[28rem] w-[28rem] -translate-x-[10%] rounded-full bg-blue-600/25 blur-3xl" />
-          <div className="absolute right-0 top-8 h-80 w-80 rounded-full bg-violet-600/25 blur-3xl" />
-          <div className="absolute bottom-10 right-1/4 h-40 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
-          <div className="tech-grid absolute inset-0 opacity-25" />
+          <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-[20%] rounded-full bg-blue-600/15 blur-3xl" />
+          <div className="absolute right-10 top-16 h-64 w-64 rounded-full bg-violet-600/16 blur-3xl" />
+          <div className="absolute bottom-16 right-1/3 h-28 w-56 rounded-full bg-cyan-400/6 blur-3xl" />
+          <div className="tech-grid absolute inset-0 opacity-[0.16]" />
           <span className="absolute left-[18%] top-24 size-1 rounded-full bg-white/50" />
           <span className="absolute right-[22%] top-40 size-1 rounded-full bg-cyan-200/70" />
           <span className="absolute right-[12%] top-64 size-1.5 rounded-full bg-violet-200/50" />
@@ -150,20 +160,20 @@ function Home() {
               <span className="size-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(103,232,249,0.8)]" aria-hidden />
               Technology + Digital Growth • Noida
             </p>
-            <h1 className="mt-5 font-display text-5xl font-extrabold leading-[0.92] tracking-tight sm:text-6xl lg:text-[4.6rem]">
+            <h1 className="mt-6 font-display text-5xl font-extrabold leading-[0.92] tracking-tight sm:text-6xl lg:text-[4.35rem]">
               Build Digital.
               <span className="mt-1 block bg-gradient-to-r from-[#4d8dff] to-[#9a6bff] bg-clip-text text-transparent">
                 Grow Smarter.
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+            <p className="mt-5 max-w-[33.5rem] text-base leading-relaxed text-white/70">
               MKSANALYTIQ is a Noida-based technology and digital growth studio helping businesses across{" "}
               <Link to="/digital-marketing-software-delhi-ncr" className="text-white underline decoration-white/30 underline-offset-4">
                 Delhi NCR
               </Link>{" "}
               and India with digital marketing, web development, software, apps and AI solutions.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
                 asChild
                 className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_28px_rgba(70,110,255,0.4)] hover:brightness-110"
@@ -176,10 +186,10 @@ function Home() {
                 Chat on WhatsApp
               </WhatsAppButton>
             </div>
-            <ul className="mt-7 grid grid-cols-2 gap-x-3 gap-y-3 sm:grid-cols-4">
+            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
               {trust.map((item) => (
-                <li key={item.title} className="flex items-start gap-2 text-sm">
-                  <item.icon className="mt-0.5 size-4 shrink-0 text-cyan-200 drop-shadow-[0_0_8px_rgba(103,232,249,0.7)]" aria-hidden />
+                <li key={item.title} className="flex items-start gap-2 text-xs sm:text-sm">
+                  <item.icon className="mt-0.5 size-3.5 shrink-0 text-cyan-200/90" aria-hidden />
                   <span>
                     <span className="block font-semibold text-white">{item.title}</span>
                     <span className="text-white/55">{item.text}</span>
@@ -191,13 +201,13 @@ function Home() {
           <HeroVisual />
         </section>
 
-        <section className="relative mx-auto max-w-6xl px-5 pb-8 pt-2">
+        <section className="relative mx-auto max-w-6xl px-5 pb-4 pt-1">
           <dl className="stats-panel glass-card grid overflow-hidden rounded-[1.6rem] sm:grid-cols-2 lg:grid-cols-5">
             <Stat kicker="01" title="Strategy. Build. Grow." text="One team for product + growth." />
             <Stat kicker="5+" title="Core Services" text="Marketing through AI." />
             <Stat kicker="End to End" title="Digital & Tech Solutions" text="" />
-            <Stat kicker="Noida" title="Based" text="Noida Based" />
-            <Stat kicker="Delhi NCR & India" title="Service Coverage" text="Serving Delhi NCR & India" />
+            <Stat kicker="Noida" title="Based" text="" />
+            <Stat kicker="Delhi NCR & India" title="Service Coverage" text="" />
           </dl>
         </section>
       </div>
@@ -275,7 +285,7 @@ function Home() {
                 <article className="work-card glass-card group overflow-hidden rounded-3xl">
                   <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="block">
                     <div className="relative">
-                      <Preview slug={project.slug} loading="lazy" className="h-52 sm:h-56" />
+                      <Preview slug={project.slug} loading="lazy" className="h-56 rounded-t-3xl sm:h-60" />
                       <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur">
                         <ArrowRight className="size-4" aria-hidden />
                         <span className="sr-only">View {project.name}</span>
@@ -447,33 +457,40 @@ function TechMark({ name }: { name: string }) {
 
 function HeroVisual() {
   return (
-    <div className="home-stage relative mx-auto h-[440px] w-full max-w-xl sm:h-[520px] lg:h-[560px] lg:max-w-none" aria-hidden>
-      <div className="absolute bottom-8 left-1/2 h-48 w-[80%] -translate-x-1/2 rounded-full bg-blue-500/30 blur-3xl" />
-      <div className="absolute bottom-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full border border-cyan-300/40 shadow-[0_0_30px_rgba(80,200,255,0.25)]" />
-      <div className="absolute bottom-8 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full border border-blue-400/20" />
-      <div className="laptop absolute bottom-14 left-1/2 w-[78%] max-w-[26rem] -translate-x-1/2">
-        <div className="rounded-t-[1.4rem] border border-cyan-200/40 bg-gradient-to-b from-slate-500/80 to-[#0b1220] p-[7px] shadow-[0_40px_90px_rgba(20,60,180,0.45)]">
-          <div className="laptop-screen flex h-44 flex-col items-center justify-center rounded-xl sm:h-52">
-            <span className="font-display text-6xl font-extrabold leading-none text-cyan-50 drop-shadow-[0_0_18px_rgba(140,190,255,0.7)]">
-              A
-            </span>
+    <div className="home-stage relative mx-auto h-[360px] w-full max-w-xl sm:h-[440px] lg:h-[500px] lg:max-w-none" aria-hidden>
+      <div className="absolute bottom-6 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-blue-500/15 blur-3xl" />
+      <div className="absolute bottom-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full border border-cyan-200/25" />
+      <div className="absolute bottom-4 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full border border-blue-400/15" />
+      <div className="laptop absolute bottom-8 left-1/2 w-[88%] max-w-[30rem] -translate-x-1/2">
+        <div className="rounded-t-[1.35rem] border border-cyan-100/25 bg-gradient-to-b from-slate-400/70 to-[#090f1c] p-2 shadow-[0_28px_50px_rgba(0,0,0,0.45)]">
+          <div className="laptop-screen flex h-40 flex-col items-center justify-center rounded-xl sm:h-52">
+            <span className="font-display text-5xl font-extrabold leading-none text-cyan-50 sm:text-6xl">A</span>
             <span className="mt-2 text-xs font-semibold tracking-[0.22em] text-white">MKSANALYTIQ</span>
             <span className="mt-1 text-[10px] text-white/60">Ideas. Technology. Growth.</span>
           </div>
         </div>
-        <div className="relative mx-auto h-3.5 w-[112%] -translate-x-[5%] rounded-b-2xl bg-gradient-to-b from-slate-200/80 via-slate-500 to-slate-900 shadow-[0_16px_30px_rgba(0,0,0,0.45)]">
-          <span className="absolute left-1/2 top-1 h-1 w-16 -translate-x-1/2 rounded-full bg-slate-900/50" />
+        <div className="relative mx-auto h-4 w-[114%] -translate-x-[6%] rounded-b-2xl bg-gradient-to-b from-slate-300/70 via-slate-600 to-[#05070d] shadow-[0_18px_24px_rgba(0,0,0,0.5)]">
+          <span className="absolute inset-x-6 top-1.5 h-px bg-white/25" />
+          <span className="absolute left-[18%] top-1 flex gap-1">
+            <span className="h-1 w-3 rounded-sm bg-slate-900/40" />
+            <span className="h-1 w-3 rounded-sm bg-slate-900/40" />
+            <span className="h-1 w-3 rounded-sm bg-slate-900/40" />
+          </span>
+          <span className="absolute left-1/2 top-1 h-1 w-14 -translate-x-1/2 rounded-full bg-slate-950/60" />
         </div>
-        <div className="mx-auto h-2 w-28 rounded-b-md bg-slate-700/80" />
+        <div className="mx-auto h-2.5 w-32 rounded-b-md bg-[#070b14]" />
       </div>
       {floats.map((card) => (
         <div
           key={card.title}
-          className={`float-card absolute hidden w-40 rounded-2xl p-3 sm:block ${card.className}`}
-          style={{ transform: `translateZ(${card.z}px) rotate(${card.rotate}deg)`, animationDelay: card.delay }}
+          className={`float-card absolute hidden w-36 rounded-2xl p-3 lg:block ${card.className}`}
+          style={{
+            transform: `translateZ(${card.z}px) rotateX(${card.rx}deg) rotateY(${card.ry}deg) rotate(${card.rotate}deg) scale(${card.scale})`,
+            animationDelay: card.delay,
+          }}
         >
-          <span className="grid size-8 place-items-center rounded-lg bg-cyan-300/15 text-cyan-100 shadow-[0_0_16px_rgba(80,170,255,0.35)]">
-            <card.icon className="size-4" />
+          <span className="grid size-7 place-items-center rounded-lg border border-white/10 bg-white/10 text-cyan-100">
+            <card.icon className="size-3.5" />
           </span>
           <p className="mt-2 text-xs font-semibold leading-snug text-white">{card.title}</p>
         </div>
