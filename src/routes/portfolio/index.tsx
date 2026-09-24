@@ -34,8 +34,8 @@ function Portfolio() {
             Projects that make an impact
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Public software from the studio’s GitHub, {company.githubHandle}. Client marketing and private event work
-            isn’t listed here — ask on a call and we’ll walk through relevant examples.
+            Products built by the studio. Public repositories are linked. Where the source stays private, the
+            project is still listed and a live site is linked when one is published.
           </p>
           <a className="mt-4 inline-block text-sm font-semibold text-primary" href={company.github}>
             All repositories

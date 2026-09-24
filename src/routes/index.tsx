@@ -152,7 +152,7 @@ function Home() {
                 Selected work, built for real use.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
-                Public software from the studio. Client marketing stays private to each engagement.
+                Public products from the studio. The full list is on Work.
               </p>
             </div>
             <Link to="/portfolio" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-primary">

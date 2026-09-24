@@ -36,14 +36,16 @@ export function ProjectCard({ project }: { project: Project }) {
           >
             View project <ArrowRight className="size-4" aria-hidden />
           </Link>
-          <a
-            href={project.github}
-            className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Repository <ArrowUpRight className="size-4" aria-hidden />
-          </a>
+          {project.github ? (
+            <a
+              href={project.github}
+              className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Repository <ArrowUpRight className="size-4" aria-hidden />
+            </a>
+          ) : null}
           {project.live ? (
             <a
               href={project.live}

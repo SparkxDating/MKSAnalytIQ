@@ -1,5 +1,14 @@
 import { cn } from "@/lib/cn";
 
+const illustrated = new Set([
+  "shortgen",
+  "cpaas",
+  "taxpilot",
+  "eye-camp",
+  "navi-zindagi",
+  "influencer-os",
+]);
+
 export function Preview({ slug, className }: { slug: string; className?: string }) {
   return (
     <div className={cn("relative h-44 overflow-hidden bg-navy text-paper", className)} aria-hidden>
@@ -9,6 +18,16 @@ export function Preview({ slug, className }: { slug: string; className?: string 
       {slug === "eye-camp" ? <Camp /> : null}
       {slug === "navi-zindagi" ? <Relief /> : null}
       {slug === "influencer-os" ? <Influencer /> : null}
+      {illustrated.has(slug) ? null : <Mark label={slug} />}
+    </div>
+  );
+}
+
+function Mark({ label }: { label: string }) {
+  return (
+    <div className="flex h-full flex-col justify-between p-4">
+      <p className="text-xs uppercase tracking-widest text-accent">Product</p>
+      <p className="font-display text-lg font-bold uppercase tracking-wide">{label.replace(/-/g, " ")}</p>
     </div>
   );
 }

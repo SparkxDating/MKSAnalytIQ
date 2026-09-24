@@ -95,14 +95,18 @@ export function CaseStudy({ project }: { project: Project }) {
           <section className="rounded-3xl border border-line bg-card p-5">
             <h2 className="text-lg font-bold">Links</h2>
             <div className="mt-3 flex flex-col gap-2 text-sm font-semibold">
-              <a
-                href={project.github}
-                className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Repository <ArrowUpRight className="size-4" aria-hidden />
-              </a>
+              {project.github ? (
+                <a
+                  href={project.github}
+                  className="inline-flex h-11 items-center gap-1 text-ink hover:text-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Repository <ArrowUpRight className="size-4" aria-hidden />
+                </a>
+              ) : (
+                <p className="text-sm font-normal leading-relaxed text-mute">Source repository is private.</p>
+              )}
               {project.live ? (
                 <a
                   href={project.live}
