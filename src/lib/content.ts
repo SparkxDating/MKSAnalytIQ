@@ -557,6 +557,8 @@ export const projects: {
   objective?: string;
   /** How the published product addresses that job. Omit when it is not in the project data. */
   approach?: string;
+  /** Organisation already named in the summary. Omit for the studio’s own products. */
+  builtFor?: string;
 }[] = [
   {
     slug: "shortgen",
@@ -640,6 +642,7 @@ export const projects: {
     seoTitle: "Eye Camp Registration — Hindi Registration System | MKSAnalytIQ",
     seoDescription:
       "Project overview of the Hindi, mobile-first eye-camp registration system for a free cataract camp in Varanasi.",
+    builtFor: "Trishakti Seva Foundation and RJ Shankara Eye Hospital",
   },
   {
     slug: "navi-zindagi",
@@ -655,6 +658,7 @@ export const projects: {
     seoTitle: "Navi Zindagi — Fundraising and Volunteer Site | MKSAnalytIQ",
     seoDescription:
       "Project overview of the Navi Zindagi fundraising and volunteer site for flood-relief work in Nepal and Assam.",
+    builtFor: "Navi Zindagi Foundation",
   },
   {
     slug: "influencer-os",
@@ -722,6 +726,7 @@ export const projects: {
     seoTitle: "BRJ Bharat — Bilingual Organisation Website | MKSAnalytIQ",
     seoDescription:
       "Project overview of the bilingual Bhartiya Rashtriya Jansatta website, including forms, a news feed and an admin console.",
+    builtFor: "Bhartiya Rashtriya Jansatta",
   },
   {
     slug: "carnispora",

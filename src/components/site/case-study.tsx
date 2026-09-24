@@ -78,7 +78,9 @@ export function CaseStudy({ project }: { project: Project }) {
             </p>
             <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
             <p className="mt-3 text-sm leading-relaxed text-mute">
-              Built by the MKSAnalytIQ studio in Sector 8, Noida.
+              {project.builtFor
+                ? `Built by the MKSAnalytIQ studio in Sector 8, Noida, for ${project.builtFor}.`
+                : "Studio product built by MKSAnalytIQ in Sector 8, Noida."}
             </p>
             <p className="mt-3 text-sm leading-relaxed text-mute">
               This page lists the documented scope and features. Any business outcomes shown here are verified and

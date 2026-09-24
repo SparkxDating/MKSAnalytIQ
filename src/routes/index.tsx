@@ -227,7 +227,15 @@ function Home() {
             <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Our Core Services</h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/65 sm:text-base">
               From digital marketing to custom software, we help businesses plan, build and grow with the right mix of
-              strategy, technology and creative execution.
+              strategy, technology and creative execution. In Noida that includes{" "}
+              <Link to="/seo-services-noida" className="text-white underline decoration-white/30 underline-offset-4">
+                SEO
+              </Link>{" "}
+              and{" "}
+              <Link to="/google-ads-agency-noida" className="text-white underline decoration-white/30 underline-offset-4">
+                Google Ads
+              </Link>
+              .
             </p>
           </div>
           <Button asChild variant="ghost" className="bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white hover:brightness-110">

@@ -11,8 +11,8 @@ export function FinalCta() {
       <img
         src="/media/ridge.jpg"
         alt=""
-        width={1792}
-        height={1008}
+        width={1280}
+        height={720}
         loading="lazy"
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover opacity-50"
