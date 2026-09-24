@@ -34,14 +34,14 @@ const growth = [
 ] as const;
 
 const technology = [
-  { title: "Websites", to: "/services", hash: "software" },
+  { title: "Website Development", to: "/services", hash: "software" },
   { title: "Web Applications", to: "/services", hash: "software" },
   { title: "Mobile Apps", to: "/services", hash: "software" },
   { title: "SaaS Development", to: "/services", hash: "software" },
   { title: "AI & Automation", to: "/", hash: "technology" },
 ] as const;
 
-const featuredSlugs = ["shortgen", "taxpilot", "cpaas", "influencer-os"] as const;
+const featuredSlugs = ["shortgen", "taxpilot", "influencer-os"] as const;
 
 const featured = featuredSlugs.flatMap((slug) => {
   const project = projects.find((item) => item.slug === slug);
@@ -49,14 +49,16 @@ const featured = featuredSlugs.flatMap((slug) => {
 });
 
 const stackNames = new Set(projects.flatMap((project) => project.stack));
-const technologies = ["Next.js", "TypeScript", "Python", "Postgres", "Prisma", "NestJS", "Kotlin"].filter((name) =>
-  stackNames.has(name),
-);
-if (
+const technologies = [
+  stackNames.has("Next.js") ? "Next.js" : "",
+  stackNames.has("Next.js") ? "React" : "",
+  stackNames.has("TypeScript") ? "TypeScript" : "",
+  stackNames.has("Python") ? "Python" : "",
+  stackNames.has("Postgres") ? "PostgreSQL" : "",
   projects.some((project) => `${project.name} ${project.summary} ${project.features.join(" ")}`.includes("AI"))
-) {
-  technologies.push("AI");
-}
+    ? "AI"
+    : "",
+].filter((name) => name.length > 0);
 
 const reasons = [
   {
@@ -118,6 +120,18 @@ function Home() {
         </div>
       </section>
 
+      <section className="border-b border-line bg-card">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+          <h2 className="max-w-3xl font-display text-3xl font-extrabold tracking-tight sm:text-5xl">
+            One team for the product and the growth.
+          </h2>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-mute sm:text-lg">
+            From digital strategy and customer acquisition to websites, apps, SaaS and AI automation — we help
+            businesses build and grow their digital presence.
+          </p>
+        </div>
+      </section>
+
       <section id="solutions" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-20 sm:py-28">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">What we do</p>
         <h2 className="mt-3 max-w-xl text-3xl font-extrabold tracking-tight sm:text-4xl">
@@ -134,7 +148,9 @@ function Home() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">Selected work</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">Products we have shipped</h2>
+              <h2 className="mt-3 max-w-2xl text-3xl font-extrabold tracking-tight sm:text-5xl">
+                Selected work, built for real use.
+              </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
                 Public software from the studio. Client marketing stays private to each engagement.
               </p>
@@ -149,8 +165,8 @@ function Home() {
                 key={project.slug}
                 className={
                   index === 0
-                    ? "overflow-hidden border border-line bg-paper lg:col-span-2 lg:grid lg:grid-cols-5"
-                    : "overflow-hidden border border-line bg-paper"
+                    ? "group overflow-hidden border border-line bg-paper transition-colors duration-200 hover:border-primary/40 lg:col-span-2 lg:grid lg:grid-cols-5"
+                    : "group overflow-hidden border border-line bg-paper transition-colors duration-200 hover:border-primary/40"
                 }
               >
                 <Preview
@@ -161,6 +177,9 @@ function Home() {
                   <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
                   <h3 className="mt-2 font-display text-2xl font-bold">{project.name}</h3>
                   <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-mute">{project.summary}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
+                    {project.stack.join(" · ")}
+                  </p>
                   <Link
                     to="/portfolio/$slug"
                     params={{ slug: project.slug }}
@@ -176,7 +195,9 @@ function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
-        <h2 className="max-w-lg text-3xl font-extrabold uppercase tracking-tight sm:text-4xl">Why MKSAnalytIQ</h2>
+        <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight sm:text-4xl">
+          A practical studio, from strategy to shipped product.
+        </h2>
         <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((item) => (
             <article key={item.title} className="border-t border-line pt-5">
@@ -198,9 +219,7 @@ function Home() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 max-w-2xl text-sm text-paper/65">
-              Taken from products the studio has shipped. Not a claim about every engagement.
-            </p>
+            <p className="mt-4 max-w-2xl text-sm text-paper/65">From products the studio has shipped.</p>
           </div>
         </div>
       </section>
@@ -211,9 +230,9 @@ function Home() {
           <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">How a project moves</h2>
           <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
             {homeSteps.map((step) => (
-              <li key={step.n}>
-                <p className="font-display text-sm font-bold text-primary">{step.n}</p>
-                <h3 className="mt-2 font-display text-lg font-bold">{step.title}</h3>
+              <li key={step.n} className="border-t border-line pt-5">
+                <p className="font-display text-3xl font-extrabold text-primary">{step.n}</p>
+                <h3 className="mt-3 font-display text-lg font-bold">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mute">{step.text}</p>
               </li>
             ))}

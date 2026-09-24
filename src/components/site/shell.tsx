@@ -109,7 +109,7 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           <div>
             <Logo tone="paper" />
             <p className="mt-4 text-sm leading-relaxed text-paper/75">
-              Digital marketing, social media, events and software — from a studio in Sector 8, Noida.
+              Technology and digital growth studio. Based in Sector 8, Noida.
             </p>
             <p className="mt-4 text-sm text-paper/75">
               Proprietor
