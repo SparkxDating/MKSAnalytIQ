@@ -8,6 +8,7 @@ export const analyticsEvents = [
   "case_study_view",
   "contact_form_start",
   "contact_form_submit",
+  "directions_click",
 ] as const;
 
 export type AnalyticsEventName = (typeof analyticsEvents)[number];

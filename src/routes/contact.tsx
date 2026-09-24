@@ -275,6 +275,34 @@ function Contact() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-5 pb-12">
+        <div className="overflow-hidden rounded-3xl border border-line bg-card">
+          <div className="flex flex-wrap items-end justify-between gap-3 px-5 py-4 sm:px-6">
+            <div>
+              <h2 className="text-lg font-bold">Find the studio</h2>
+              <p className="mt-1 text-sm text-mute">{company.addressOneLine}</p>
+            </div>
+            <a
+              className="inline-flex h-11 items-center text-sm font-semibold text-primary"
+              href={company.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("directions_click", { source: "contact-map" })}
+            >
+              Open in Google Maps
+            </a>
+          </div>
+          <iframe
+            title="MKSAnalytIQ studio on Google Maps"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(company.addressOneLine)}&z=16&output=embed`}
+            className="h-72 w-full border-0 sm:h-96"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
       <section className="mx-auto max-w-3xl px-5 pb-16">
         <FaqList items={questions} heading="Before you write" />
       </section>
