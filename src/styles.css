@@ -87,6 +87,13 @@
   background-position: right center;
 }
 
+.tech-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-paper) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-paper) 7%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
 .wordmark-iq {
   background-image: linear-gradient(90deg, var(--color-deep), var(--color-primary) 45%, var(--color-accent));
   -webkit-background-clip: text;

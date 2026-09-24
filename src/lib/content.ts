@@ -61,11 +61,10 @@ export const finalCta = {
 export const trustStatement = "Marketing + Technology under one roof";
 
 export const nav = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
+  { to: "/", label: "Solutions", hash: "solutions" },
   { to: "/portfolio", label: "Work" },
-  { to: "/process", label: "Process" },
+  { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
 

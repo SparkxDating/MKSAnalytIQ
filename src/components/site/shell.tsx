@@ -40,8 +40,9 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
               const active = item.to === "/" ? path === "/" : path.startsWith(item.to);
               return (
                 <Link
-                  key={item.to}
+                  key={item.label}
                   to={item.to}
+                  hash={"hash" in item ? item.hash : undefined}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative py-2 text-sm font-medium text-mute transition-colors hover:text-ink",
@@ -60,7 +61,7 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
             <WhatsAppButton source="nav" className="hidden h-11 px-4 xl:inline-flex" />
             <Button asChild className="hidden h-11 lg:inline-flex">
               <Link to="/contact" onClick={() => track("quote_click", { source: "nav" })}>
-                Book Free Consultation
+                Start a Project
               </Link>
             </Button>
             <button
@@ -79,8 +80,9 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
           <nav id="mobile-nav" className="border-t border-line bg-card px-5 py-3 lg:hidden" aria-label="Mobile">
             {nav.map((item) => (
               <Link
-                key={item.to}
+                key={item.label}
                 to={item.to}
+                hash={"hash" in item ? item.hash : undefined}
                 className="flex h-12 items-center border-b border-line text-base font-medium last:border-b-0"
               >
                 {item.label}
@@ -90,7 +92,7 @@ export function SiteShell({ children, cta = true }: { children: ReactNode; cta?:
               <WhatsAppButton source="nav-menu" className="w-full" />
               <Button asChild className="w-full">
                 <Link to="/contact" onClick={() => track("quote_click", { source: "nav-menu" })}>
-                  Book Free Consultation
+                  Start a Project
                 </Link>
               </Button>
             </div>

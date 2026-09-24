@@ -1,17 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, CalendarRange, Code2, Megaphone, Share2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { FaqList } from "@/components/site/faq";
 import { HeroStage } from "@/components/site/hero-stage";
 import { JsonLd } from "@/components/site/json-ld";
-import { ProcessSteps } from "@/components/site/process-steps";
-import { ProjectBrowser } from "@/components/site/project-browser";
+import { Preview } from "@/components/site/previews";
 import { SiteShell } from "@/components/site/shell";
 import { Testimonials } from "@/components/site/testimonials";
 import { WhatsAppButton } from "@/components/site/whatsapp";
-import { WhySection } from "@/components/site/why";
 import { track } from "@/lib/analytics";
-import { faqsFor, hero, publishedStats, services, trustNotes, trustStatement } from "@/lib/content";
+import { faqsFor, projects, trustNotes } from "@/lib/content";
 import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
@@ -19,194 +17,205 @@ const description =
   "MKSAnalytIQ helps businesses generate leads, build their digital presence and launch digital products. Digital marketing, software and growth from a studio in Noida.";
 
 export const Route = createFileRoute("/")({
-  head: () => pageMeta({
-    title: "Digital Marketing, Software & Growth Systems | MKSAnalytIQ Noida",
-    description,
-    path: "/",
-  }),
+  head: () =>
+    pageMeta({
+      title: "Digital Marketing, Software & Growth Systems | MKSAnalytIQ Noida",
+      description,
+      path: "/",
+    }),
   component: Home,
 });
 
-const icons = {
-  marketing: Megaphone,
-  social: Share2,
-  events: CalendarRange,
-  software: Code2,
-};
+const growth = [
+  { title: "Performance Marketing", to: "/services", hash: "marketing" },
+  { title: "Social Media", to: "/services", hash: "social" },
+  { title: "SEO & Content", to: "/services", hash: "marketing" },
+  { title: "Analytics", to: "/services", hash: "marketing" },
+] as const;
 
-const figures = publishedStats.length ? publishedStats : trustNotes;
+const technology = [
+  { title: "Websites", to: "/services", hash: "software" },
+  { title: "Web Applications", to: "/services", hash: "software" },
+  { title: "Mobile Apps", to: "/services", hash: "software" },
+  { title: "SaaS Development", to: "/services", hash: "software" },
+  { title: "AI & Automation", to: "/", hash: "ai" },
+] as const;
+
+const reasons = [
+  {
+    title: "Strategy-first",
+    text: "The offer, the audience and the number that matters are written down before anyone designs or codes.",
+  },
+  {
+    title: "Technology-driven",
+    text: "Websites, apps and automation sit next to the marketing, so the system does not depend on four vendors.",
+  },
+  {
+    title: "Transparent",
+    text: "Scopes, files and repositories stay with you. You see the work while it is being made.",
+  },
+  {
+    title: "Built for growth",
+    text: "Launch is the start. We keep what is working and change what is not.",
+  },
+];
+
+const homeSteps = [
+  { n: "01", title: "Discover", text: "The idea, the audience and what a useful first version looks like." },
+  { n: "02", title: "Strategy", text: "Channels, product scope and a sequence you can approve." },
+  { n: "03", title: "Design", text: "Interface, message and the path a person actually takes." },
+  { n: "04", title: "Build", text: "Site, app, campaign or automation — in the open, not on the last day." },
+  { n: "05", title: "Launch & Grow", text: "Ship it, watch what moves, and decide the next build." },
+];
 
 function Home() {
   return (
-    <SiteShell>
+    <SiteShell cta={false}>
       <JsonLd data={faqSchema(homeFaqs)} />
-      <section className="hero-wash text-paper">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 lg:grid-cols-2 lg:py-20">
+      <section className="hero-wash relative overflow-hidden text-paper">
+        <div className="tech-grid pointer-events-none absolute inset-0 opacity-70" />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-16 sm:py-20 lg:grid-cols-2 lg:py-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-              Noida · Marketing and technology
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              {hero.title}
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">MKSAnalytIQ · Noida</p>
+            <h1 className="mt-5 max-w-full font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+              Build digital.
+              <span className="mt-2 block text-accent">Grow smarter.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-paper/80 sm:text-lg">{hero.lede}</p>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-paper/80 sm:text-lg">
+              We build websites, apps, AI solutions and digital marketing systems that help businesses grow.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild>
                 <Link to="/contact" onClick={() => track("hero_cta_click", { source: "hero" })}>
-                  {hero.primaryCta} <ArrowRight className="size-4" aria-hidden />
+                  Start a Project <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
-              <WhatsAppButton source="hero" variant="ghost" message="Hello, I’d like a free consultation.">
-                {hero.secondaryCta}
-              </WhatsAppButton>
+              <Button variant="ghost" asChild>
+                <a href="#work">View Our Work</a>
+              </Button>
             </div>
-            <p className="mt-6 text-sm text-paper/75">{hero.trust}</p>
           </div>
           <HeroStage />
         </div>
       </section>
 
-      <section className="border-b border-line bg-card">
-        <div className="mx-auto max-w-6xl px-5 py-12">
-          <h2 className="max-w-2xl text-2xl font-extrabold tracking-tight sm:text-3xl">{trustStatement}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
-            Campaigns, content, events and the software they point to — planned by the same studio in Sector 8, Noida.
-          </p>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {figures.map((item) => (
-              <li key={item.label} className="rounded-2xl border border-line bg-paper px-4 py-3">
-                <p className="font-display text-xl font-extrabold text-primary">{item.value}</p>
-                <p className="text-sm text-mute">{item.label}</p>
-              </li>
-            ))}
-          </ul>
+      <section className="border-b border-line bg-card" aria-label="Studio">
+        <ul className="mx-auto grid max-w-6xl gap-6 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {trustNotes.map((item) => (
+            <li key={item.label}>
+              <p className="font-display text-lg font-bold">{item.value}</p>
+              <p className="mt-1 text-sm text-mute">{item.label}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="solutions" className="scroll-mt-20 mx-auto max-w-6xl px-5 py-20 sm:py-24">
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">What we do</p>
+        <h2 className="mt-3 max-w-xl text-3xl font-extrabold tracking-tight sm:text-4xl">Two practices. One studio.</h2>
+        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <ServiceGroup kicker="Digital growth" items={growth} />
+          <ServiceGroup kicker="Technology" items={technology} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary">Our services</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Everything you need to <span className="text-primary">build and grow online</span>
-            </h2>
+      <section id="work" className="scroll-mt-20 border-y border-line bg-card">
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary">Selected work</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Products we have shipped</h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-mute">
+                Public software from the studio. Client marketing stays private to each engagement.
+              </p>
+            </div>
+            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+              All work <ArrowRight className="size-4" aria-hidden />
+            </Link>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-mute">
-            Creativity, technology and a report you can read. One studio for the campaign and the thing it points to.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-4 lg:grid-cols-2">
-          {services.map((service) => {
-            const Icon = icons[service.id];
-            return (
-              <article key={service.id} className="flex flex-col rounded-3xl border border-line bg-card p-5 sm:p-6">
-                <div className="flex items-start gap-4">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-paper text-primary">
-                    <Icon className="size-5" aria-hidden />
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-bold">{service.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-mute">{service.blurb}</p>
-                  </div>
-                </div>
-                <div className="mt-5">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-mute">Deliverables</p>
-                  <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                    {service.deliverables.map((item) => (
-                      <li key={item} className="flex gap-2 text-sm">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-mute">
-                  <span className="font-semibold text-ink">Suitable for: </span>
-                  {service.suitable}
-                </p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                  <Button asChild>
-                    <Link
-                      to="/contact"
-                      search={{ service: service.id }}
-                      onClick={() => track("quote_click", { source: `home-${service.id}` })}
-                    >
-                      {service.cta} <ArrowRight className="size-4" aria-hidden />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="line">
-                    <Link to="/services/$service" params={{ service: service.slug }}>
-                      View service
-                    </Link>
-                  </Button>
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {projects.slice(0, 4).map((project) => (
+              <article key={project.slug} className="overflow-hidden border border-line bg-paper">
+                <Preview slug={project.slug} className="h-56 sm:h-64" />
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
+                  <h3 className="mt-2 font-display text-2xl font-bold">{project.name}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-mute">{project.summary}</p>
+                  <Link
+                    to="/portfolio/$slug"
+                    params={{ slug: project.slug }}
+                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-ink hover:text-primary"
+                  >
+                    View Case Study <ArrowUpRight className="size-4" aria-hidden />
+                  </Link>
                 </div>
               </article>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
 
-      <WhySection />
+      <section className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Why MKSAnalytIQ</p>
+        <h2 className="mt-3 max-w-lg text-3xl font-extrabold tracking-tight sm:text-4xl">
+          A technology studio that also runs the growth.
+        </h2>
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          {reasons.map((item) => (
+            <article key={item.title} className="border-t border-line pt-5">
+              <h3 className="font-display text-lg font-bold">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-mute">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="border-y border-line bg-card">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 lg:grid-cols-2">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary">About us</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Your digital <span className="text-primary">growth partner</span>
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-mute">
-              MKSAnalytIQ helps businesses build a stronger presence — marketing that can be measured, social that
-              sounds like you, events that actually fill the room, and software your team keeps after launch. The aim
-              is simple: real results, and a relationship that lasts longer than one campaign.
-            </p>
-            <Button asChild className="mt-6">
-              <Link to="/about">
-                Learn More <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </Button>
-          </div>
-          <div className="relative">
-            <img
-              src="/media/office.jpg"
-              alt="Conference room at the MKSAnalytIQ studio"
-              width={1792}
-              height={1008}
-              loading="lazy"
-              decoding="async"
-              className="h-72 w-full rounded-3xl object-cover sm:h-80"
-            />
-            <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-2xl bg-card/95 px-3 py-2 shadow-lg">
-              <img src="/media/mark.png" alt="" width={808} height={572} className="h-8 w-auto" />
-              <span className="font-display text-sm font-extrabold">
-                MKS<span className="wordmark-iq">ANALYTIQ</span>
-              </span>
+        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-24">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">Process</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">How a project moves</h2>
+          <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+            {homeSteps.map((step) => (
+              <li key={step.n}>
+                <p className="font-display text-sm font-bold text-primary">{step.n}</p>
+                <h3 className="mt-2 font-display text-lg font-bold">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-mute">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="ai" className="scroll-mt-20 bg-ink text-paper">
+        <div className="tech-grid">
+          <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 py-16 sm:py-20 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent">Capability</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight">AI & Automation</h2>
             </div>
+            <p className="text-base leading-relaxed text-paper/80 lg:col-span-8">
+              Automate workflows, connect your tools and build AI-powered experiences that make your business faster
+              and smarter.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:py-20">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Our process</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Our Process</h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
-          Whether the job is a social retainer, a one-day event or a product build, the shape stays the same.
-        </p>
-        <ProcessSteps />
-      </section>
-
-      <section className="mx-auto max-w-6xl px-5 pb-16">
-        <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary">Our work</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Projects that <span className="text-primary">make an impact</span>
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-mute">
-            Software and campaign systems published by the studio. Marketing retainers stay private to each client.
-          </p>
-        </div>
-        <div className="mt-8">
-          <ProjectBrowser />
+      <section className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
+        <p className="text-xs font-semibold uppercase tracking-widest text-primary">Next</p>
+        <h2 className="mt-4 max-w-3xl font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl">
+          Let’s build something.
+        </h2>
+        <p className="mt-5 max-w-lg text-base text-mute">Have an idea, product or business you want to take online?</p>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button asChild>
+            <Link to="/contact" onClick={() => track("quote_click", { source: "home-final" })}>
+              Start a Project <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </Button>
+          <WhatsAppButton source="home-final" variant="line">
+            WhatsApp Us
+          </WhatsAppButton>
         </div>
       </section>
 
@@ -216,5 +225,37 @@ function Home() {
 
       <Testimonials />
     </SiteShell>
+  );
+}
+
+function ServiceGroup({
+  kicker,
+  items,
+}: {
+  kicker: string;
+  items: readonly { title: string; to: "/" | "/services"; hash: string }[];
+}) {
+  return (
+    <div>
+      <h3 className="text-xs font-semibold uppercase tracking-widest text-mute">{kicker}</h3>
+      <ul className="mt-5 grid gap-3">
+        {items.map((item) => (
+          <li key={item.title}>
+            <Link
+              to={item.to}
+              hash={item.hash}
+              activeOptions={{ includeHash: true }}
+              className="group flex items-center justify-between border border-line bg-card px-4 py-4 text-base font-semibold transition-colors duration-200 hover:border-primary/50 hover:text-primary"
+            >
+              {item.title}
+              <ArrowRight
+                className="size-4 text-mute transition-transform duration-200 group-hover:translate-x-1 group-hover:text-primary"
+                aria-hidden
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

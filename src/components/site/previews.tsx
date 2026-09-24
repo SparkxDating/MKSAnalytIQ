@@ -1,6 +1,8 @@
-export function Preview({ slug }: { slug: string }) {
+import { cn } from "@/lib/cn";
+
+export function Preview({ slug, className }: { slug: string; className?: string }) {
   return (
-    <div className="relative h-44 overflow-hidden bg-navy text-paper" aria-hidden>
+    <div className={cn("relative h-44 overflow-hidden bg-navy text-paper", className)} aria-hidden>
       {slug === "shortgen" ? <ShortGen /> : null}
       {slug === "cpaas" ? <Cpaas /> : null}
       {slug === "taxpilot" ? <Tax /> : null}
