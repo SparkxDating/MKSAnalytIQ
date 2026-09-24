@@ -54,8 +54,8 @@ export function SiteShell({
         className={
           night
             ? cn(
-                "fixed inset-x-0 top-0 z-40 border-b transition-colors duration-200",
-                scrolled ? "border-white/10 bg-[#050816]/85 backdrop-blur-xl" : "border-transparent bg-transparent",
+                "fixed inset-x-0 top-0 z-40 border-b border-white/10 backdrop-blur-md transition-colors duration-200",
+                scrolled ? "bg-[#050816]/82" : "bg-[#050816]/25",
               )
             : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
         }
@@ -85,7 +85,11 @@ export function SiteShell({
             })}
           </nav>
           <div className="flex items-center gap-2">
-            <WhatsAppButton source="nav" className="hidden h-11 px-4 xl:inline-flex" />
+            <WhatsAppButton
+              source="nav"
+              variant={night ? "ghost" : "line"}
+              className="hidden h-11 px-4 xl:inline-flex"
+            />
             <Button
               asChild
               className={cn(

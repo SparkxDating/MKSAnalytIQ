@@ -120,12 +120,12 @@ const trust = [
   { icon: Sparkles, title: "Noida Based", text: "Pan India" },
 ];
 
-const floats: { title: string; icon: LucideIcon; className: string; delay: string }[] = [
-  { title: "Digital Marketing", icon: Megaphone, className: "left-[2%] top-[18%] -rotate-6", delay: "0s" },
-  { title: "Web Development", icon: Code2, className: "right-[0%] top-[8%] rotate-6", delay: "0.6s" },
-  { title: "Software Development", icon: Target, className: "right-[4%] bottom-[16%] rotate-3", delay: "1.1s" },
-  { title: "App Development", icon: Smartphone, className: "left-[6%] bottom-[18%] -rotate-3", delay: "0.4s" },
-  { title: "AI & Automation", icon: Brain, className: "left-[28%] top-[2%] -rotate-2", delay: "1.4s" },
+const floats: { title: string; icon: LucideIcon; className: string; delay: string; z: number; rotate: number }[] = [
+  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[14%]", delay: "0s", z: 36, rotate: -8 },
+  { title: "Web Development", icon: Code2, className: "right-[0%] top-[4%]", delay: "0.8s", z: 72, rotate: 8 },
+  { title: "Software Development", icon: Target, className: "right-[2%] top-[36%]", delay: "1.3s", z: 24, rotate: 4 },
+  { title: "App Development", icon: Smartphone, className: "left-[2%] bottom-[2%]", delay: "0.4s", z: 48, rotate: -4 },
+  { title: "AI & Automation", icon: Brain, className: "left-[24%] top-[0%]", delay: "1.6s", z: 96, rotate: -2 },
 ];
 
 function Home() {
@@ -134,18 +134,23 @@ function Home() {
       <JsonLd data={faqSchema(homeFaqs)} />
       <div className="relative overflow-x-clip">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute -left-24 top-10 h-80 w-80 rounded-full bg-blue-600/20 blur-3xl" />
-          <div className="absolute right-0 top-24 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl" />
-          <div className="tech-grid absolute inset-0 opacity-30" />
+          <div className="absolute left-1/2 top-16 h-[28rem] w-[28rem] -translate-x-[10%] rounded-full bg-blue-600/25 blur-3xl" />
+          <div className="absolute right-0 top-8 h-80 w-80 rounded-full bg-violet-600/25 blur-3xl" />
+          <div className="absolute bottom-10 right-1/4 h-40 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="tech-grid absolute inset-0 opacity-25" />
+          <span className="absolute left-[18%] top-24 size-1 rounded-full bg-white/50" />
+          <span className="absolute right-[22%] top-40 size-1 rounded-full bg-cyan-200/70" />
+          <span className="absolute right-[12%] top-64 size-1.5 rounded-full bg-violet-200/50" />
+          <span className="absolute left-[42%] top-[28rem] size-1 rounded-full bg-white/40" />
         </div>
 
-        <section className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-8 pt-8 sm:pt-12 lg:grid-cols-2 lg:gap-6 lg:pb-4 lg:pt-10">
+        <section className="relative mx-auto grid max-w-6xl items-center gap-8 px-5 pb-4 pt-6 sm:pt-8 lg:grid-cols-2 lg:gap-4 lg:pb-2 lg:pt-6">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/80">
-              <span className="size-1.5 rounded-full bg-cyan-300" aria-hidden />
+              <span className="size-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(103,232,249,0.8)]" aria-hidden />
               Technology + Digital Growth • Noida
             </p>
-            <h1 className="mt-6 font-display text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 font-display text-5xl font-extrabold leading-[0.92] tracking-tight sm:text-6xl lg:text-[4.6rem]">
               Build Digital.
               <span className="mt-1 block bg-gradient-to-r from-[#4d8dff] to-[#9a6bff] bg-clip-text text-transparent">
                 Grow Smarter.
@@ -171,10 +176,10 @@ function Home() {
                 Chat on WhatsApp
               </WhatsAppButton>
             </div>
-            <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <ul className="mt-7 grid grid-cols-2 gap-x-3 gap-y-3 sm:grid-cols-4">
               {trust.map((item) => (
                 <li key={item.title} className="flex items-start gap-2 text-sm">
-                  <item.icon className="mt-0.5 size-4 shrink-0 text-cyan-300" aria-hidden />
+                  <item.icon className="mt-0.5 size-4 shrink-0 text-cyan-200 drop-shadow-[0_0_8px_rgba(103,232,249,0.7)]" aria-hidden />
                   <span>
                     <span className="block font-semibold text-white">{item.title}</span>
                     <span className="text-white/55">{item.text}</span>
@@ -186,18 +191,18 @@ function Home() {
           <HeroVisual />
         </section>
 
-        <section className="relative mx-auto max-w-6xl px-5 pb-16">
-          <dl className="glass-card grid gap-px overflow-hidden rounded-3xl sm:grid-cols-2 lg:grid-cols-5">
+        <section className="relative mx-auto max-w-6xl px-5 pb-8 pt-2">
+          <dl className="stats-panel glass-card grid overflow-hidden rounded-[1.6rem] sm:grid-cols-2 lg:grid-cols-5">
             <Stat kicker="01" title="Strategy. Build. Grow." text="One team for product + growth." />
             <Stat kicker="5+" title="Core Services" text="Marketing through AI." />
-            <Stat kicker="End to End" title="Digital & Tech Solutions" text="One written scope." />
-            <Stat kicker="Noida" title="Based" text="Sector 8, the only office." />
-            <Stat kicker="Delhi NCR & India" title="Service Coverage" text="No other offices." />
+            <Stat kicker="End to End" title="Digital & Tech Solutions" text="" />
+            <Stat kicker="Noida" title="Based" text="Noida Based" />
+            <Stat kicker="Delhi NCR & India" title="Service Coverage" text="Serving Delhi NCR & India" />
           </dl>
         </section>
       </div>
 
-      <section id="solutions" className="scroll-mt-24 mx-auto max-w-6xl px-5 py-8 sm:py-14">
+      <section id="solutions" className="scroll-mt-24 mx-auto max-w-6xl px-5 py-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-cyan-200">
@@ -221,11 +226,11 @@ function Home() {
               <Link
                 to="/services/$service"
                 params={{ service: service.slug }}
-                className="svc-card glass-card group relative flex h-full min-h-64 flex-col overflow-hidden rounded-3xl p-5"
+                className="svc-card glass-card group relative flex h-full min-h-72 flex-col overflow-hidden rounded-3xl p-5"
               >
-                <span className={`pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${service.glow}`} aria-hidden />
-                <span className={`svc-icon relative grid size-12 place-items-center rounded-2xl ${service.iconBg}`}>
-                  <service.icon className="size-6" aria-hidden />
+                <span className={`pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${service.glow}`} aria-hidden />
+                <span className={`svc-icon relative grid size-14 place-items-center rounded-2xl ${service.iconBg}`}>
+                  <service.icon className="size-7" aria-hidden />
                 </span>
                 <h3 className="relative mt-8 font-display text-lg font-bold">{service.title}</h3>
                 <p className="relative mt-2 flex-1 text-sm leading-relaxed text-white/60">{service.text}</p>
@@ -245,7 +250,7 @@ function Home() {
         </p>
       </section>
 
-      <section id="work" className="scroll-mt-24 mx-auto max-w-6xl px-5 py-14">
+      <section id="work" className="scroll-mt-24 mx-auto max-w-6xl px-5 py-10">
         <div className="grid items-center gap-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-cyan-200">
@@ -267,9 +272,15 @@ function Home() {
           <ul className="flex gap-4 overflow-x-auto pb-2 lg:col-span-8 lg:grid lg:grid-cols-3 lg:overflow-visible">
             {featured.map((project) => (
               <li key={project.slug} className="w-[78%] shrink-0 sm:w-[46%] lg:w-auto">
-                <article className="glass-card overflow-hidden rounded-3xl">
+                <article className="work-card glass-card group overflow-hidden rounded-3xl">
                   <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="block">
-                    <Preview slug={project.slug} loading="lazy" className="h-44 sm:h-48" />
+                    <div className="relative">
+                      <Preview slug={project.slug} loading="lazy" className="h-52 sm:h-56" />
+                      <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur">
+                        <ArrowRight className="size-4" aria-hidden />
+                        <span className="sr-only">View {project.name}</span>
+                      </span>
+                    </div>
                     <div className="p-4">
                       <h3 className="font-display text-lg font-bold">{project.name}</h3>
                       <p className="mt-1 text-xs text-white/55">{project.kind}</p>
@@ -286,7 +297,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-14">
+      <section className="mx-auto max-w-6xl px-5 py-10">
         <div className="grid items-start gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-cyan-200">
@@ -304,11 +315,14 @@ function Home() {
           </div>
           <ol className="grid gap-6 lg:col-span-8 lg:grid-cols-5">
             {homeSteps.map((step, index) => (
-              <li key={step.n} className="relative">
+              <li key={step.n} className="relative border-l border-cyan-300/25 pl-4 lg:border-0 lg:pl-0">
                 {index < homeSteps.length - 1 ? (
-                  <span className="absolute left-8 top-5 hidden h-px w-[calc(100%-1rem)] bg-white/15 lg:block" aria-hidden />
+                  <span
+                    className="absolute left-10 top-6 hidden h-px w-[calc(100%-1.25rem)] bg-gradient-to-r from-cyan-300/80 to-transparent shadow-[0_0_8px_rgba(103,232,249,0.6)] lg:block"
+                    aria-hidden
+                  />
                 ) : null}
-                <span className="relative grid size-10 place-items-center rounded-2xl border border-white/10 bg-white/5 text-cyan-200">
+                <span className="relative grid size-12 place-items-center rounded-2xl border border-cyan-200/30 bg-cyan-400/10 text-cyan-100 shadow-[0_0_22px_rgba(80,180,255,0.28)]">
                   <step.icon className="size-4" aria-hidden />
                 </span>
                 <p className="mt-3 text-xs font-semibold text-white/45">{step.n}</p>
@@ -336,31 +350,34 @@ function Home() {
           </div>
           <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:col-span-8">
             {technologies.map((name) => (
-              <li key={name} className="glass-card flex h-24 flex-col items-center justify-center rounded-2xl text-center">
-                <span className="font-display text-sm font-bold text-white">{name}</span>
+              <li key={name} className="glass-card flex h-24 flex-col items-center justify-center gap-2 rounded-2xl text-center">
+                <TechMark name={name} />
+                <span className="font-display text-xs font-bold text-white">{name}</span>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-10">
-        <div className="glass-card relative overflow-hidden rounded-[2rem] px-5 py-10 sm:px-10 lg:py-14">
-          <div className="pointer-events-none absolute -left-8 bottom-0 hidden h-48 w-48 lg:block" aria-hidden>
-            <div className="absolute left-6 top-8 h-28 w-28 rotate-12 rounded-3xl bg-gradient-to-br from-cyan-300/70 to-blue-700/30 blur-[1px]" />
-            <div className="absolute left-16 top-2 h-20 w-20 -rotate-6 rounded-2xl bg-gradient-to-br from-violet-400/70 to-blue-900/40" />
+      <section className="mx-auto max-w-6xl px-5 py-8">
+        <div className="glass-card relative overflow-hidden rounded-[2rem] border-white/15 px-5 py-8 shadow-[0_0_60px_rgba(60,100,255,0.12)] sm:px-10">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-blue-600/10 via-transparent to-violet-600/15" aria-hidden />
+          <div className="pointer-events-none absolute -left-4 bottom-0 hidden h-56 w-56 lg:block" aria-hidden>
+            <div className="absolute left-8 top-16 h-28 w-24 rotate-12 rounded-3xl bg-gradient-to-br from-cyan-200/80 to-blue-700/20 shadow-[0_20px_40px_rgba(40,80,200,0.35)]" />
+            <div className="absolute left-20 top-6 h-24 w-20 -rotate-12 rounded-2xl bg-gradient-to-br from-violet-300/70 to-blue-950/50" />
+            <div className="absolute left-4 top-6 h-16 w-16 rotate-45 rounded-xl bg-gradient-to-br from-white/30 to-cyan-500/10" />
           </div>
           <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-            <div className="max-w-2xl lg:pl-36">
+            <div className="max-w-2xl lg:pl-40">
               <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Let’s Build Something Great</h2>
-              <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
+              <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
                 Ready to grow your business with digital marketing, web development, software, apps or AI? Let’s discuss
                 your project.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button
                   asChild
-                  className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_28px_rgba(70,110,255,0.35)] hover:brightness-110"
+                  className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_28px_rgba(70,110,255,0.4)] hover:brightness-110"
                 >
                   <Link to="/contact" onClick={() => track("quote_click", { source: "home-final" })}>
                     Book Free Consultation <ArrowRight className="size-4" aria-hidden />
@@ -372,15 +389,17 @@ function Home() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <p className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm leading-relaxed text-white/80">
+              <p className="rounded-2xl border border-white/10 bg-[#07111f]/70 px-4 py-3 text-sm leading-relaxed text-white/80 backdrop-blur">
                 <span className="block font-semibold text-white">Based in Noida</span>
                 Serving Delhi NCR and India
               </p>
-              <div className="globe relative grid size-28 shrink-0 place-items-center overflow-hidden rounded-full sm:size-36" aria-hidden>
-                <div className="globe-spin absolute inset-3 rounded-full border border-cyan-200/30" />
-                <div className="absolute inset-6 rounded-full border border-white/20" />
-                <div className="absolute h-px w-full bg-white/25" />
-                <div className="absolute h-full w-px bg-white/20" />
+              <div className="globe relative size-24 shrink-0 overflow-hidden rounded-full sm:size-36" aria-hidden>
+                <div className="globe-spin absolute inset-0">
+                  <div className="absolute left-1/2 top-2 h-[92%] w-10 -translate-x-1/2 rounded-full border border-white/25" />
+                  <div className="absolute left-2 top-1/2 h-10 w-[92%] -translate-y-1/2 rounded-full border border-white/20" />
+                  <div className="absolute inset-5 rounded-full border border-cyan-100/25" />
+                </div>
+                <div className="absolute inset-x-3 top-1/2 h-px bg-white/30" />
               </div>
             </div>
           </div>
@@ -397,38 +416,65 @@ function Home() {
 
 function Stat({ kicker, title, text }: { kicker: string; title: string; text: string }) {
   return (
-    <div className="bg-white/[0.02] px-5 py-6 sm:border-l sm:border-white/10 first:sm:border-l-0">
-      <dt className="font-display text-2xl font-extrabold text-white">{kicker}</dt>
+    <div className="border-white/10 px-5 py-5 sm:border-l sm:first:border-l-0">
+      <dt className="font-display text-2xl font-extrabold tracking-tight text-white">{kicker}</dt>
       <dd className="mt-1 text-sm font-semibold text-white/90">{title}</dd>
-      <dd className="mt-1 text-xs leading-relaxed text-white/50">{text}</dd>
+      {text ? <dd className="mt-1 text-xs leading-relaxed text-white/50">{text}</dd> : null}
     </div>
+  );
+}
+
+function TechMark({ name }: { name: string }) {
+  const marks: Record<string, string> = {
+    "Next.js": "N",
+    TypeScript: "TS",
+    Python: "Py",
+    NestJS: "Ne",
+    PostgreSQL: "Pg",
+    Prisma: "Pr",
+    Expo: "Ex",
+    Supabase: "Sb",
+    Swift: "Sw",
+    Kotlin: "Kt",
+    JavaScript: "JS",
+  };
+  return (
+    <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-white/15 to-white/5 font-display text-xs font-extrabold text-cyan-100 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
+      {marks[name] ?? name.slice(0, 2)}
+    </span>
   );
 }
 
 function HeroVisual() {
   return (
-    <div className="home-stage relative mx-auto h-[420px] w-full max-w-xl sm:h-[480px]" aria-hidden>
-      <div className="absolute inset-x-10 bottom-6 h-40 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute bottom-10 left-1/2 h-36 w-36 -translate-x-1/2 rounded-full border border-cyan-300/30" />
-      <div className="absolute bottom-6 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full border border-blue-400/20" />
-      <div className="laptop absolute bottom-16 left-1/2 w-64 -translate-x-1/2 sm:w-72">
-        <div className="rounded-t-2xl border border-cyan-200/30 bg-[#07111f] p-2 shadow-[0_30px_80px_rgba(20,60,180,0.35)]">
-          <div className="flex h-36 flex-col items-center justify-center rounded-xl bg-gradient-to-b from-[#12306e] to-[#070d1c] sm:h-40">
-            <span className="font-display text-5xl font-extrabold text-cyan-100">A</span>
-            <span className="mt-1 text-xs font-semibold tracking-[0.2em] text-white">MKSANALYTIQ</span>
-            <span className="mt-1 text-[10px] text-white/50">Ideas. Technology. Growth.</span>
+    <div className="home-stage relative mx-auto h-[440px] w-full max-w-xl sm:h-[520px] lg:h-[560px] lg:max-w-none" aria-hidden>
+      <div className="absolute bottom-8 left-1/2 h-48 w-[80%] -translate-x-1/2 rounded-full bg-blue-500/30 blur-3xl" />
+      <div className="absolute bottom-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full border border-cyan-300/40 shadow-[0_0_30px_rgba(80,200,255,0.25)]" />
+      <div className="absolute bottom-8 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full border border-blue-400/20" />
+      <div className="laptop absolute bottom-14 left-1/2 w-[78%] max-w-[26rem] -translate-x-1/2">
+        <div className="rounded-t-[1.4rem] border border-cyan-200/40 bg-gradient-to-b from-slate-500/80 to-[#0b1220] p-[7px] shadow-[0_40px_90px_rgba(20,60,180,0.45)]">
+          <div className="laptop-screen flex h-44 flex-col items-center justify-center rounded-xl sm:h-52">
+            <span className="font-display text-6xl font-extrabold leading-none text-cyan-50 drop-shadow-[0_0_18px_rgba(140,190,255,0.7)]">
+              A
+            </span>
+            <span className="mt-2 text-xs font-semibold tracking-[0.22em] text-white">MKSANALYTIQ</span>
+            <span className="mt-1 text-[10px] text-white/60">Ideas. Technology. Growth.</span>
           </div>
         </div>
-        <div className="mx-auto h-3 w-[108%] -translate-x-[4%] rounded-b-xl bg-gradient-to-b from-slate-300/70 to-slate-700/80" />
-        <div className="mx-auto h-2 w-24 rounded-b-md bg-slate-500/70" />
+        <div className="relative mx-auto h-3.5 w-[112%] -translate-x-[5%] rounded-b-2xl bg-gradient-to-b from-slate-200/80 via-slate-500 to-slate-900 shadow-[0_16px_30px_rgba(0,0,0,0.45)]">
+          <span className="absolute left-1/2 top-1 h-1 w-16 -translate-x-1/2 rounded-full bg-slate-900/50" />
+        </div>
+        <div className="mx-auto h-2 w-28 rounded-b-md bg-slate-700/80" />
       </div>
       {floats.map((card) => (
         <div
           key={card.title}
-          className={`float-card glass-card absolute hidden w-36 rounded-2xl p-3 sm:block ${card.className}`}
-          style={{ animationDelay: card.delay }}
+          className={`float-card absolute hidden w-40 rounded-2xl p-3 sm:block ${card.className}`}
+          style={{ transform: `translateZ(${card.z}px) rotate(${card.rotate}deg)`, animationDelay: card.delay }}
         >
-          <card.icon className="size-4 text-cyan-200" />
+          <span className="grid size-8 place-items-center rounded-lg bg-cyan-300/15 text-cyan-100 shadow-[0_0_16px_rgba(80,170,255,0.35)]">
+            <card.icon className="size-4" />
+          </span>
           <p className="mt-2 text-xs font-semibold leading-snug text-white">{card.title}</p>
         </div>
       ))}
