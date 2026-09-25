@@ -72,6 +72,7 @@ export const nav = [
 export const footerCompany = [
   { to: "/about", label: "About" },
   { to: "/portfolio", label: "Work" },
+  { to: "/case-studies", label: "Case Studies" },
   { to: "/process", label: "Process" },
   { to: "/digital-marketing-software-delhi-ncr", label: "Delhi NCR" },
   { to: "/seo-services-noida", label: "SEO in Noida" },

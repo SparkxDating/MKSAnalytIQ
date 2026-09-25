@@ -23,6 +23,8 @@ import { Route as StudioRouteImport } from './routes/studio'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ApiLeadsRouteImport } from './routes/api/leads'
+import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies/index'
+import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies/$slug'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio/$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services/index'
@@ -105,6 +107,16 @@ const ApiLeadsRoute = ApiLeadsRouteImport.update({
   path: '/api/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
+  id: '/case-studies/',
+  path: '/case-studies/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
+  id: '/case-studies/$slug',
+  path: '/case-studies/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
   id: '/portfolio/',
   path: '/portfolio/',
@@ -171,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/leads': typeof ApiLeadsRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/services/ads': typeof ServicesAdsRoute
@@ -178,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/services/seo': typeof ServicesSeoRoute
   '/services/social': typeof ServicesSocialRoute
   '/services/software': typeof ServicesSoftwareRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -197,6 +211,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/leads': typeof ApiLeadsRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/services/ads': typeof ServicesAdsRoute
@@ -204,6 +219,7 @@ export interface FileRoutesByTo {
   '/services/seo': typeof ServicesSeoRoute
   '/services/social': typeof ServicesSocialRoute
   '/services/software': typeof ServicesSoftwareRoute
+  '/case-studies': typeof CaseStudiesIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
   '/services': typeof ServicesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -224,6 +240,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/work': typeof WorkRoute
   '/api/leads': typeof ApiLeadsRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/services/$service': typeof ServicesServiceRoute
   '/services/ads': typeof ServicesAdsRoute
@@ -231,6 +248,7 @@ export interface FileRoutesById {
   '/services/seo': typeof ServicesSeoRoute
   '/services/social': typeof ServicesSocialRoute
   '/services/software': typeof ServicesSoftwareRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
   '/services/': typeof ServicesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -252,6 +270,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/work'
     | '/api/leads'
+    | '/case-studies/$slug'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/services/ads'
@@ -259,6 +278,7 @@ export interface FileRouteTypes {
     | '/services/seo'
     | '/services/social'
     | '/services/software'
+    | '/case-studies/'
     | '/portfolio/'
     | '/services/'
     | '/api/auth/$'
@@ -278,6 +298,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/work'
     | '/api/leads'
+    | '/case-studies/$slug'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/services/ads'
@@ -285,6 +306,7 @@ export interface FileRouteTypes {
     | '/services/seo'
     | '/services/social'
     | '/services/software'
+    | '/case-studies'
     | '/portfolio'
     | '/services'
     | '/api/auth/$'
@@ -304,6 +326,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/work'
     | '/api/leads'
+    | '/case-studies/$slug'
     | '/portfolio/$slug'
     | '/services/$service'
     | '/services/ads'
@@ -311,6 +334,7 @@ export interface FileRouteTypes {
     | '/services/seo'
     | '/services/social'
     | '/services/software'
+    | '/case-studies/'
     | '/portfolio/'
     | '/services/'
     | '/api/auth/$'
@@ -331,6 +355,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   WorkRoute: typeof WorkRoute
   ApiLeadsRoute: typeof ApiLeadsRoute
+  CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   PortfolioSlugRoute: typeof PortfolioSlugRoute
   ServicesServiceRoute: typeof ServicesServiceRoute
   ServicesAdsRoute: typeof ServicesAdsRoute
@@ -338,6 +363,7 @@ export interface RootRouteChildren {
   ServicesSeoRoute: typeof ServicesSeoRoute
   ServicesSocialRoute: typeof ServicesSocialRoute
   ServicesSoftwareRoute: typeof ServicesSoftwareRoute
+  CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
   PortfolioIndexRoute: typeof PortfolioIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -443,6 +469,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/': {
+      id: '/case-studies/'
+      path: '/case-studies'
+      fullPath: '/case-studies/'
+      preLoaderRoute: typeof CaseStudiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies/$slug': {
+      id: '/case-studies/$slug'
+      path: '/case-studies/$slug'
+      fullPath: '/case-studies/$slug'
+      preLoaderRoute: typeof CaseStudiesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio/': {
       id: '/portfolio/'
       path: '/portfolio'
@@ -531,6 +571,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   WorkRoute: WorkRoute,
   ApiLeadsRoute: ApiLeadsRoute,
+  CaseStudiesSlugRoute: CaseStudiesSlugRoute,
   PortfolioSlugRoute: PortfolioSlugRoute,
   ServicesServiceRoute: ServicesServiceRoute,
   ServicesAdsRoute: ServicesAdsRoute,
@@ -538,6 +579,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesSeoRoute: ServicesSeoRoute,
   ServicesSocialRoute: ServicesSocialRoute,
   ServicesSoftwareRoute: ServicesSoftwareRoute,
+  CaseStudiesIndexRoute: CaseStudiesIndexRoute,
   PortfolioIndexRoute: PortfolioIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,

@@ -112,6 +112,22 @@ No revenue, user, or ranking figures are published with these projects.
 
 ---
 
+## Case studies
+
+Case studies are generated from the public project list. There is no second dataset and no CMS.
+
+- **Data:** `src/lib/content.ts` holds each project (`slug`, `name`, `summary`, `kind`, `features`, `stack`, optional `serviceSlugs`, `objective`, `approach`, `builtFor`, `github`, `live`). `src/lib/case-studies.ts` maps that list into case-study records. A new object in `projects` appears on `/case-studies` and `/case-studies/{slug}` without a new page component.
+- **Images:** add `public/media/work/{slug}.jpg` (the existing shots are 1280×720). That file is the hero. There is no extra gallery in the repo, so the page does not invent one.
+- **Routing:** `src/routes/case-studies/index.tsx` is `/case-studies`. `src/routes/case-studies/$slug.tsx` is `/case-studies/{slug}`. Unknown slugs 404. `/portfolio/{slug}` stays as the project page.
+- **SEO:** title `{Project Name} Case Study | MKSANALYTIQ`, a unique description, canonical `https://www.mksanalytiq.in/case-studies/{slug}`, Open Graph and Twitter tags, and the project image as the social image. JSON-LD is a `CreativeWork` plus a `BreadcrumbList`. No reviews or ratings. `*.vercel.app` URLs stay on the visible live-demo link and are left out of `sameAs`.
+- **Sitemap:** add `https://www.mksanalytiq.in/case-studies` and `https://www.mksanalytiq.in/case-studies/{slug}` to `public/sitemap.xml`. The route is automatic. The sitemap line is manual.
+
+Do not add an industry, a challenge, process stages, dates, a client name, or a result that is not already on the project. Leave `builtFor` empty for studio products. Outcome copy states what was delivered and says no user, revenue, or ranking figure is on file.
+
+The footer links to Case Studies. The primary nav does not, so the bar stays at six items.
+
+---
+
 ## Development
 
 ```bash
@@ -128,9 +144,10 @@ npm run build
 ## Project Structure
 
 ```
-src/routes/          Public pages, including the homepage, services, portfolio, contact, and legal routes
+src/routes/          Public pages, including the homepage, services, portfolio, case studies, contact, and legal routes
 src/components/site/ Shared marketing components
 src/lib/content.ts   Service, project, and company copy
+src/lib/case-studies.ts  Case studies derived from the project list
 src/lib/seo.ts       Canonical URLs, Open Graph, and JSON-LD helpers
 src/styles.css       Global styles
 public/sitemap.xml   Sitemap
@@ -170,7 +187,7 @@ No Google Analytics, Tag Manager, or Meta Pixel ID is stored in the repository. 
 - `VITE_GTM_ID` — a container id matching `GTM-XXXX`. Loaded from `src/routes/__root.tsx`.
 - `VITE_META_PIXEL_ID` — a numeric Meta Pixel id, same file.
 
-Until one of those is set, `track()` in `src/lib/analytics.ts` dispatches an `mks-analytics` event and does not call a third-party script. Consultation clicks also forward `consultation_click`. Phone links forward `phone_click`. Email links send `email_click`. Service-page enquiry buttons send `service_cta_click`. Service pages also forward `service_page_view`. Portfolio links send `portfolio_project_click`. The contact form sends `contact_form_start` and `contact_form_submit`. WhatsApp links send `whatsapp_click`. Do not commit a measurement id.
+Until one of those is set, `track()` in `src/lib/analytics.ts` dispatches an `mks-analytics` event and does not call a third-party script. Consultation clicks also forward `consultation_click`. Phone links forward `phone_click`. Email links send `email_click`. Service-page enquiry buttons send `service_cta_click`. Service pages also forward `service_page_view`. Portfolio links send `portfolio_project_click`. Case study pages send `case_study_view`. The contact form sends `contact_form_start` and `contact_form_submit`. WhatsApp links send `whatsapp_click`. Do not commit a measurement id.
 
 Search Console ownership is not verified from this repository. After deploy, submit `https://www.mksanalytiq.in/sitemap.xml`. `public/robots.txt` already points at that sitemap.
 

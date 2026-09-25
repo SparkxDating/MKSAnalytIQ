@@ -231,6 +231,13 @@ export function ServiceDetail({ service }: { service: Service }) {
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
         <h2 className="text-3xl font-extrabold tracking-tight">{service.workTitle ?? "Relevant work"}</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+          Documented scope for this work is also on the{" "}
+          <Link to="/case-studies" className="font-semibold text-primary hover:text-ink">
+            case studies
+          </Link>{" "}
+          page. Those pages do not add traffic or revenue figures.
+        </p>
         {related.length ? (
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {related.map((project) => (

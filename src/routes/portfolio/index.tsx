@@ -61,6 +61,13 @@ function Portfolio() {
           <a className="mt-4 inline-block text-sm font-semibold text-primary" href={company.github}>
             All repositories
           </a>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute">
+            The same projects are written up as{" "}
+            <Link to="/case-studies" className="font-semibold text-primary">
+              case studies
+            </Link>
+            , still without invented results.
+          </p>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-5 py-12">

@@ -328,6 +328,12 @@ function Home() {
             <p className="mt-4 text-sm leading-relaxed text-[#4c5d78]">
               Explore selected products and digital platforms built by MKSANALYTIQ.
             </p>
+            <p className="mt-3 text-sm leading-relaxed text-[#4c5d78]">
+              <Link to="/case-studies" className="font-semibold text-primary">
+                Read the case studies
+              </Link>{" "}
+              for the documented scope of each project.
+            </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild className="border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white hover:brightness-110">
                 <Link to="/portfolio">

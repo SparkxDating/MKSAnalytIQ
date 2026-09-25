@@ -86,13 +86,15 @@ export function pageMeta({
   title,
   description,
   path,
+  image,
 }: {
   title: string;
   description: string;
   path: string;
+  image?: string;
 }) {
   const url = absoluteUrl(path);
-  const image = absoluteUrl(site.ogImage);
+  const imageUrl = absoluteUrl(image ?? site.ogImage);
   return {
     meta: [
       { title },
@@ -101,13 +103,13 @@ export function pageMeta({
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { property: "og:url", content: url },
-      { property: "og:image", content: image },
+      { property: "og:image", content: imageUrl },
       { property: "og:locale", content: site.locale },
       { property: "og:site_name", content: company.name },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
-      { name: "twitter:image", content: image },
+      { name: "twitter:image", content: imageUrl },
     ],
     links: [{ rel: "canonical", href: url }],
   };

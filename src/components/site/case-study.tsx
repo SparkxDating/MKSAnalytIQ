@@ -95,6 +95,15 @@ export function CaseStudy({ project }: { project: Project }) {
           <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">{project.name}</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">{project.summary}</p>
+          <p className="mt-4">
+            <Link
+              to="/case-studies/$slug"
+              params={{ slug: project.slug }}
+              className="text-sm font-semibold text-primary hover:text-ink"
+            >
+              Read the case study
+            </Link>
+          </p>
         </div>
       </section>
 
