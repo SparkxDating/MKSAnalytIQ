@@ -170,7 +170,7 @@ No Google Analytics, Tag Manager, or Meta Pixel ID is stored in the repository. 
 - `VITE_GTM_ID` — a container id matching `GTM-XXXX`. Loaded from `src/routes/__root.tsx`.
 - `VITE_META_PIXEL_ID` — a numeric Meta Pixel id, same file.
 
-Until one of those is set, `track()` in `src/lib/analytics.ts` dispatches an `mks-analytics` event and does not call a third-party script. Consultation clicks also forward `consultation_click`. Service pages also forward `service_page_view`. Portfolio links send `portfolio_project_click`. The contact form sends `contact_form_start` and `contact_form_submit`. WhatsApp links send `whatsapp_click`. Do not commit a measurement id.
+Until one of those is set, `track()` in `src/lib/analytics.ts` dispatches an `mks-analytics` event and does not call a third-party script. Consultation clicks also forward `consultation_click`. Phone links forward `phone_click`. Email links send `email_click`. Service-page enquiry buttons send `service_cta_click`. Service pages also forward `service_page_view`. Portfolio links send `portfolio_project_click`. The contact form sends `contact_form_start` and `contact_form_submit`. WhatsApp links send `whatsapp_click`. Do not commit a measurement id.
 
 Search Console ownership is not verified from this repository. After deploy, submit `https://www.mksanalytiq.in/sitemap.xml`. `public/robots.txt` already points at that sitemap.
 

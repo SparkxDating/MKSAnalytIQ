@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { track } from "@/lib/analytics";
 import { company, site } from "@/lib/content";
 import { SiteShell } from "./shell";
 
@@ -25,11 +26,19 @@ export function LegalLayout({
           <br />
           {company.addressOneLine}
           <br />
-          <a className="font-semibold text-primary" href={`mailto:${company.email}`}>
+          <a
+            className="font-semibold text-primary"
+            href={`mailto:${company.email}`}
+            onClick={() => track("email_click", { source: "legal" })}
+          >
             {company.email}
           </a>
           <br />
-          <a className="font-semibold text-primary" href={`tel:${company.phoneTel}`}>
+          <a
+            className="font-semibold text-primary"
+            href={`tel:${company.phoneTel}`}
+            onClick={() => track("call_click", { source: "legal" })}
+          >
             {company.phoneDisplay}
           </a>
         </p>

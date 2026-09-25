@@ -40,6 +40,7 @@ const schema = z.object({
   service: z.string().min(1, "Pick a service."),
   budget: z.union([z.enum(budgetOptions), z.literal("")]),
   timeline: z.union([z.enum(timelineOptions), z.literal("")]),
+  preferred: z.enum(["whatsapp", "email", "phone"], { message: "Choose how you prefer we reply." }),
   message: z.string().trim().min(12, "A sentence or two is enough — at least 12 characters."),
 }).superRefine((data, context) => {
   if (!data.phone && !data.email) {
@@ -61,6 +62,12 @@ function enquiryServiceLabel(id: string) {
   if (id === "ai") return "AI Development & Automation";
   return services.find((item) => item.id === id)?.title ?? id;
 }
+
+const preferredLabels = {
+  whatsapp: "WhatsApp",
+  email: "Email",
+  phone: "Phone call",
+} as const;
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>): { service?: string } => {
@@ -95,6 +102,7 @@ function Contact() {
 
   function openComposer(data: Fields, channel: "email" | "whatsapp") {
     const serviceLabel = enquiryServiceLabel(data.service);
+    const preferred = preferredLabels[data.preferred];
     const body = [
       `Name: ${data.name}`,
       `Company: ${data.company || "—"}`,
@@ -104,6 +112,7 @@ function Contact() {
       `Service: ${serviceLabel}`,
       `Budget: ${data.budget || "Not specified"}`,
       `Timeline: ${data.timeline || "Not specified"}`,
+      `Preferred contact: ${preferred}`,
       "",
       data.message,
     ].join("\n");
@@ -120,9 +129,15 @@ function Contact() {
     const submitter = (event.nativeEvent as SubmitEvent).submitter;
     const channel = submitter instanceof HTMLButtonElement && submitter.value === "email" ? "email" : "whatsapp";
     const data = Object.fromEntries(new FormData(event.currentTarget));
+    if (typeof data.fax === "string" && data.fax.trim().length > 0) {
+      setErrors({});
+      setStatus("opened");
+      return;
+    }
     const parsed = schema.safeParse({
       ...data,
       website: typeof data.website === "string" ? data.website : "",
+      preferred: typeof data.preferred === "string" ? data.preferred : "",
     });
     if (!parsed.success) {
       const next: Partial<Record<FieldName, string>> = {};
@@ -154,8 +169,10 @@ function Contact() {
       service: parsed.data.service,
       budget: parsed.data.budget || "not_specified",
       timeline: parsed.data.timeline || "not_specified",
+      preferred: parsed.data.preferred,
       delivery_channel: channel,
     });
+    if (channel === "email") track("email_click", { source: "contact-form" });
     openComposer(parsed.data, channel);
     window.setTimeout(() => setBusy(false), 2000);
   }
@@ -178,8 +195,9 @@ function Contact() {
         <form
           onSubmit={onSubmit}
           onFocus={onStart}
-          className="space-y-4 rounded-3xl border border-line bg-card p-5 sm:p-6 lg:col-span-3"
+          className="relative space-y-4 rounded-3xl border border-line bg-card p-5 sm:p-6 lg:col-span-3"
           noValidate
+          aria-busy={busy}
         >
           {status === "invalid" ? (
             <p className="rounded-2xl bg-paper p-4 text-sm text-ink" role="alert">
@@ -187,12 +205,18 @@ function Contact() {
             </p>
           ) : null}
           <p className="text-sm leading-relaxed text-mute">
-            Required: name, service, message, and either a mobile number or email. Business details, budget and timing
-            are optional.
+            Required: name, service, project description, how you prefer we reply, and either a mobile number or email.
+            Business, website, budget and timing are optional. This page does not store the brief.
           </p>
+          <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+            <label>
+              Fax
+              <input name="fax" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field id="name" label="Name" name="name" error={errors.name} autoComplete="name" required />
-            <Field id="company" label="Company / business (optional)" name="company" error={errors.company} autoComplete="organization" />
+            <Field id="company" label="Business / company (optional)" name="company" error={errors.company} autoComplete="organization" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field
@@ -242,6 +266,11 @@ function Contact() {
               ))}
             </Select>
           </div>
+          <Select id="preferred" label="Preferred contact method" name="preferred" error={errors.preferred} defaultValue="whatsapp" required>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone call</option>
+          </Select>
           <label className="block text-sm font-semibold" htmlFor="message">
             Project description <span className="text-primary">*</span>
             <textarea
@@ -262,16 +291,16 @@ function Contact() {
           </label>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button type="submit" name="channel" value="whatsapp" disabled={busy} className="flex-1">
-              Continue in WhatsApp
+              {busy ? "Opening…" : "Continue in WhatsApp"}
             </Button>
             <Button type="submit" name="channel" value="email" variant="line" disabled={busy} className="flex-1">
-              Prepare email
+              {busy ? "Opening…" : "Prepare email"}
             </Button>
           </div>
           {status === "opened" ? (
             <p className="rounded-2xl bg-paper p-4 text-sm leading-relaxed text-ink" role="status">
-              Your chosen app should open with the brief. Review the details there before sending. We don’t store the
-              form on this website.
+              Your email or WhatsApp app should open with this brief. Review it there before you send. This website does
+              not store the form. If nothing opened, use the button below.
             </p>
           ) : null}
           {status === "duplicate" ? (

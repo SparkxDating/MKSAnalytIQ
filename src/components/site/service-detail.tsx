@@ -108,7 +108,10 @@ export function ServiceDetail({ service }: { service: Service }) {
                 <Link
                   to="/contact"
                   search={{ service: service.id }}
-                  onClick={() => track("quote_click", { source: service.slug })}
+                  onClick={() => {
+                    track("quote_click", { source: service.slug });
+                    track("service_cta_click", { service: service.slug, place: "hero" });
+                  }}
                 >
                   {heroConsultationLabel(service)} <ArrowRight className="size-4" aria-hidden />
                 </Link>
@@ -250,7 +253,14 @@ export function ServiceDetail({ service }: { service: Service }) {
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
-            <Link to="/contact" search={{ service: service.id }} onClick={() => track("quote_click", { source: `${service.slug}-end` })}>
+            <Link
+              to="/contact"
+              search={{ service: service.id }}
+              onClick={() => {
+                track("quote_click", { source: `${service.slug}-end` });
+                track("service_cta_click", { service: service.slug, place: "end" });
+              }}
+            >
               {service.closingCta ?? service.cta} <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>

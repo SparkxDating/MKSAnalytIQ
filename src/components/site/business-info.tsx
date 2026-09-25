@@ -42,7 +42,11 @@ export function BusinessInfo({ source }: { source: string }) {
           <div>
             <dt className="text-xs font-semibold uppercase tracking-widest text-mute">Email</dt>
             <dd className="mt-1">
-              <a className="font-semibold hover:text-primary" href={`mailto:${company.email}`}>
+              <a
+                className="font-semibold hover:text-primary"
+                href={`mailto:${company.email}`}
+                onClick={() => track("email_click", { source })}
+              >
                 {company.email}
               </a>
             </dd>

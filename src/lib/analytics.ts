@@ -3,10 +3,13 @@ export const analyticsEvents = [
   "hero_cta_click",
   "whatsapp_click",
   "call_click",
+  "phone_click",
+  "email_click",
   "quote_click",
   "consultation_click",
   "service_view",
   "service_page_view",
+  "service_cta_click",
   "case_study_view",
   "portfolio_project_click",
   "contact_form_start",
@@ -46,6 +49,7 @@ export function track(name: AnalyticsEventName, props: AnalyticsProps = {}) {
     forward("cta_click", clean);
     forward("consultation_click", clean);
   }
+  if (name === "call_click") forward("phone_click", clean);
   if (name === "service_view") forward("service_page_view", clean);
 }
 

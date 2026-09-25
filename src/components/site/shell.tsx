@@ -227,7 +227,11 @@ export function SiteShell({
                 </a>
               </li>
               <li>
-                <a className="hover:text-accent" href={`mailto:${company.email}`}>
+                <a
+                  className="hover:text-accent"
+                  href={`mailto:${company.email}`}
+                  onClick={() => track("email_click", { source: "footer" })}
+                >
                   {company.email}
                 </a>
               </li>

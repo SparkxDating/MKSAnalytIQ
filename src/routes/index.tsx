@@ -209,11 +209,11 @@ function Home() {
                 className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
               >
                 <Link to="/contact" onClick={() => track("hero_cta_click", { source: "hero" })}>
-                Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                Get a Free Consultation <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
               <WhatsAppButton source="hero" variant="line">
-                Chat on WhatsApp
+                WhatsApp Us
               </WhatsAppButton>
             </div>
             <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
@@ -300,11 +300,11 @@ function Home() {
             className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
           >
             <Link to="/contact" onClick={() => track("quote_click", { source: "home-services" })}>
-              Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+              Get a Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>
           <WhatsAppButton source="home-services" variant="line">
-            Chat on WhatsApp
+            WhatsApp Us
           </WhatsAppButton>
         </div>
         <p className="mt-6 text-sm text-[#5c6b80]">
@@ -339,11 +339,11 @@ function Home() {
                 className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
               >
                 <Link to="/contact" onClick={() => track("quote_click", { source: "home-work" })}>
-                  Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                  Get a Free Consultation <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
               <WhatsAppButton source="home-work" variant="line">
-                Chat on WhatsApp
+                WhatsApp Us
               </WhatsAppButton>
             </div>
           </div>
@@ -509,11 +509,11 @@ function Home() {
                   className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
                 >
                   <Link to="/contact" onClick={() => track("quote_click", { source: "home-final" })}>
-                    Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                    Get a Free Consultation <ArrowRight className="size-4" aria-hidden />
                   </Link>
                 </Button>
                 <WhatsAppButton source="home-final" variant="line">
-                  Chat on WhatsApp
+                  WhatsApp Us
                 </WhatsAppButton>
               </div>
             </div>

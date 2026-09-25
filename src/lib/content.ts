@@ -47,8 +47,8 @@ export const hero = {
   title: "Build Digital. Grow Smarter.",
   lede: "MKSAnalytIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
   trust: "Based in Noida • Serving Delhi NCR and India",
-  primaryCta: "Book Free Consultation",
-  secondaryCta: "Chat on WhatsApp",
+  primaryCta: "Get a Free Consultation",
+  secondaryCta: "WhatsApp Us",
 } as const;
 
 export const finalCta = {
