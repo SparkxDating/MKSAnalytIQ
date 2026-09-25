@@ -321,7 +321,19 @@ function ServiceBridges({ slug }: { slug: string }) {
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
         The admin side, API and shared backend are usually{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          custom software development
+          software development
+        </Link>
+        . A public site beside the app is{" "}
+        <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
+          web development
+        </Link>
+        . A reviewed AI feature inside the app is{" "}
+        <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
+          AI development
+        </Link>
+        . Marketing the app after launch is{" "}
+        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+          digital marketing
         </Link>
         .
       </p>

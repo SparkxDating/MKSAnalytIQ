@@ -432,19 +432,29 @@ export const services: {
       "An app is commissioned without a clear job, or it ships with no way for the team to manage what is inside it.",
     solution:
       "We write down the platforms, the screens and the handover, then build against that scope. Maintenance after launch is included only when the scope says so.",
-    sections: [
-      {
-        title: "What this service is",
-        text: "App development is a custom Android, iOS or cross-platform application for customers or staff, with an admin side and an API when the app has to share data with a website or another system.",
-      },
-      {
-        title: "What is included",
-        text: "The scope names the platforms, the screens, the admin panel and any API. Published studio work has used Expo for cross-platform apps, Swift for an iOS app and Kotlin for an Android component. A new brief does not automatically include every platform. App maintenance after the first release is included only when the scope says so.",
-      },
-      {
-        title: "How to start",
-        text: "Say who will use the app and whether it should be Android, iOS or cross-platform, if you already know. You can book that conversation from Noida or remotely across Delhi NCR and India.",
-      },
+    sections: [],
+    serviceMenu: {
+      title: "Mobile App Development Services",
+      intro:
+        "Published studio apps have used Expo for cross-platform builds, Swift for an iOS app and Kotlin for an Android component. A new project includes only the items the scope names.",
+      items: [
+        "Android Apps",
+        "iOS Apps",
+        "Cross-platform Apps",
+        "Business Applications",
+        "API Integration",
+        "Admin Panels",
+        "App Maintenance",
+      ],
+    },
+    deliverablesTitle: "What We Deliver",
+    pageDeliverables: [
+      "A written scope of who uses the app and which platforms it covers",
+      "The Android, iOS or cross-platform app that scope describes",
+      "An admin panel when the scope includes one",
+      "An API connection only when the scope names it",
+      "A release on the platforms that were agreed",
+      "Maintenance after launch only when the scope includes it",
     ],
     deliverables: [
       "Android app development",
@@ -456,15 +466,52 @@ export const services: {
       "App maintenance",
     ],
     cta: "Book Free Consultation",
+    heroCta: "Discuss Your App Idea",
+    closingCta: "Start an App Project",
     related: ["software"],
-    relatedServices: ["software-development", "web-development", "ai-development"],
+    relatedServices: ["software-development", "web-development", "ai-development", "digital-marketing"],
     image: "/media/work/spark-mobile.jpg",
     imageAlt: "Spark Mobile, an iOS and Android app developed by MKSAnalytIQ",
     seoTitle: "App Development Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ develops custom mobile and business applications for companies in Noida, Delhi NCR and across India.",
+    processTitle: "From Idea to App",
     processIntro:
-      "An app uses the same five steps: who it is for, a written scope of platforms and screens, a build you can review, a release, then updates only if maintenance was agreed.",
+      "Six steps. The platforms and screens are agreed before development, and maintenance after launch is included only when the scope says so.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Product Planning",
+        text: "Who uses the app, what job it does, and whether it is Android, iOS or cross-platform.",
+      },
+      {
+        n: "02",
+        title: "UI/UX",
+        text: "The screens, agreed before development. No design tool is assumed.",
+      },
+      {
+        n: "03",
+        title: "Development",
+        text: "The app, built against that scope.",
+      },
+      {
+        n: "04",
+        title: "API Integration",
+        text: "A connection to another system, only when the scope names it.",
+      },
+      {
+        n: "05",
+        title: "Testing",
+        text: "The screens and paths named in the scope, checked before release.",
+      },
+      {
+        n: "06",
+        title: "Launch",
+        text: "The app is released on the platforms that were agreed.",
+      },
+    ],
+    workTitle: "Relevant App Projects",
+    faqIds: ["app-platforms-page", "app-cross", "app-admin", "app-handover", "app-care", "app-begin"],
     technologyNote:
       "Where a published project names a mobile stack, it is Expo, Swift or Kotlin, sometimes with TypeScript and Supabase. The stack for a new app is chosen in the scope, not copied from another project.",
   },
@@ -1406,6 +1453,42 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "How do I start a software project?",
     a: "Use Discuss Your Software Idea or Start Your Software Project, or message on WhatsApp. Describe the operation the software has to support. The first reply is a written scope. The studio is in Sector 8, Noida.",
     tags: ["sw-page"],
+  },
+  {
+    id: "app-platforms-page",
+    q: "Do you build Android and iOS apps?",
+    a: "Yes, when the scope names those platforms. Published studio work includes Android and iOS apps, a Swift iOS app and a Kotlin Android component. A new project does not automatically include both.",
+    tags: ["app-page"],
+  },
+  {
+    id: "app-cross",
+    q: "Do you build cross-platform apps?",
+    a: "Yes. Published cross-platform apps have used Expo. The scope says whether this brief is cross-platform or native. It is not assumed.",
+    tags: ["app-page"],
+  },
+  {
+    id: "app-admin",
+    q: "Can the app include an admin panel or an API?",
+    a: "Yes, when the scope lists them. An admin panel is how the team manages what is inside the app. An API is included only when the app has to share data with a site or another system.",
+    tags: ["app-page"],
+  },
+  {
+    id: "app-handover",
+    q: "What do we receive at launch?",
+    a: "The app on the platforms named in the scope, and whatever else the written agreement says you keep. This page is not the contract.",
+    tags: ["app-page"],
+  },
+  {
+    id: "app-care",
+    q: "Is app maintenance included?",
+    a: "Only when the scope says so. Maintenance then covers updates after the first release. It is not assumed.",
+    tags: ["app-page"],
+  },
+  {
+    id: "app-begin",
+    q: "How do I start an app project?",
+    a: "Use Discuss Your App Idea or Start an App Project, or message on WhatsApp. Say who will use the app and which platforms you have in mind. The first reply is a written scope. The studio is in Sector 8, Noida.",
+    tags: ["app-page"],
   },
 ];
 
