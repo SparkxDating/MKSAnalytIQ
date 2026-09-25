@@ -1,9 +1,14 @@
 import { steps } from "@/lib/content";
 
-export function ProcessSteps() {
+export function ProcessSteps({
+  items,
+}: {
+  items?: readonly { n: string; title: string; text: string }[];
+}) {
+  const list = items ?? steps;
   return (
     <ol className="mt-8 grid gap-4 md:grid-cols-5">
-      {steps.map((step, index) => (
+      {list.map((step, index) => (
         <li
           key={step.n}
           className="rise rounded-3xl border border-line bg-card p-5"

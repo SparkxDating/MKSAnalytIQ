@@ -117,6 +117,20 @@ export const services: {
   processIntro?: string;
   /** Factual tools used on published work. Not a promise for the next brief. */
   technologyNote?: string;
+  /** Replaces the default “Who it is for” heading when set. */
+  audienceTitle?: string;
+  /** Replaces the default “Deliverables” heading when set. */
+  deliverablesTitle?: string;
+  /** Replaces the default “Process” heading when set. */
+  processTitle?: string;
+  /** Page-specific process. Other pages keep the shared five steps. */
+  processSteps?: { n: string; title: string; text: string }[];
+  /** Extra list card, same treatment as deliverables. */
+  serviceMenu?: { title: string; intro?: string; items: string[] };
+  /** Bottom button label. Hero keeps `cta`. */
+  closingCta?: string;
+  /** FAQ ids for this page only, in display order. */
+  faqIds?: string[];
 }[] = [
   {
     id: "marketing",
@@ -125,48 +139,80 @@ export const services: {
     h1: "Digital Marketing Company in Noida",
     linkLabel: "digital marketing services",
     blurb:
-      "Performance marketing, social media, SEO, content and analytics for businesses that want enquiries they can actually follow up.",
+      "SEO, Google Ads, Meta Ads, social, content and reporting for businesses that want enquiries someone can answer.",
     suitable:
-      "Businesses in Noida, Delhi NCR and elsewhere in India that have an offer and want enquiries from search, ads or social, with a page and a follow-up path someone can answer.",
+      "A business that already has an offer and needs people to enquire from search, ads or social, then needs someone on the team to answer. That might be a first campaign, a page that matches the ad, or a monthly read of spend and enquiries. No particular industry is required. The studio is in Noida, and this work is available across Delhi NCR and India.",
     problem:
-      "Spend often goes out before the offer, the landing page and the tracking agree. Without that, it is hard to tell what a lead cost.",
+      "Spend often starts before the offer, the page and the tracking agree. Without that, it is hard to tell which enquiry came from which channel.",
     solution:
-      "We treat the offer, ads, landing page, retargeting and reporting as one system. You approve a written scope before anything launches.",
-    sections: [
-      {
-        title: "What this service is",
-        text: "Digital marketing here means putting a defined offer in front of people who can enquire, then reading what that activity produced. A scope can include Google Ads, Meta Ads, SEO, content, social media and the landing page those channels share. This page does not promise a ranking or a number of leads.",
-      },
-      {
-        title: "What is included",
-        text: "The written scope names the channels, whether a landing page is part of the work, how enquiries are tracked, and what the monthly report will show. SEO and content are pages that describe the same offer as the ads. Social media can sit inside this scope or be planned on its own. Retargeting is included only when the scope lists it.",
-      },
-      {
-        title: "How to start",
-        text: "Book a free consultation or message on WhatsApp with the offer and whether a page already exists. You get a written scope before a campaign launches. The studio is in Sector 8, Noida, and this work is available across Delhi NCR and India.",
-      },
-    ],
+      "The offer, the channels, the landing page and the report are one written scope. You approve it before anything launches. The scope does not promise a ranking or a number of leads.",
+    sections: [],
+    serviceMenu: {
+      title: "Digital Marketing Services",
+      intro: "A project uses the items named in its scope. The others stay off until you add them.",
+      items: [
+        "SEO",
+        "Google Ads",
+        "Meta Ads",
+        "Social Media Marketing",
+        "Content Marketing",
+        "Lead Generation",
+        "Analytics",
+        "Conversion Optimization",
+      ],
+    },
+    audienceTitle: "Who We Help",
+    deliverablesTitle: "What You Get",
     deliverables: [
-      "Google Ads",
-      "Meta Ads",
-      "Landing pages",
-      "Conversion tracking",
-      "Retargeting",
-      "Performance reporting",
-      "SEO and content pages",
+      "A written scope before launch",
+      "Only the channels that scope names",
+      "A landing page when the scope includes one",
+      "Tracking on the form, call or WhatsApp path",
+      "A report of enquiries and spend",
+      "Changes after the first results, inside that scope",
     ],
     cta: "Book Free Consultation",
+    closingCta: "Talk About Your Marketing Goals",
     related: ["marketing", "campaigns"],
-    relatedServices: ["web-development", "ai-development", "social-media"],
+    relatedServices: ["web-development", "software-development", "app-development", "ai-development"],
     image: "/media/desk.jpg",
     imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
     seoTitle: "Digital Marketing Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSAnalytIQ provides digital marketing services in Noida and Delhi NCR, including performance marketing, social media, SEO, content and analytics.",
+      "Digital marketing from MKSAnalytIQ in Noida: SEO, Google Ads, Meta Ads, social, content and reporting for businesses across Delhi NCR and India.",
+    processTitle: "Our Digital Growth Process",
     processIntro:
-      "A marketing engagement uses the same five steps as the rest of the studio: understand the offer, approve a written scope, prepare the page and campaigns, launch, then keep what is producing enquiries and change what is not.",
+      "Five steps for a marketing engagement. You approve the plan before launch, and the report is enquiries and spend — not a ranking or a lead-count promise.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Understand",
+        text: "The offer, who should enquire, and what already exists: a site, ads, or tracking.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "A written scope: channels, page, tracking, timeline and fee. You approve it before launch.",
+      },
+      {
+        n: "03",
+        title: "Launch",
+        text: "Campaigns and pages go live as that scope describes.",
+      },
+      {
+        n: "04",
+        title: "Measure",
+        text: "Enquiries, spend and the path they came from, in a report you can read.",
+      },
+      {
+        n: "05",
+        title: "Optimize",
+        text: "Keep what produces enquiries and change what does not, inside the scope.",
+      },
+    ],
+    faqIds: ["dm-services", "dm-ads", "dm-measure", "dm-page", "dm-after", "dm-start"],
     technologyNote:
-      "The channels used on this work are Google Ads, Meta Ads, SEO and content pages, and social calendars when they are in the scope. Tracking is the form, call or WhatsApp path the report is based on. There is no separate ad platform to disclose, and this page does not publish performance figures.",
+      "Tracking is the form, call or WhatsApp path the report uses. There is no separate ad platform to name here, and this page does not publish campaign results.",
   },
   {
     id: "web",
@@ -1151,6 +1197,42 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "How do I start an AI or automation project?",
     a: "Describe the job you want drafted, answered or routed, and who should approve the output. The consultation names the external tools and the limits. MKSAnalytIQ does not scope this as training a new foundation model.",
     tags: ["ai"],
+  },
+  {
+    id: "dm-services",
+    q: "Which digital marketing services can a scope include?",
+    a: "SEO, Google Ads, Meta Ads, social media marketing, content marketing, lead generation, analytics and conversion optimization. The written scope names which of those are in the project. Social media can also be planned on its own page.",
+    tags: ["dm-page"],
+  },
+  {
+    id: "dm-ads",
+    q: "Do you manage Google Ads and Meta Ads?",
+    a: "Yes, when the scope includes them. That covers the campaigns, a landing page if one is listed, conversion tracking and a report of enquiries and spend. Media spend is paid to the ad platform and is not a package price on this site.",
+    tags: ["dm-page"],
+  },
+  {
+    id: "dm-measure",
+    q: "How do you measure a campaign?",
+    a: "Against the path in the scope: a form, a call or WhatsApp, plus what was spent. The report shows enquiries and spend. It does not promise a ranking, a lead count or a return.",
+    tags: ["dm-page"],
+  },
+  {
+    id: "dm-page",
+    q: "Do I need a website before marketing starts?",
+    a: "You need a place the enquiry can land. An existing page can be used. If there isn’t one, a landing page can be part of the marketing scope, or a separate web development brief.",
+    tags: ["dm-page"],
+  },
+  {
+    id: "dm-after",
+    q: "What happens after the campaigns launch?",
+    a: "We read the first results, keep what is producing enquiries and change what is not, inside the scope you approved. That is the optimize step. It is not a guarantee of growth.",
+    tags: ["dm-page"],
+  },
+  {
+    id: "dm-start",
+    q: "How do I start, and is the first conversation free?",
+    a: "Yes. Book a free consultation or send a WhatsApp message with the offer and whether a page already exists. You receive a written scope before a campaign launches. The studio is in Sector 8, Noida, and the work is available across Delhi NCR and India.",
+    tags: ["dm-page"],
   },
 ];
 

@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import { track } from "@/lib/analytics";
-import { faqsFor, projectsForService, relatedServices, steps, site, type services } from "@/lib/content";
+import { faqsFor, faqs, projectsForService, relatedServices, steps, site, type services } from "@/lib/content";
 import { absoluteUrl, areaServedPlaces, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { Button } from "./button";
 import { FaqList } from "./faq";
@@ -15,7 +15,12 @@ type Service = (typeof services)[number];
 
 export function ServiceDetail({ service }: { service: Service }) {
   const related = projectsForService(service.slug);
-  const questions = faqsFor(service.id);
+  const questions = service.faqIds?.length
+    ? service.faqIds.flatMap((id) => {
+        const item = faqs.find((faq) => faq.id === id);
+        return item ? [item] : [];
+      })
+    : faqsFor(service.id);
   const path = `/services/${service.slug}`;
   const linked = relatedServices(service.relatedServices);
 
@@ -121,23 +126,44 @@ export function ServiceDetail({ service }: { service: Service }) {
 
       <section className="mx-auto max-w-6xl px-5 pt-4">
         <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-          <h2 className="text-2xl font-extrabold">Who it is for</h2>
+          <h2 className="text-2xl font-extrabold">{service.audienceTitle ?? "Who it is for"}</h2>
           <p className="mt-3 text-sm leading-relaxed text-mute">{service.suitable}</p>
         </article>
       </section>
 
-      <section className="mx-auto max-w-6xl space-y-4 px-5 py-4">
-        {service.sections.map((section) => (
-          <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-            <h2 className="text-2xl font-extrabold">{section.title}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-mute">{section.text}</p>
-          </article>
-        ))}
-      </section>
+      {service.sections.length ? (
+        <section className="mx-auto max-w-6xl space-y-4 px-5 py-4">
+          {service.sections.map((section) => (
+            <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+              <h2 className="text-2xl font-extrabold">{section.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-mute">{section.text}</p>
+            </article>
+          ))}
+        </section>
+      ) : null}
+
+      {service.serviceMenu ? (
+        <section className="mx-auto max-w-6xl px-5 py-4">
+          <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+            <h2 className="text-2xl font-extrabold">{service.serviceMenu.title}</h2>
+            {service.serviceMenu.intro ? (
+              <p className="mt-2 text-sm text-mute">{service.serviceMenu.intro}</p>
+            ) : null}
+            <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+              {service.serviceMenu.items.map((item) => (
+                <li key={item} className="flex gap-3 text-sm">
+                  <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       <section className="mx-auto max-w-6xl px-5 pb-4">
         <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-          <h2 className="text-2xl font-extrabold">Deliverables</h2>
+          <h2 className="text-2xl font-extrabold">{service.deliverablesTitle ?? "Deliverables"}</h2>
           <p className="mt-2 text-sm text-mute">Typical items. The written scope lists what your project includes.</p>
           <ul className="mt-5 grid gap-2 sm:grid-cols-2">
             {service.deliverables.map((item) => (
@@ -176,12 +202,12 @@ export function ServiceDetail({ service }: { service: Service }) {
       ) : null}
 
       <section className="mx-auto max-w-6xl px-5 py-12">
-        <h2 className="text-3xl font-extrabold tracking-tight">Process</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight">{service.processTitle ?? "Process"}</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
           {service.processIntro ??
             `${steps.length} steps, the same shape as every other engagement: you always know what happens next.`}
         </p>
-        <ProcessSteps />
+        <ProcessSteps items={service.processSteps} />
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
@@ -209,7 +235,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
             <Link to="/contact" search={{ service: service.id }} onClick={() => track("quote_click", { source: `${service.slug}-end` })}>
-              {service.cta} <ArrowRight className="size-4" aria-hidden />
+              {service.closingCta ?? service.cta} <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>
           <WhatsAppButton source={`service-end-${service.slug}`} />
@@ -224,11 +250,19 @@ function ServiceBridges({ slug }: { slug: string }) {
   if (slug === "digital-marketing") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        Campaigns usually need a page to land on, which is{" "}
+        Campaigns usually need a page to land on. That is{" "}
         <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
           web development
+        </Link>{" "}
+        when the brief is a site. When the enquiry has to enter a system your team already runs, the build is{" "}
+        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+          software development
+        </Link>{" "}
+        or{" "}
+        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
+          app development
         </Link>
-        . When the follow-up is a chatbot or an automated draft, that work is{" "}
+        . A chatbot or an automated draft on the same offer is{" "}
         <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
           AI development
         </Link>
