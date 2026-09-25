@@ -332,19 +332,30 @@ export const services: {
       "A tool gets delivered without a handover the team can use, or the public site and the internal system are planned as if they were unrelated.",
     solution:
       "We scope the build, ship it in the open, and hand over what the written agreement says you keep — including a repository when that is part of the scope.",
-    sections: [
-      {
-        title: "What this service is",
-        text: "Software development is custom software, a SaaS product or an internal business system your own team can run. It covers web applications, dashboards, APIs and database-backed tools when the operation needs them.",
-      },
-      {
-        title: "What is included",
-        text: "The scope says what ships, who can sign in, which other systems it talks to, and whether a repository is part of the handover. An AI feature, if you need one, is a named part of that scope rather than an open-ended research project.",
-      },
-      {
-        title: "How to start",
-        text: "Describe the operation the software has to support. The consultation decides whether that is custom software, a SaaS product or a dashboard, and what the handover includes.",
-      },
+    sections: [],
+    serviceMenu: {
+      title: "Custom Software Development",
+      intro:
+        "A project includes only what the written scope names. Workflow automation and AI-enabled software are a defined job a person still reviews, not a private model.",
+      items: [
+        "Business Software",
+        "SaaS Platforms",
+        "Web Applications",
+        "Dashboards",
+        "APIs",
+        "Database Applications",
+        "Workflow Automation",
+        "AI-enabled Software",
+      ],
+    },
+    deliverablesTitle: "What We Build",
+    pageDeliverables: [
+      "A screen for work that currently sits in spreadsheets or message threads",
+      "A product more than one customer can sign in to",
+      "A dashboard of records the system already holds",
+      "An API or database so two parts of the operation share the same data",
+      "A workflow that moves a job from one agreed step to the next",
+      "An AI step inside that software, which a person still reviews",
     ],
     deliverables: [
       "Custom software",
@@ -358,6 +369,8 @@ export const services: {
       "Repository handover",
     ],
     cta: "Book Free Consultation",
+    heroCta: "Discuss Your Software Idea",
+    closingCta: "Start Your Software Project",
     related: ["software"],
     relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
     image: "/media/devices.jpg",
@@ -365,8 +378,43 @@ export const services: {
     seoTitle: "Software Development Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
+    processTitle: "Software Development Process",
     processIntro:
-      "Software follows the same five steps: understand the operation, approve a written scope, build in the open, hand over what was agreed, then improve only against that scope.",
+      "Six steps. You approve the scope before development, and support after deployment is included only when that scope says so.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Requirements",
+        text: "The operation the software has to support, who signs in, and what done means.",
+      },
+      {
+        n: "02",
+        title: "Architecture",
+        text: "How the screens, data and any API fit. Written into the scope before building.",
+      },
+      {
+        n: "03",
+        title: "Development",
+        text: "The software, built against that scope.",
+      },
+      {
+        n: "04",
+        title: "Testing",
+        text: "The paths named in the scope, checked before deployment.",
+      },
+      {
+        n: "05",
+        title: "Deployment",
+        text: "The build goes to the host agreed in the scope.",
+      },
+      {
+        n: "06",
+        title: "Support",
+        text: "Fixes and small changes after deployment, only when the scope includes them.",
+      },
+    ],
+    workTitle: "Selected Software Projects",
+    faqIds: ["sw-kinds", "sw-saas", "sw-handover", "sw-data", "sw-ai", "sw-start"],
     technologyNote:
       "Published studio software has used Next.js, TypeScript, Python, NestJS, PostgreSQL and Prisma. Those are examples from shipped projects, not a stack every brief must use. The scope names what this one will use.",
   },
@@ -1322,6 +1370,42 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "How do I start a web project?",
     a: "Use Discuss Your Website or Start a Web Project, or message on WhatsApp. Say whether you need a business site, a shop or a web application, and what content you already have. The first reply is a written scope, not a build. The studio is in Sector 8, Noida.",
     tags: ["web-page"],
+  },
+  {
+    id: "sw-kinds",
+    q: "What kinds of custom software can a scope include?",
+    a: "Business software, a SaaS product, a web application, a dashboard, an API, or a database-backed tool. The written scope names which of those this project is. It does not promise a user count or a revenue figure.",
+    tags: ["sw-page"],
+  },
+  {
+    id: "sw-saas",
+    q: "Do you build SaaS platforms?",
+    a: "Yes, when more than one customer needs to sign in to the same product. Published studio work includes multi-tenant products such as ShortGen. A new brief is scoped on its own and does not inherit that product’s features.",
+    tags: ["sw-page"],
+  },
+  {
+    id: "sw-handover",
+    q: "What is handed over?",
+    a: "Whatever the written agreement says you keep, including a repository when that was agreed. This page is not the contract and does not transfer intellectual property by itself.",
+    tags: ["sw-page"],
+  },
+  {
+    id: "sw-data",
+    q: "Can the software include an API or a database?",
+    a: "Yes, when the operation needs shared records or a connection to another system. Those are named in the scope. They are not added by default.",
+    tags: ["sw-page"],
+  },
+  {
+    id: "sw-ai",
+    q: "Can the software include AI or workflow automation?",
+    a: "Yes, as a defined step inside the product: a draft, a check, or a job moving from one agreed stage to the next. A person still reviews it. MKSAnalytIQ does not claim a proprietary foundation model.",
+    tags: ["sw-page"],
+  },
+  {
+    id: "sw-start",
+    q: "How do I start a software project?",
+    a: "Use Discuss Your Software Idea or Start Your Software Project, or message on WhatsApp. Describe the operation the software has to support. The first reply is a written scope. The studio is in Sector 8, Noida.",
+    tags: ["sw-page"],
   },
 ];
 

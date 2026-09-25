@@ -308,6 +308,10 @@ function ServiceBridges({ slug }: { slug: string }) {
         <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
           AI development
         </Link>
+        . When the software needs to be marketed after launch, that work is{" "}
+        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+          digital marketing
+        </Link>
         .
       </p>
     );
