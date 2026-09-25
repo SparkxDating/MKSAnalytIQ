@@ -44,7 +44,7 @@ const services = [
   {
     title: "Digital Marketing",
     slug: "digital-marketing",
-    text: "SEO, Google Ads, Meta Ads, social media, content and lead generation.",
+    text: "Ads, SEO, content and social, aimed at enquiries your team can follow up.",
     icon: Megaphone,
     glow: "from-violet-100 to-white",
     iconBg: "bg-violet-100 text-violet-700",
@@ -52,7 +52,7 @@ const services = [
   {
     title: "Web Development",
     slug: "web-development",
-    text: "Business websites, web applications, ecommerce and custom digital experiences.",
+    text: "Business websites, shops and web applications your team can run after launch.",
     icon: Code2,
     glow: "from-blue-100 to-white",
     iconBg: "bg-blue-100 text-blue-700",
@@ -60,7 +60,7 @@ const services = [
   {
     title: "Software Development",
     slug: "software-development",
-    text: "Custom software, SaaS, dashboards, APIs and business automation.",
+    text: "Custom software, SaaS, dashboards and APIs, scoped before anyone builds.",
     icon: Target,
     glow: "from-orange-100 to-white",
     iconBg: "bg-orange-100 text-orange-700",
@@ -68,15 +68,15 @@ const services = [
   {
     title: "App Development",
     slug: "app-development",
-    text: "Android, iOS and cross-platform mobile applications.",
+    text: "Android, iOS and cross-platform apps, with an admin side when the brief needs one.",
     icon: Smartphone,
     glow: "from-teal-100 to-white",
     iconBg: "bg-teal-100 text-teal-700",
   },
   {
-    title: "AI & Automation",
+    title: "AI Development & Automation",
     slug: "ai-development",
-    text: "AI applications, chatbots, automation workflows and intelligent business solutions.",
+    text: "Chatbots, drafts and workflow automation a person still reviews.",
     icon: Brain,
     glow: "from-indigo-100 to-white",
     iconBg: "bg-indigo-100 text-indigo-700",
@@ -197,11 +197,11 @@ function Home() {
               </Link>
             </p>
             <p className="mt-4 max-w-[33.5rem] text-base leading-relaxed text-[#4c5d78]">
-              MKSANALYTIQ is a Noida-based technology and digital growth studio serving businesses across{" "}
+              MKSANALYTIQ is a Noida-based technology and digital growth studio helping businesses across{" "}
               <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
                 Delhi NCR
               </Link>{" "}
-              and India.
+              and India with digital marketing, web development, software, apps and AI solutions.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
@@ -485,8 +485,8 @@ function Home() {
             <div className="max-w-2xl lg:pl-40">
               <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Let’s Build Something Great</h2>
               <p className="mt-3 text-sm leading-relaxed text-[#4c5d78] sm:text-base">
-                Ready to grow your business with digital marketing, web development, software, apps or AI? MKSANALYTIQ
-                is a Noida-based studio serving{" "}
+                Digital marketing, web, software, apps or AI. Tell us what you want to start. The studio is in Noida
+                and works with businesses across{" "}
                 <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
                   Delhi NCR
                 </Link>{" "}
