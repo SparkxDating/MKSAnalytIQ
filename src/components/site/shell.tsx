@@ -17,13 +17,15 @@ export function SiteShell({
 }: {
   children: ReactNode;
   cta?: boolean;
-  tone?: "paper" | "night";
+  tone?: "paper" | "night" | "day";
 }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const lastPath = useRef<string | null>(null);
   const night = tone === "night";
+  const day = tone === "day";
+  const fixed = night || day;
 
   useEffect(() => {
     if (lastPath.current === path) return;
@@ -36,15 +38,15 @@ export function SiteShell({
   }, [path]);
 
   useEffect(() => {
-    if (!night) return;
+    if (!fixed) return;
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [night]);
+  }, [fixed]);
 
   return (
-    <div className={night ? "min-h-screen bg-[#050816] text-white" : "min-h-screen bg-paper text-ink"}>
+    <div className={night ? "min-h-screen bg-[#050816] text-white" : day ? "home-day min-h-screen bg-[#f7faff] text-ink" : "min-h-screen bg-paper text-ink"}>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-card focus:px-4 focus:py-2"
@@ -58,7 +60,12 @@ export function SiteShell({
                 "fixed inset-x-0 top-0 z-40 border-b border-white/10 backdrop-blur-md transition-colors duration-200",
                 scrolled ? "bg-[#050816]/82" : "bg-[#050816]/25",
               )
-            : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
+            : day
+              ? cn(
+                  "fixed inset-x-0 top-0 z-40 border-b border-[#d9e6ff] backdrop-blur-md transition-shadow duration-200",
+                  scrolled ? "bg-white/90 shadow-[0_8px_30px_rgba(40,80,160,0.08)]" : "bg-white/55",
+                )
+              : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
         }
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
@@ -73,7 +80,7 @@ export function SiteShell({
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative py-2 text-sm font-medium transition-colors",
-                    night ? "text-[13px] text-white/75 hover:text-white" : "text-mute hover:text-ink",
+                    night ? "text-[13px] text-white/75 hover:text-white" : "text-[13px] text-[#31445f] hover:text-ink",
                     active && (night ? "text-white" : "text-ink"),
                   )}
                 >
@@ -95,7 +102,8 @@ export function SiteShell({
               asChild
               className={cn(
                 "hidden h-11 lg:inline-flex",
-                night && "border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_0_24px_rgba(70,110,255,0.45)] hover:brightness-110",
+                night && "border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_24px_rgba(80,90,255,0.28)] hover:brightness-110",
+                day && "border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white shadow-[0_8px_24px_rgba(80,90,255,0.22)] hover:brightness-110",
               )}
             >
               <Link to="/contact" onClick={() => track("quote_click", { source: "nav" })}>
@@ -146,7 +154,7 @@ export function SiteShell({
           </nav>
         ) : null}
       </header>
-      <main id="main" className={night ? "pt-16" : undefined}>
+      <main id="main" className={fixed ? "pt-16" : undefined}>
         {children}
         <div className="h-16 md:hidden" aria-hidden />
       </main>
