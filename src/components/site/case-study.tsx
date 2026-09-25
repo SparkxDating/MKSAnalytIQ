@@ -11,6 +11,15 @@ import { WhatsAppButton } from "./whatsapp";
 
 type Project = (typeof projects)[number];
 
+function isVercelHost(url: string) {
+  try {
+    const host = new URL(url).hostname;
+    return host === "vercel.app" || host.endsWith(".vercel.app");
+  } catch {
+    return false;
+  }
+}
+
 export function CaseStudy({ project }: { project: Project }) {
   const linked = servicesForProject(project);
 
@@ -18,7 +27,7 @@ export function CaseStudy({ project }: { project: Project }) {
     track("case_study_view", { project: project.slug });
   }, [project.slug]);
 
-  const sameAs = [project.live, project.github].filter((url) => url.length > 0);
+  const sameAs = [project.live, project.github].filter((url) => url.length > 0 && !isVercelHost(url));
 
   return (
     <>
