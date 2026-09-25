@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { track } from "@/lib/analytics";
 import type { projects } from "@/lib/content";
 import { Preview } from "./previews";
 
@@ -8,7 +9,7 @@ type Project = (typeof projects)[number];
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-card shadow-sm">
-      <Preview slug={project.slug} />
+      <Preview slug={project.slug} loading="lazy" />
       <div className="flex flex-1 flex-col p-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
         <h3 className="mt-1 font-display text-lg font-bold">
@@ -16,6 +17,7 @@ export function ProjectCard({ project }: { project: Project }) {
             to="/portfolio/$slug"
             params={{ slug: project.slug }}
             className="hover:text-primary"
+            onClick={() => track("portfolio_project_click", { project: project.slug, source: "card-title" })}
           >
             {project.name}
           </Link>
@@ -33,6 +35,7 @@ export function ProjectCard({ project }: { project: Project }) {
             to="/portfolio/$slug"
             params={{ slug: project.slug }}
             className="inline-flex h-11 items-center gap-1 text-primary"
+            onClick={() => track("portfolio_project_click", { project: project.slug, source: "card" })}
           >
             View project <ArrowRight className="size-4" aria-hidden />
           </Link>
@@ -44,6 +47,7 @@ export function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
             >
               Repository <ArrowUpRight className="size-4" aria-hidden />
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : null}
           {project.live ? (
@@ -54,6 +58,7 @@ export function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
             >
               Live demo <ArrowUpRight className="size-4" aria-hidden />
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           ) : null}
         </div>

@@ -56,6 +56,12 @@ type FieldName = keyof Fields;
 
 const questions = faqsFor("contact");
 
+function enquiryServiceLabel(id: string) {
+  if (id === "other" || id === "unsure") return "Other";
+  if (id === "ai") return "AI Development & Automation";
+  return services.find((item) => item.id === id)?.title ?? id;
+}
+
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>): { service?: string } => {
     if (typeof search.service === "string" && search.service.length > 0) return { service: search.service };
@@ -72,7 +78,8 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const preset = Route.useSearch().service ?? "";
+  const rawPreset = Route.useSearch().service ?? "";
+  const preset = rawPreset === "unsure" ? "other" : rawPreset;
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [status, setStatus] = useState<"idle" | "invalid" | "opened" | "duplicate">("idle");
   const started = useRef(false);
@@ -87,7 +94,7 @@ function Contact() {
   }
 
   function openComposer(data: Fields, channel: "email" | "whatsapp") {
-    const serviceLabel = services.find((item) => item.id === data.service)?.title ?? data.service;
+    const serviceLabel = enquiryServiceLabel(data.service);
     const body = [
       `Name: ${data.name}`,
       `Company: ${data.company || "—"}`,
@@ -190,14 +197,14 @@ function Contact() {
           <div className="grid gap-4 sm:grid-cols-2">
             <Field
               id="phone"
-              label="Mobile (optional)"
+              label="Phone / WhatsApp"
               name="phone"
               error={errors.phone}
               inputMode="numeric"
               autoComplete="tel"
               placeholder="9560814623"
             />
-            <Field id="email" label="Email (optional)" name="email" error={errors.email} type="email" autoComplete="email" />
+            <Field id="email" label="Email" name="email" error={errors.email} type="email" autoComplete="email" />
           </div>
           <p className="-mt-2 text-xs text-mute">Enter at least one contact detail so we can reply.</p>
           <Field
@@ -208,14 +215,14 @@ function Contact() {
             autoComplete="url"
             placeholder="example.com or @handle"
           />
-          <Select id="service" label="Service" name="service" error={errors.service} defaultValue={preset} required>
+          <Select id="service" label="Service required" name="service" error={errors.service} defaultValue={preset} required>
             <option value="">Choose one</option>
             {services.map((service) => (
               <option key={service.id} value={service.id}>
-                {service.title}
+                {enquiryServiceLabel(service.id)}
               </option>
             ))}
-            <option value="unsure">Not sure yet</option>
+            <option value="other">Other</option>
           </Select>
           <div className="grid gap-4 sm:grid-cols-2">
             <Select id="budget" label="Budget range (optional)" name="budget" error={errors.budget} defaultValue="">
@@ -236,7 +243,7 @@ function Contact() {
             </Select>
           </div>
           <label className="block text-sm font-semibold" htmlFor="message">
-            Message <span className="text-primary">*</span>
+            Project description <span className="text-primary">*</span>
             <textarea
               id="message"
               name="message"

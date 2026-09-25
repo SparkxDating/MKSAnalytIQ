@@ -4,8 +4,11 @@ export const analyticsEvents = [
   "whatsapp_click",
   "call_click",
   "quote_click",
+  "consultation_click",
   "service_view",
+  "service_page_view",
   "case_study_view",
+  "portfolio_project_click",
   "contact_form_start",
   "contact_form_submit",
   "lead_form_submit",
@@ -39,7 +42,11 @@ export function track(name: AnalyticsEventName, props: AnalyticsProps = {}) {
   window.dispatchEvent(new CustomEvent("mks-analytics", { detail }));
   forward(name, clean);
   if (name === "contact_form_submit") forward("lead_form_submit", clean);
-  if (name === "hero_cta_click" || name === "quote_click") forward("cta_click", clean);
+  if (name === "hero_cta_click" || name === "quote_click") {
+    forward("cta_click", clean);
+    forward("consultation_click", clean);
+  }
+  if (name === "service_view") forward("service_page_view", clean);
 }
 
 function forward(name: string, clean: Record<string, string | number | boolean>) {

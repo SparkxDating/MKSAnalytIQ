@@ -326,7 +326,7 @@ function Home() {
               <span className="block">Real Solutions.</span>
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-[#4c5d78]">
-              A look at some of the products and platforms we’ve built across industries.
+              Explore selected products and digital platforms built by MKSANALYTIQ.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild className="border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white hover:brightness-110">
@@ -351,7 +351,12 @@ function Home() {
             {featured.map((project) => (
               <li key={project.slug} className="w-[78%] shrink-0 sm:w-[46%] lg:w-auto">
                 <article className="work-card glass-card group flex h-full flex-col overflow-hidden rounded-3xl">
-                  <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="relative block">
+                  <Link
+                    to="/portfolio/$slug"
+                    params={{ slug: project.slug }}
+                    className="relative block"
+                    onClick={() => track("portfolio_project_click", { project: project.slug, source: "home" })}
+                  >
                     <Preview slug={project.slug} loading="lazy" className="h-56 rounded-t-3xl sm:h-60" />
                     <span className="absolute bottom-3 right-3 grid size-9 place-items-center rounded-full border border-[#d7e4ff] bg-white/90 text-primary shadow-sm backdrop-blur">
                       <ArrowRight className="size-4" aria-hidden />
@@ -360,7 +365,12 @@ function Home() {
                   </Link>
                   <div className="flex flex-1 flex-col p-4">
                     <h3 className="font-display text-lg font-bold">
-                      <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="hover:text-primary">
+                      <Link
+                        to="/portfolio/$slug"
+                        params={{ slug: project.slug }}
+                        className="hover:text-primary"
+                        onClick={() => track("portfolio_project_click", { project: project.slug, source: "home-title" })}
+                      >
                         {project.name}
                       </Link>
                     </h3>
@@ -371,6 +381,7 @@ function Home() {
                         to="/portfolio/$slug"
                         params={{ slug: project.slug }}
                         className="inline-flex min-h-11 items-center gap-1 text-ink"
+                        onClick={() => track("portfolio_project_click", { project: project.slug, source: "home-details" })}
                       >
                         Project details <ArrowRight className="size-4" aria-hidden />
                       </Link>

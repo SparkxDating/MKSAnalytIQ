@@ -165,6 +165,31 @@ The permanent redirect from `mksanalytiq.in` to `www.mksanalytiq.in` is **not in
 
 Exception: the studio setup copy still tells the owner to register the Google OAuth redirect URI as `https://mksanalytiq.in/api/auth/callback/google`. A blanket apex redirect will break that callback until the Google client is updated to `https://www.mksanalytiq.in/api/auth/callback/google`. Until that auth change is made, exclude `/api/auth/*` on the apex host from the redirect.
 
+No Google Analytics, Tag Manager, or Meta Pixel ID is stored in the repository. The site already forwards events when a provider is present. Set these in the hosting environment, not in source:
+
+- `VITE_GTM_ID` — a container id matching `GTM-XXXX`. Loaded from `src/routes/__root.tsx`.
+- `VITE_META_PIXEL_ID` — a numeric Meta Pixel id, same file.
+
+Until one of those is set, `track()` in `src/lib/analytics.ts` dispatches an `mks-analytics` event and does not call a third-party script. Consultation clicks also forward `consultation_click`. Service pages also forward `service_page_view`. Portfolio links send `portfolio_project_click`. The contact form sends `contact_form_start` and `contact_form_submit`. WhatsApp links send `whatsapp_click`. Do not commit a measurement id.
+
+Search Console ownership is not verified from this repository. After deploy, submit `https://www.mksanalytiq.in/sitemap.xml`. `public/robots.txt` already points at that sitemap.
+
+---
+
+## Future articles
+
+There is no blog, CMS, or article route. Do not add a dependency for one. When a page is actually written, add a route under `src/routes/` and a matching URL in `public/sitemap.xml`. These topics are not published:
+
+- Website Development Cost in Noida
+- Custom Software Development Cost in India
+- App Development Cost in India
+- How to Choose a Software Development Company
+- Website vs Web Application
+- How AI Can Automate Business Workflows
+- Google Ads vs Meta Ads for Lead Generation
+
+Do not publish prices, rankings, or results on those pages unless they are already in the project record.
+
 ---
 
 ## Local Development

@@ -919,7 +919,7 @@ export const projects: {
     seoTitle: "AI Influencer OS — Content Workspace | MKSAnalytIQ",
     seoDescription:
       "Project overview of AI Influencer OS: profiles, content drafts, post approval and disclosed sponsored captions.",
-    serviceSlugs: ["ai-development", "digital-marketing"],
+    serviceSlugs: ["ai-development", "software-development", "digital-marketing"],
     objective: "Draft and approve influencer content, including a disclosure on sponsored captions.",
     approach: "The published workspace covers profiles, drafts, approval and that disclosure step.",
   },

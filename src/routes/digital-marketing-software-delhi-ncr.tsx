@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { SiteShell } from "@/components/site/shell";
 import { WhatsAppButton } from "@/components/site/whatsapp";
 import { company, site, steps } from "@/lib/content";
+import { track } from "@/lib/analytics";
 import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
 
 const path = "/digital-marketing-software-delhi-ncr";
@@ -108,15 +109,16 @@ function DelhiNcrPage() {
             Digital Marketing & Software Development for Delhi NCR
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            MKSAnalytIQ is based at {company.addressOneLine}. From there the studio works with businesses in
-            Noida, Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad, and elsewhere in India.
+            MKSANALYTIQ is based in Noida and serves businesses across Delhi NCR and India. The studio is at{" "}
+            {company.addressOneLine}. Greater Noida, Delhi, Gurugram, Ghaziabad and Faridabad are served from that
+            studio. There is no other office.
           </p>
           <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
             Based in Noida • Serving Delhi NCR and India
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild>
-              <Link to="/contact">
+              <Link to="/contact" onClick={() => track("quote_click", { source: "delhi-ncr" })}>
                 Book Free Consultation <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
@@ -176,7 +178,7 @@ function DelhiNcrPage() {
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => track("quote_click", { source: "delhi-ncr-end" })}>
               Book Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>

@@ -88,7 +88,11 @@ function ServicesPage() {
                 </p>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <Button asChild>
-                    <Link to="/contact" search={{ service: service.id }}>
+                    <Link
+                      to="/contact"
+                      search={{ service: service.id }}
+                      onClick={() => track("quote_click", { source: `services-${service.slug}` })}
+                    >
                       {service.cta} <ArrowRight className="size-4" aria-hidden />
                     </Link>
                   </Button>

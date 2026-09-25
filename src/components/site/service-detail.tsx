@@ -13,6 +13,19 @@ import { WhatsAppButton } from "./whatsapp";
 
 type Service = (typeof services)[number];
 
+const coreConsultation = new Set([
+  "digital-marketing",
+  "web-development",
+  "software-development",
+  "app-development",
+  "ai-development",
+]);
+
+function heroConsultationLabel(service: Service) {
+  if (coreConsultation.has(service.slug)) return "Book Free Consultation";
+  return service.heroCta ?? service.cta;
+}
+
 export function ServiceDetail({ service }: { service: Service }) {
   const related = projectsForService(service.slug);
   const questions = service.faqIds?.length
@@ -97,7 +110,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                   search={{ service: service.id }}
                   onClick={() => track("quote_click", { source: service.slug })}
                 >
-                  {service.heroCta ?? service.cta} <ArrowRight className="size-4" aria-hidden />
+                  {heroConsultationLabel(service)} <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
               <WhatsAppButton source={`service-${service.slug}`} message={`Hello, I need help with ${service.title}.`} />
@@ -108,6 +121,7 @@ export function ServiceDetail({ service }: { service: Service }) {
             alt={service.imageAlt}
             width={1792}
             height={1008}
+            decoding="async"
             className="h-72 w-full rounded-3xl object-cover sm:h-96"
           />
         </div>

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { ProcessSteps } from "@/components/site/process-steps";
 import { SiteShell } from "@/components/site/shell";
+import { track } from "@/lib/analytics";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/process")({
@@ -49,7 +50,7 @@ function ProcessPage() {
           </div>
           <div className="flex items-end">
             <Button asChild>
-              <Link to="/contact">
+              <Link to="/contact" onClick={() => track("quote_click", { source: "process" })}>
                 Book Free Consultation <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>

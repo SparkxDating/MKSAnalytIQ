@@ -6,6 +6,7 @@ import { FaqList } from "@/components/site/faq";
 import { JsonLd } from "@/components/site/json-ld";
 import { SiteShell } from "@/components/site/shell";
 import { company, faqsFor, publishedStats, trustNotes } from "@/lib/content";
+import { track } from "@/lib/analytics";
 import { faqSchema, pageMeta } from "@/lib/seo";
 
 const questions = faqsFor("about");
@@ -63,6 +64,8 @@ function About() {
           alt="MKSAnalytIQ office in Noida"
           width={1280}
           height={720}
+          loading="lazy"
+          decoding="async"
           className="h-80 w-full rounded-3xl object-cover lg:col-span-3 lg:h-full"
         />
         <div className="flex flex-col justify-center rounded-3xl bg-ink p-6 text-paper lg:col-span-2">
@@ -113,7 +116,7 @@ function About() {
             </p>
           </div>
           <Button asChild className="mt-6 w-fit">
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => track("quote_click", { source: "about" })}>
               Book Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>

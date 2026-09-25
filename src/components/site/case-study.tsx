@@ -112,15 +112,11 @@ export function CaseStudy({ project }: { project: Project }) {
                 ? `Built by the MKSAnalytIQ studio in Sector 8, Noida, for ${project.builtFor}.`
                 : "Studio product built by MKSAnalytIQ in Sector 8, Noida."}
             </p>
-            <p className="mt-3 text-sm leading-relaxed text-mute">
-              This page lists the documented scope and features. Any business outcomes shown here are verified and
-              approved for sharing.
-            </p>
           </section>
 
           {project.objective ? (
             <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-              <h2 className="text-2xl font-extrabold">Objective</h2>
+              <h2 className="text-2xl font-extrabold">Problem / Objective</h2>
               <p className="mt-3 text-sm leading-relaxed text-mute">{project.objective}</p>
             </section>
           ) : null}
@@ -156,7 +152,7 @@ export function CaseStudy({ project }: { project: Project }) {
           <section className="overflow-hidden rounded-3xl border border-line bg-card">
             <h2 className="px-5 pt-5 text-2xl font-extrabold">Screenshot</h2>
             <div className="mt-4">
-              <Preview slug={project.slug} />
+              <Preview slug={project.slug} loading="lazy" />
             </div>
             <p className="px-5 py-4 text-sm leading-relaxed text-mute">
               Project screenshot: {project.name}.
@@ -165,7 +161,7 @@ export function CaseStudy({ project }: { project: Project }) {
 
           {linked.length ? (
             <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-              <h2 className="text-2xl font-extrabold">Where this sits</h2>
+              <h2 className="text-2xl font-extrabold">Related services</h2>
               <p className="mt-3 text-sm leading-relaxed text-mute">
                 This project is an example of{" "}
                 {linked.map((service, index) => (
@@ -183,18 +179,20 @@ export function CaseStudy({ project }: { project: Project }) {
         </div>
 
         <aside className="space-y-4">
+          {project.stack.length ? (
+            <section className="rounded-3xl border border-line bg-card p-5">
+              <h2 className="text-lg font-bold">Technology</h2>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {project.stack.map((tag) => (
+                  <li key={tag} className="rounded-full bg-paper px-2.5 py-1 text-xs font-medium">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
           <section className="rounded-3xl border border-line bg-card p-5">
-            <h2 className="text-lg font-bold">Technology</h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {project.stack.map((tag) => (
-                <li key={tag} className="rounded-full bg-paper px-2.5 py-1 text-xs font-medium">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </section>
-          <section className="rounded-3xl border border-line bg-card p-5">
-            <h2 className="text-lg font-bold">Links</h2>
+            <h2 className="text-lg font-bold">Project links</h2>
             <div className="mt-3 flex flex-col gap-2 text-sm font-semibold">
               {project.github ? (
                 <a
@@ -204,6 +202,7 @@ export function CaseStudy({ project }: { project: Project }) {
                   rel="noopener noreferrer"
                 >
                   GitHub repository <ArrowUpRight className="size-4" aria-hidden />
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               ) : (
                 <p className="text-sm font-normal leading-relaxed text-mute">Source repository is private.</p>
@@ -216,6 +215,7 @@ export function CaseStudy({ project }: { project: Project }) {
                   rel="noopener noreferrer"
                 >
                   Live demo <ArrowUpRight className="size-4" aria-hidden />
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               ) : (
                 <p className="text-sm font-normal leading-relaxed text-mute">No public live demo is listed.</p>
@@ -232,7 +232,9 @@ export function CaseStudy({ project }: { project: Project }) {
               Tell us what you’re trying to build or promote. The first conversation is to see if the work is a fit.
             </p>
             <Button asChild className="mt-4 w-full">
-              <Link to="/contact">Book Free Consultation</Link>
+              <Link to="/contact" onClick={() => track("quote_click", { source: `case-${project.slug}` })}>
+                Book Free Consultation
+              </Link>
             </Button>
             <WhatsAppButton
               source={`case-${project.slug}`}

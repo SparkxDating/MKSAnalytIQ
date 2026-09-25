@@ -21,6 +21,7 @@ export function Preview({
         width={1280}
         height={720}
         loading={loading}
+        decoding="async"
         className="h-full w-full object-cover object-center"
       />
     </div>
