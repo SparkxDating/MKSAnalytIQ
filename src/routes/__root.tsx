@@ -6,7 +6,7 @@ import { businessGraph } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
 const description =
-  "MKSAnalytIQ is a digital marketing agency in Noida Sector 8 for SEO, Google Ads, social media, websites and software across Delhi NCR.";
+  "MKSANALYTIQ is a Noida-based technology and digital growth studio offering digital marketing, web development, software, app and AI solutions across Delhi NCR and India.";
 
 function analyticsScripts() {
   const scripts: { children: string }[] = [];
@@ -30,9 +30,9 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Digital Marketing Agency in Noida Sector 8 | MKSAnalytIQ" },
+      { title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida" },
       { name: "description", content: description },
-      { name: "theme-color", content: "#071426" },
+      { name: "theme-color", content: "#f7fbff" },
       { name: "robots", content: "index,follow" },
     ],
     links: [

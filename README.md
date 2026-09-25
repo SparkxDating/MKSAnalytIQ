@@ -122,3 +122,59 @@ npm run build
 ```
 
 `npm run dev` serves the site on port 8080. `npm run build` produces the production bundle and then runs database migrations when `DATABASE_URL` is set.
+
+---
+
+## Project Structure
+
+```
+src/routes/          Public pages, including the homepage, services, portfolio, contact, and legal routes
+src/components/site/ Shared marketing components
+src/lib/content.ts   Service, project, and company copy
+src/lib/seo.ts       Canonical URLs, Open Graph, and JSON-LD helpers
+src/styles.css       Global styles
+public/sitemap.xml   Sitemap
+public/robots.txt    Robots file
+public/media/        Images used by the site
+migrations/          SQL migrations
+scripts/             Dev, build, and migration helpers
+```
+
+---
+
+## SEO & Discoverability
+
+Implemented in the site today:
+
+- Unique titles and meta descriptions through `pageMeta` in `src/lib/seo.ts`
+- Canonical URLs on `https://www.mksanalytiq.in`
+- Open Graph and Twitter card tags
+- JSON-LD for Organization, LocalBusiness, WebSite, Service, BreadcrumbList, and FAQPage where those pages render them
+- `public/sitemap.xml` and `public/robots.txt`
+- `theme-color` set to `#f7fbff`
+
+---
+
+## Local Development
+
+Package manager: npm. Scripts from `package.json`:
+
+```bash
+npm install
+npm run dev
+npm run typecheck
+npm run build
+npm run preview
+```
+
+`npm run dev` starts Vite on port 8080. `npm run build` builds the site and then runs `npm run db:migrate`. `npm run typecheck` runs `tsc --noEmit`.
+
+---
+
+## Contact
+
+- **Studio:** C-81, C Block, Sector 8, Noida, Uttar Pradesh 201306, India
+- **Phone:** +91 95608 14623
+- **Email:** hello@mksanalytiq.in
+- **Website:** https://www.mksanalytiq.in
+

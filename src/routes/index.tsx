@@ -28,12 +28,12 @@ import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
 const description =
-  "MKSAnalytIQ is a digital marketing agency in Noida Sector 8 for SEO, Google Ads, social media, websites and software across Delhi NCR.";
+  "MKSANALYTIQ is a Noida-based technology and digital growth studio offering digital marketing, web development, software, app and AI solutions across Delhi NCR and India.";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "Digital Marketing Agency in Noida Sector 8 | MKSAnalytIQ",
+      title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida",
       description,
       path: "/",
     }),
@@ -132,11 +132,11 @@ const floats: {
   ry: number;
   scale: number;
 }[] = [
-  { title: "AI & Automation", icon: Brain, className: "left-[26%] top-[2%]", delay: "0.2s", z: -48, rotate: -6, rx: 10, ry: -8, scale: 0.9 },
-  { title: "Web Development", icon: Code2, className: "right-[1%] top-[8%]", delay: "1.1s", z: -18, rotate: 7, rx: 8, ry: 10, scale: 0.94 },
-  { title: "Software Development", icon: Target, className: "right-[4%] top-[40%]", delay: "0.6s", z: 28, rotate: 4, rx: 4, ry: 12, scale: 1 },
-  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[20%]", delay: "0s", z: 70, rotate: -8, rx: 2, ry: -12, scale: 1.05 },
-  { title: "App Development", icon: Smartphone, className: "left-[8%] bottom-[2%]", delay: "1.5s", z: 92, rotate: -3, rx: 0, ry: -6, scale: 1.06 },
+  { title: "AI & Automation", icon: Brain, className: "left-[26%] top-[2%]", delay: "0.2s", z: -90, rotate: -6, rx: 10, ry: -8, scale: 0.88 },
+  { title: "Web Development", icon: Code2, className: "right-[1%] top-[8%]", delay: "1.1s", z: -36, rotate: 7, rx: 8, ry: 10, scale: 0.92 },
+  { title: "Software Development", icon: Target, className: "right-[4%] top-[40%]", delay: "0.6s", z: 36, rotate: 4, rx: 4, ry: 12, scale: 1 },
+  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[20%]", delay: "0s", z: 96, rotate: -8, rx: 2, ry: -12, scale: 1.04 },
+  { title: "App Development", icon: Smartphone, className: "left-[8%] bottom-[2%]", delay: "1.5s", z: 140, rotate: -3, rx: 0, ry: -6, scale: 1.08 },
 ];
 
 function Home() {
