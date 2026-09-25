@@ -381,27 +381,35 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-8 sm:py-14">
-        <div className="grid items-center gap-8 lg:grid-cols-12">
+      <section className="tech-section relative mx-auto max-w-6xl overflow-hidden px-5 pb-6 pt-6 sm:pb-8 sm:pt-10">
+        <div className="pointer-events-none absolute -right-6 top-8 size-36 rounded-full bg-blue-200/50 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute bottom-10 left-6 size-16 rounded-full bg-violet-200/60 blur-2xl" aria-hidden />
+        <div className="relative grid items-end gap-6 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="inline-flex items-center gap-2 rounded-full border border-[#d7e4ff] bg-white/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-primary">
               Technology
             </p>
-            <h2 className="mt-4 font-display text-4xl font-extrabold tracking-tight">
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:mt-4 sm:text-4xl">
               Modern Stack.
               <span className="block">Real Solutions.</span>
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#4c5d78]">
-              Tools named on published studio projects. Nothing is listed here that those projects do not already use.
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#4c5d78] sm:mt-3">
+              Tools used across our published studio projects to build reliable, scalable and future-ready solutions.
             </p>
           </div>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:col-span-8">
-            {technologies.map((name) => (
-              <li key={name} className="glass-card flex h-24 flex-col items-center justify-center gap-2 rounded-2xl text-center">
-                <TechMark name={name} />
-                <span className="font-display text-xs font-bold text-ink">{name}</span>
-              </li>
-            ))}
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:col-span-8 lg:grid-cols-4">
+            {technologies.map((name) => {
+              const meta = techMeta[name] ?? { category: "Stack", glow: "tech-glow-blue" };
+              return (
+                <li key={name} className={`tech-tile ${meta.glow}`}>
+                  <span className="grid size-9 place-items-center" aria-hidden>
+                    <TechIcon name={name} />
+                  </span>
+                  <span className="mt-2 font-display text-[13px] font-bold leading-none text-ink">{name}</span>
+                  <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-[#5c6b80]">{meta.category}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -471,24 +479,110 @@ function Stat({ kicker, title, text }: { kicker: string; title: string; text: st
   );
 }
 
-function TechMark({ name }: { name: string }) {
-  const marks: Record<string, string> = {
-    "Next.js": "N",
-    TypeScript: "TS",
-    Python: "Py",
-    NestJS: "Ne",
-    PostgreSQL: "Pg",
-    Prisma: "Pr",
-    Expo: "Ex",
-    Supabase: "Sb",
-    Swift: "Sw",
-    Kotlin: "Kt",
-    JavaScript: "JS",
-  };
+const techMeta: Record<string, { category: string; glow: string }> = {
+  "Next.js": { category: "Frontend", glow: "tech-glow-blue" },
+  TypeScript: { category: "Frontend", glow: "tech-glow-blue" },
+  Python: { category: "Backend", glow: "tech-glow-amber" },
+  NestJS: { category: "Backend", glow: "tech-glow-red" },
+  PostgreSQL: { category: "Database", glow: "tech-glow-blue" },
+  Prisma: { category: "Database", glow: "tech-glow-ink" },
+  Expo: { category: "Mobile", glow: "tech-glow-ink" },
+  Supabase: { category: "Infrastructure", glow: "tech-glow-green" },
+  Swift: { category: "Mobile", glow: "tech-glow-amber" },
+  Kotlin: { category: "Mobile", glow: "tech-glow-violet" },
+  JavaScript: { category: "Frontend", glow: "tech-glow-amber" },
+};
+
+function TechIcon({ name }: { name: string }) {
+  const common = { viewBox: "0 0 24 24", className: "size-7", fill: "none" } as const;
+  if (name === "Next.js") {
+    return (
+      <svg {...common} aria-hidden>
+        <circle cx="12" cy="12" r="9" stroke="#111827" strokeWidth="1.6" />
+        <path d="M9 16V8l7.2 8" stroke="#111827" strokeWidth="1.6" />
+        <path d="M15.2 8v8" stroke="#111827" strokeWidth="1.6" />
+      </svg>
+    );
+  }
+  if (name === "TypeScript") {
+    return (
+      <svg {...common} aria-hidden>
+        <rect x="3" y="3" width="18" height="18" rx="3" fill="#3178C6" />
+        <path d="M8 10.2h8M12 10.2V17" stroke="#fff" strokeWidth="1.5" />
+        <path d="M14.2 14.2c.4-.5 1-.8 1.7-.8.9 0 1.5.4 1.5 1.1 0 1.6-3.2.8-3.2 2.4 0 .7.6 1.1 1.6 1.1.8 0 1.4-.3 1.8-.8" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (name === "Python") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M12 4c3 0 3.2 1.3 3.2 2.8v1.6H9.2v.7h6.6c1.6 0 2.7 1 2.7 2.7v2.6c0 1.6-1.2 2.6-2.8 2.6h-1.6v-1.5c0-1.5-1.2-2.6-2.7-2.6H8.6C6.8 13 5.5 11.8 5.5 10V7.2C5.5 5.4 6.7 4 8.6 4H12z" fill="#3776AB" />
+        <path d="M12 20c-3 0-3.2-1.3-3.2-2.8v-1.6h6v-.7H8.2c-1.6 0-2.7-1-2.7-2.7v-2.6c0-1.6 1.2-2.6 2.8-2.6h1.6V8.5c0 1.5 1.2 2.6 2.7 2.6h2.8c1.8 0 3.1 1.2 3.1 3v2.8c0 1.8-1.2 3.1-3.1 3.1H12z" fill="#FFD343" />
+        <circle cx="10" cy="6.3" r=".7" fill="#fff" />
+        <circle cx="14" cy="17.7" r=".7" fill="#fff" />
+      </svg>
+    );
+  }
+  if (name === "NestJS") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M12 3.5 20 8v8l-8 4.5L4 16V8l8-4.5z" fill="#E0234E" />
+        <path d="M12 7.2 16.2 9.6v4.8L12 16.8 7.8 14.4V9.6L12 7.2z" fill="#fff" />
+        <path d="M12 9.2 14.2 10.5v2.5L12 14.2 9.8 13V10.5L12 9.2z" fill="#E0234E" />
+      </svg>
+    );
+  }
+  if (name === "PostgreSQL") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M8 19.5c.4-1.6 1.2-2.4 2.2-2.8.3-2 .2-3.4-.4-4.4-1.2-.3-2.3-1.2-2.6-2.6-.5 1.4-1.8 2-2.7 1.6.6-1.6 2-2.6 3.6-2.8-.2-.8.2-1.8 1.2-2.3 1.6-1 3.6-.4 4.4 1 .8-.3 1.8-.2 2.4.4 1.2 1.2.8 3-.6 4 .2.8 0 1.8-.6 2.6-.8 1.1-.7 2.6-.3 4.3 1.1.3 2 .9 2.4 2.6" stroke="#336791" strokeWidth="1.4" strokeLinecap="round" />
+        <circle cx="10.2" cy="9.2" r=".6" fill="#336791" />
+      </svg>
+    );
+  }
+  if (name === "Prisma") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M12.8 3.2 20 19.2h-4.2L12.6 9.4 8.4 19.2H4L12.8 3.2z" fill="#1B2B4A" />
+        <path d="M14.6 19.2h4.6L15.2 12l-.6 7.2z" fill="#5A67D8" />
+      </svg>
+    );
+  }
+  if (name === "Expo") {
+    return (
+      <svg {...common} aria-hidden>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="#111827" />
+        <path d="M8 15.2 12 7.2l4 8" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (name === "Supabase") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M13.2 3.5 5.2 13.2h5.2l-.8 7.3 8.2-10.2h-5.4l.8-6.8z" fill="#3ECF8E" />
+      </svg>
+    );
+  }
+  if (name === "Swift") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M5 16.5c3.2-1 6.8-4.2 8.2-7.2 1.2 1.4 3.6 3.2 6 3.4-2.2-2.6-3.4-5.2-3.2-7.4-2.4 2.4-5.4 4.2-8.4 5.2C6.2 9.2 5 7.6 5 6.2 5 9.4 6.6 13.6 5 16.5z" fill="#F05138" />
+      </svg>
+    );
+  }
+  if (name === "Kotlin") {
+    return (
+      <svg {...common} aria-hidden>
+        <path d="M4 20V4h8.2L4 12.2V20z" fill="#7F52FF" />
+        <path d="M12.2 4H20L12 12l8 8H12.2L4 12.2 12.2 4z" fill="#E44857" />
+      </svg>
+    );
+  }
   return (
-    <span className="grid size-9 place-items-center rounded-xl bg-[#eef4ff] font-display text-xs font-extrabold text-primary shadow-[inset_0_0_0_1px_rgba(180,205,255,0.9)]">
-      {marks[name] ?? name.slice(0, 2)}
-    </span>
+    <svg {...common} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="#F7DF1E" />
+      <path d="M10.2 16.2c.4.7 1 1.2 2.1 1.2 1.1 0 1.8-.5 1.8-1.2 0-.8-.6-1.1-1.7-1.5l-.6-.2c-1.6-.6-2.6-1.3-2.6-2.8 0-1.4 1.1-2.5 2.9-2.5 1.2 0 2.1.4 2.7 1.5l-1.5.9c-.3-.6-.7-.8-1.2-.8-.6 0-.9.3-.9.8 0 .5.4.8 1.4 1.1l.6.2c1.8.7 2.8 1.4 2.8 3 0 1.7-1.3 2.6-3.2 2.6-1.6 0-2.7-.8-3.2-1.9l1.6-.9z" fill="#111827" />
+    </svg>
   );
 }
 

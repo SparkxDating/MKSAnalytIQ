@@ -76,6 +76,10 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .tech-tile:hover {
+    transform: none;
+  }
 }
 
 .tech-grid {
@@ -233,6 +237,60 @@
 
 .work-card:hover img {
   transform: scale(1.03);
+}
+
+.tech-section {
+  background: linear-gradient(180deg, transparent 0%, transparent 62%, rgba(232, 240, 255, 0.85) 100%);
+}
+
+.tech-tile {
+  display: flex;
+  height: 118px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(190, 210, 245, 0.95);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(241, 246, 255, 0.9));
+  box-shadow:
+    0 10px 22px rgba(40, 80, 160, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+@media (min-width: 640px) {
+  .tech-tile {
+    height: 132px;
+  }
+}
+
+.tech-tile:hover {
+  transform: perspective(700px) translateY(-5px) translateZ(8px) rotateX(4deg) rotateY(-3deg);
+}
+
+.tech-glow-blue:hover {
+  box-shadow: 0 16px 28px rgba(47, 107, 255, 0.16), 0 0 0 1px rgba(90, 140, 255, 0.35);
+}
+
+.tech-glow-amber:hover {
+  box-shadow: 0 16px 28px rgba(214, 158, 46, 0.16), 0 0 0 1px rgba(240, 190, 70, 0.4);
+}
+
+.tech-glow-red:hover {
+  box-shadow: 0 16px 28px rgba(224, 35, 78, 0.14), 0 0 0 1px rgba(224, 35, 78, 0.28);
+}
+
+.tech-glow-ink:hover {
+  box-shadow: 0 16px 28px rgba(20, 30, 60, 0.14), 0 0 0 1px rgba(80, 110, 180, 0.28);
+}
+
+.tech-glow-green:hover {
+  box-shadow: 0 16px 28px rgba(46, 180, 120, 0.16), 0 0 0 1px rgba(62, 207, 142, 0.4);
+}
+
+.tech-glow-violet:hover {
+  box-shadow: 0 16px 28px rgba(120, 80, 255, 0.16), 0 0 0 1px rgba(140, 110, 255, 0.35);
 }
 
 @keyframes float-y {
