@@ -76,10 +76,6 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-
-  .tech-tile:hover {
-    transform: none;
-  }
 }
 
 .tech-grid {
@@ -265,6 +261,69 @@
   }
 }
 
+/* Mobile-only compact polish for the technology stack. Desktop rules above stay unchanged. */
+@media (max-width: 639px) {
+  .tech-section {
+    padding-top: 0.75rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .tech-section > .grid {
+    gap: 0.7rem;
+    align-items: start;
+  }
+
+  .tech-section h2 {
+    margin-top: 0.4rem;
+  }
+
+  .tech-section h2 + p {
+    margin-top: 0.25rem;
+    line-height: 1.35;
+  }
+
+  .tech-section ul {
+    row-gap: 12px;
+    column-gap: 10px;
+  }
+
+  .tech-tile {
+    height: 82px;
+    min-width: 0;
+    padding: 0.3rem 0.45rem;
+    justify-content: center;
+  }
+
+  .tech-tile > span:first-child {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .tech-tile svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .tech-tile > span:nth-child(2) {
+    margin-top: 0.15rem;
+    line-height: 1;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .tech-tile > span:nth-child(3) {
+    margin-top: 0.08rem;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .tech-tile:hover {
   transform: perspective(700px) translateY(-5px) translateZ(8px) rotateX(4deg) rotateY(-3deg);
 }
@@ -291,6 +350,12 @@
 
 .tech-glow-violet:hover {
   box-shadow: 0 16px 28px rgba(120, 80, 255, 0.16), 0 0 0 1px rgba(140, 110, 255, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-tile:hover {
+    transform: none;
+  }
 }
 
 @keyframes float-y {
