@@ -9,6 +9,27 @@ import { JsonLd } from "./json-ld";
 import { Preview } from "./previews";
 import { WhatsAppButton } from "./whatsapp";
 
+function caseServiceAnchor(slug: string) {
+  switch (slug) {
+    case "digital-marketing":
+      return "marketing a defined offer";
+    case "web-development":
+      return "a public website";
+    case "software-development":
+      return "custom software";
+    case "app-development":
+      return "a mobile app";
+    case "ai-development":
+      return "an AI workflow a person reviews";
+    case "social-media":
+      return "social content";
+    case "event-management":
+      return "event registration";
+    default:
+      return "this service";
+  }
+}
+
 type Project = (typeof projects)[number];
 
 function isVercelHost(url: string) {
@@ -144,16 +165,19 @@ export function CaseStudy({ project }: { project: Project }) {
 
           {linked.length ? (
             <section className="rounded-3xl border border-line bg-card p-5 sm:p-6">
-              <h2 className="text-2xl font-extrabold">Related services</h2>
-              <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold">
-                {linked.map((service) => (
-                  <li key={service.slug}>
-                    <Link to="/services/$service" params={{ service: service.slug }} className="text-primary hover:text-ink">
-                      {service.linkLabel}
+              <h2 className="text-2xl font-extrabold">Where this sits</h2>
+              <p className="mt-3 text-sm leading-relaxed text-mute">
+                This project is an example of{" "}
+                {linked.map((service, index) => (
+                  <span key={service.slug}>
+                    {index === 0 ? "" : index === linked.length - 1 ? " and " : ", "}
+                    <Link to="/services/$service" params={{ service: service.slug }} className="font-semibold text-primary hover:text-ink">
+                      {caseServiceAnchor(service.slug)}
                     </Link>
-                  </li>
+                  </span>
                 ))}
-              </ul>
+                .
+              </p>
             </section>
           ) : null}
         </div>

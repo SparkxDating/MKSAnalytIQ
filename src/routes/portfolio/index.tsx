@@ -36,23 +36,27 @@ function Portfolio() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
             Browse public projects from the studio. Each project page covers its documented scope, features and
             technology, with a live demo or repository when one is available. Client results appear only when approved
-            for sharing. Related work links to{" "}
+            for sharing. A project page links to the matching work, whether that is{" "}
             <Link to="/services/$service" params={{ service: "web-development" }} className="font-semibold text-primary">
-              web development services
+              a website
             </Link>
             ,{" "}
             <Link to="/services/$service" params={{ service: "software-development" }} className="font-semibold text-primary">
-              custom software development
+              custom software
+            </Link>
+            ,{" "}
+            <Link to="/services/$service" params={{ service: "app-development" }} className="font-semibold text-primary">
+              a mobile app
             </Link>
             ,{" "}
             <Link to="/services/$service" params={{ service: "digital-marketing" }} className="font-semibold text-primary">
-              digital marketing services
+              marketing an offer
             </Link>{" "}
             or{" "}
             <Link to="/services/$service" params={{ service: "ai-development" }} className="font-semibold text-primary">
-              AI development
-            </Link>{" "}
-            where the project matches.
+              a reviewed AI step
+            </Link>
+            .
           </p>
           <a className="mt-4 inline-block text-sm font-semibold text-primary" href={company.github}>
             All repositories

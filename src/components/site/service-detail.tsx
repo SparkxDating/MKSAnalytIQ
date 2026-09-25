@@ -189,15 +189,17 @@ export function ServiceDetail({ service }: { service: Service }) {
         <section className="mx-auto max-w-6xl px-5 pb-4">
           <h2 className="text-2xl font-extrabold">Related services</h2>
           <ServiceBridges slug={service.slug} />
-          <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
-            {linked.map((item) => (
-              <li key={item.slug}>
-                <Link to="/services/$service" params={{ service: item.slug }} className="text-primary hover:text-ink">
-                  {item.linkLabel}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {bridgedService(service.slug) ? null : (
+            <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
+              {linked.map((item) => (
+                <li key={item.slug}>
+                  <Link to="/services/$service" params={{ service: item.slug }} className="text-primary hover:text-ink">
+                    {item.linkLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       ) : null}
 
@@ -245,26 +247,32 @@ export function ServiceDetail({ service }: { service: Service }) {
   );
 }
 
+function bridgedService(slug: string) {
+  return (
+    slug === "digital-marketing" ||
+    slug === "web-development" ||
+    slug === "software-development" ||
+    slug === "app-development" ||
+    slug === "ai-development"
+  );
+}
+
 function ServiceBridges({ slug }: { slug: string }) {
   const linkClass = "font-semibold text-primary hover:text-ink";
   if (slug === "digital-marketing") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        Campaigns usually need a page to land on. That is{" "}
+        A campaign still needs{" "}
         <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
-          web development
-        </Link>{" "}
-        when the brief is a site. When the enquiry has to enter a system your team already runs, the build is{" "}
-        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          software development
-        </Link>{" "}
-        or{" "}
-        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
-          app development
+          a page people can land on
         </Link>
-        . A chatbot or an automated draft on the same offer is{" "}
+        . If the enquiry has to enter a tool your team already runs, that build is{" "}
+        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+          custom software
+        </Link>
+        . A draft or answer a person still checks is{" "}
         <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
-          AI development
+          an AI workflow
         </Link>
         .
       </p>
@@ -273,21 +281,17 @@ function ServiceBridges({ slug }: { slug: string }) {
   if (slug === "web-development") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        A site that also has to be marketed sits with{" "}
-        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
-          digital marketing
-        </Link>
-        . When the brief is an internal system rather than a public site, see{" "}
+        When the brief is a system your staff use, rather than a public site, see{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          software development
+          the software practice
         </Link>
-        . Phone and tablet products are{" "}
+        . A phone or tablet version of the same job is{" "}
         <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
-          app development
+          an app
         </Link>
-        . A reviewed AI feature on the site is{" "}
-        <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
-          AI development
+        . Once the site is up and you want enquiries from it, that is{" "}
+        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+          marketing the offer
         </Link>
         .
       </p>
@@ -296,21 +300,17 @@ function ServiceBridges({ slug }: { slug: string }) {
   if (slug === "software-development") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        Public sites are{" "}
+        The public face of a product is usually{" "}
         <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
-          web development
+          a website
         </Link>
-        . Phone and tablet products are{" "}
+        . Customers on a phone need{" "}
         <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
-          app development
+          a mobile client
         </Link>
-        , and a reviewed AI feature inside the product is{" "}
+        . A step that drafts or checks something, and that a person still reviews, belongs with{" "}
         <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
-          AI development
-        </Link>
-        . When the software needs to be marketed after launch, that work is{" "}
-        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
-          digital marketing
+          AI inside the product
         </Link>
         .
       </p>
@@ -319,21 +319,17 @@ function ServiceBridges({ slug }: { slug: string }) {
   if (slug === "app-development") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        The admin side, API and shared backend are usually{" "}
+        The admin side and the API are{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          software development
+          software behind the app
         </Link>
-        . A public site beside the app is{" "}
+        . The same job in a browser is{" "}
         <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
-          web development
+          a web application
         </Link>
-        . A reviewed AI feature inside the app is{" "}
+        . A reviewed draft or answer inside the app is{" "}
         <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
-          AI development
-        </Link>
-        . Marketing the app after launch is{" "}
-        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
-          digital marketing
+          an AI feature
         </Link>
         .
       </p>
@@ -342,21 +338,17 @@ function ServiceBridges({ slug }: { slug: string }) {
   if (slug === "ai-development") {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
-        AI features ship as software, so the build sits with{" "}
+        The feature still has to ship as{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          software development
+          software your team can run
         </Link>
-        . The same feature on a public site is{" "}
+        . On a public site, that same job is{" "}
         <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
-          web development
+          part of the website
         </Link>
-        , and inside a phone app it is{" "}
-        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
-          app development
-        </Link>
-        . When the job is leads or content rather than a product feature, see{" "}
+        . When the work is enquiries or content rather than a product feature, it sits with{" "}
         <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
-          digital marketing
+          marketing
         </Link>
         .
       </p>
