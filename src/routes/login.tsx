@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, LockKeyhole, Sparkles } from "lucide-react";
 import { SiteShell } from "@/components/site/shell";
-import { GROK_PROVIDERS, authEnabled, signIn } from "@/lib/auth/client";
+import { SIGN_IN_PROVIDERS, authEnabled, signIn } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
 export const Route = createFileRoute("/login")({
@@ -51,11 +51,11 @@ function Login() {
           {error ? <p className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-800" role="alert">{error}</p> : null}
           {!authEnabled ? (
             <p className="mt-5 rounded-xl bg-paper p-4 text-sm leading-relaxed text-mute">
-              Sign-in is not enabled for this deployment, so the private studio is unavailable.
+              Owner sign-in and the studio database still need to be configured for this deployment.
             </p>
           ) : (
             <div className="mt-6 space-y-3">
-              {GROK_PROVIDERS.filter((provider) => provider.idp === "google").map((provider) => (
+              {SIGN_IN_PROVIDERS.filter((provider) => provider.idp === "google").map((provider) => (
                 <button
                   key={provider.providerId}
                   type="button"

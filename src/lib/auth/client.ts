@@ -1,7 +1,7 @@
 import { genericOAuthClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 import { runPreSignInSignOut, runSignOut } from "../../../scripts/sign-out-plan.mjs";
-import { GROK_PROVIDERS } from "./providers";
+import { GOOGLE_PROVIDERS, GROK_PROVIDERS } from "./providers";
 
 /**
  * Better Auth client for this React SPA (browser-side).
@@ -39,6 +39,9 @@ export const authEnabled = import.meta.env.VITE_AUTH_ENABLED !== "false";
 
 /** The upstream providers to render sign-in buttons for. */
 export { GROK_PROVIDERS };
+export const SIGN_IN_PROVIDERS = import.meta.env.VITE_AUTH_PROVIDER === "google"
+  ? GOOGLE_PROVIDERS
+  : GROK_PROVIDERS;
 
 // ── Live-preview bearer token ────────────────────────────────────────────────
 // The embedded preview iframe has partitioned cookies, so we keep the session's
@@ -83,15 +86,15 @@ function inLivePreview(): boolean {
 type PopupMessage = { source: "grok-auth-popup"; token: string | null; error?: string };
 
 /**
- * Start sign-in with one upstream provider (`providerId` from `GROK_PROVIDERS`),
- * federating through the Grok auth broker.
+ * Start sign-in with either the standalone Google provider or a broker provider.
  *
  * - **Live preview** (`*.grok-sandbox.com` iframe): opens a POPUP to
  *   `/auth/popup`, served by the template Vite plugin (see `vite.config.ts` +
  *   `popup.server.ts`) — 302s to the broker/upstream login (no app chrome) and,
  *   on return, posts the session bearer token back. We store it and refresh the
  *   session; no top-level navigation of the iframe to the broker.
- * - **Deployed** (and local non-iframe): a normal full-page redirect into the broker.
+ * - **Standalone deployment**: Better Auth starts the Google social-provider flow.
+ * - **Broker deployment**: a normal full-page redirect into the auth broker.
  *
  * Either way it clears any existing local session FIRST so switching providers
  * actually switches identity.
@@ -119,6 +122,17 @@ export async function signIn(
     requestSignOut: () => authClient.signOut(),
     clearToken: () => setBearerToken(null),
   });
+
+  if (providerId === "google" && import.meta.env.VITE_AUTH_PROVIDER === "google") {
+    const { data, error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL,
+      errorCallbackURL,
+    });
+    if (error) throw new Error(error.message ?? "Sign-in failed");
+    if (data?.url) window.location.href = data.url;
+    return;
+  }
 
   if (inLivePreview()) {
     if (!popup) throw new Error("Pop-up blocked — allow pop-ups for sign-in");

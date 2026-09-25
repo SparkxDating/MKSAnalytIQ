@@ -147,7 +147,7 @@ function Studio() {
 
   if (isPending) return <StudioLoading />;
   if (!authEnabled) {
-    return <div className="grid min-h-screen place-items-center bg-[#070b16] px-5 text-center text-white"><div className="max-w-md"><h1 className="text-xl font-bold">Private studio unavailable</h1><p className="mt-2 text-sm leading-relaxed text-white/55">Sign-in must be enabled for this deployment before you can access contacts or campaigns.</p></div></div>;
+    return <div className="grid min-h-screen place-items-center bg-[#070b16] px-5 text-center text-white"><div className="max-w-md"><h1 className="text-xl font-bold">Private studio unavailable</h1><p className="mt-2 text-sm leading-relaxed text-white/55">Owner sign-in and the studio database still need to be configured for this deployment.</p></div></div>;
   }
   if (!user) return <Navigate to="/login" />;
   if (loading) return <StudioLoading />;
@@ -556,10 +556,10 @@ function Setup({ delivery }: { delivery: MarketingStudioData["delivery"] }) {
           <div><p className="text-sm font-semibold">{delivery.ready ? "Brevo is connected" : "Brevo setup is incomplete"}</p><p className="mt-1 text-xs leading-relaxed text-white/55">{delivery.ready ? "Campaigns can be sent after they’re saved. You’ll confirm every send." : `Missing: ${delivery.missing.join(", ")}.`}</p></div>
         </div>
         <ol className="mt-6 space-y-4">
-          <SetupStep number="01" title="Create your Brevo account" text="Start on the free plan while your list is small. Brevo currently includes 300 campaign sends per day on its free tier. Sign in to this studio with the Google address in MARKETING_OWNER_EMAIL (defaults to the public MKSAnalytIQ email)." />
-          <SetupStep number="02" title="Verify your sender domain" text="Use an address on a domain you control and complete the DNS authentication records Brevo provides. The public contact address is Gmail, which can’t be domain-authenticated; choose a sender on your own domain." />
-          <SetupStep number="03" title="Create a dedicated contact list" text="Create a new, empty list for MKSAnalytIQ only. Don’t share it or add contacts outside this studio; it syncs opted-in contacts and keeps unsubscribed addresses suppressed." />
-          <SetupStep number="04" title="Add server-side settings" text="Configure BREVO_API_KEY, BREVO_LIST_ID, BREVO_SENDER_EMAIL, and BREVO_SENDER_NAME in the hosting environment. The key stays off the browser. Set MARKETING_OWNER_EMAIL too if your Google sign-in address differs from the public business email." />
+          <SetupStep number="01" title="Connect Google sign-in" text="Create a Google OAuth web client. Add https://mksanalytiq.in/api/auth/callback/google as its redirect URI, then save GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in Vercel. The owner account defaults to MKSAnalytIQ@gmail.com." />
+          <SetupStep number="02" title="Connect persistent storage" text="Create a Neon Postgres database and save its pooled connection string as DATABASE_URL in Vercel. Add BETTER_AUTH_URL, BETTER_AUTH_SECRET, VITE_AUTH_ENABLED=true, and VITE_AUTH_PROVIDER=google there too, then redeploy." />
+          <SetupStep number="03" title="Connect Brevo delivery" text="BREVO_API_KEY, BREVO_LIST_ID, BREVO_SENDER_EMAIL, and BREVO_SENDER_NAME are server-side settings. The API key stays off the browser; the contact list is scoped to MKSAnalytIQ." />
+          <SetupStep number="04" title="Add opted-in contacts" text="Import or add only people who agreed to receive MKSAnalytIQ marketing email. Unsubscribed and suppressed contacts are excluded from future sends." />
         </ol>
         <p className="mt-6 rounded-2xl border border-white/10 bg-black/10 p-4 text-xs leading-relaxed text-white/45">This first release uses one private MKSAnalytIQ workspace and server-side provider settings. Workspace and membership data are tenant-scoped so a later customer version can add separate accounts, teams, and billing.</p>
       </section>
