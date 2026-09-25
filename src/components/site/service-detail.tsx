@@ -344,7 +344,15 @@ function ServiceBridges({ slug }: { slug: string }) {
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
         AI features ship as software, so the build sits with{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          custom software development
+          software development
+        </Link>
+        . The same feature on a public site is{" "}
+        <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
+          web development
+        </Link>
+        , and inside a phone app it is{" "}
+        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
+          app development
         </Link>
         . When the job is leads or content rather than a product feature, see{" "}
         <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>

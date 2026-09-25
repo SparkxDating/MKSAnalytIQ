@@ -529,19 +529,29 @@ export const services: {
       "AI is added as a slogan, with no workflow, no review step and no agreement about which tool is actually being used.",
     solution:
       "We scope the job: what the software should draft, route or answer, which integrations it uses, and who approves the output. MKSAnalytIQ does not claim a proprietary foundation model.",
-    sections: [
-      {
-        title: "What this service is",
-        text: "AI development here is a product feature: a chatbot, a draft, a check or an automation inside a job your team already does. MKSAnalytIQ does not claim a proprietary foundation model. The useful part is the workflow and the review step around an external AI tool.",
-      },
-      {
-        title: "What is included",
-        text: "The scope names the job, the tool, what a person still approves, and where the result goes — a dashboard, a form or another system. Chatbots, workflow automation and AI-assisted drafts are the usual shapes. An unsupervised system is not what this service is.",
-      },
-      {
-        title: "How to start",
-        text: "Describe the job: a chatbot, a draft step, or automation inside a system you already run. The consultation names the integration and the approval step. That is a software scope, not a research engagement.",
-      },
+    sections: [],
+    serviceMenu: {
+      title: "AI Development & Automation Services",
+      intro:
+        "Included only when the written scope names them. The studio does not train its own model, and a person still reviews the output.",
+      items: [
+        "AI Applications",
+        "AI Chatbots",
+        "AI Integrations",
+        "Business Automation",
+        "AI Workflows",
+        "AI Dashboards",
+        "AI-enabled Software",
+      ],
+    },
+    deliverablesTitle: "Where AI Can Help",
+    pageDeliverables: [
+      "Drafting content a person approves before it is used",
+      "Turning a defined topic into a short-form asset inside a product",
+      "Guiding a form or filing with checks and a structured export",
+      "Answering a question the scope defines, in a chat step someone can review",
+      "Moving a job through agreed steps instead of leaving it in a message thread",
+      "Sending that output to a dashboard or another system the scope names",
     ],
     deliverables: [
       "AI-powered applications",
@@ -553,15 +563,52 @@ export const services: {
       "Intelligent business tools",
     ],
     cta: "Book Free Consultation",
+    heroCta: "Discuss an AI Project",
+    closingCta: "Explore AI for Your Business",
     related: ["software"],
-    relatedServices: ["software-development", "digital-marketing", "web-development", "app-development"],
+    relatedServices: ["software-development", "web-development", "app-development", "digital-marketing"],
     image: "/media/work/taxpilot.jpg",
     imageAlt: "TaxPilot AI, a guided software project developed by MKSAnalytIQ",
     seoTitle: "AI Development & Automation Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ builds AI-powered software, automation workflows, chatbots and intelligent business tools for companies in Noida, Delhi NCR and India.",
+    processTitle: "AI Development Process",
     processIntro:
-      "AI work uses the same five steps as other software: define the job, approve the tools and the review step in writing, build that workflow, launch it to the people who will use it, then adjust only what the scope allows.",
+      "Six steps. The workflow and the review step are written down before anything is built. This is not a promise of accuracy or a private model.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Identify Opportunity",
+        text: "The job to draft, check, route or answer, and who still approves the output.",
+      },
+      {
+        n: "02",
+        title: "Define Workflow",
+        text: "The steps, the external tool, and where the result goes. You approve that in writing.",
+      },
+      {
+        n: "03",
+        title: "Build",
+        text: "That workflow, built against the scope.",
+      },
+      {
+        n: "04",
+        title: "Integrate",
+        text: "A connection to software, a site or an app, only when the scope names it.",
+      },
+      {
+        n: "05",
+        title: "Test",
+        text: "The paths in the scope, including the review step, checked before anyone relies on them.",
+      },
+      {
+        n: "06",
+        title: "Improve",
+        text: "Changes after launch, only inside the scope. Not a guarantee of a result.",
+      },
+    ],
+    workTitle: "AI Projects",
+    faqIds: ["ai-model", "ai-scope", "ai-review", "ai-connect", "ai-results", "ai-begin"],
     technologyNote:
       "Published examples include TaxPilot AI, a guided preparation tool, and AI Influencer OS, a workspace for drafts and approval. Integrations use external AI tools named in the scope. The studio does not claim that it trains its own models.",
   },
@@ -1489,6 +1536,42 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "How do I start an app project?",
     a: "Use Discuss Your App Idea or Start an App Project, or message on WhatsApp. Say who will use the app and which platforms you have in mind. The first reply is a written scope. The studio is in Sector 8, Noida.",
     tags: ["app-page"],
+  },
+  {
+    id: "ai-model",
+    q: "Do you train a proprietary AI model?",
+    a: "No. MKSAnalytIQ does not claim a foundation model of its own. An AI project uses an external tool named in the scope, inside a workflow a person still reviews.",
+    tags: ["ai-page"],
+  },
+  {
+    id: "ai-scope",
+    q: "What can an AI project include?",
+    a: "An application, a chatbot, an integration, a workflow, a dashboard or an AI step inside other software. The written scope names which of those this brief is. Published examples include guided checks, content drafts with approval, and turning a topic into a short-form asset.",
+    tags: ["ai-page"],
+  },
+  {
+    id: "ai-review",
+    q: "Does someone still review the output?",
+    a: "Yes. The scope says what a person approves before the result is used. An unsupervised system is not what this service is.",
+    tags: ["ai-page"],
+  },
+  {
+    id: "ai-connect",
+    q: "Can this connect to software, a website or an app we already have?",
+    a: "Yes, when the scope names that system. The AI work is then a feature inside it, not a separate research project. A public site is web development, and a phone app is app development, when those are part of the same brief.",
+    tags: ["ai-page"],
+  },
+  {
+    id: "ai-results",
+    q: "Do you guarantee what the AI will produce?",
+    a: "No. The page does not promise accuracy, a lead count or a business result. You get the workflow in the scope, and changes later only inside that scope.",
+    tags: ["ai-page"],
+  },
+  {
+    id: "ai-begin",
+    q: "How do I start an AI project?",
+    a: "Use Discuss an AI Project or Explore AI for Your Business, or message on WhatsApp. Describe the job you want drafted, checked or answered, and who should approve it. The first reply is a written scope. The studio is in Sector 8, Noida.",
+    tags: ["ai-page"],
   },
 ];
 
