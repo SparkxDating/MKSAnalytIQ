@@ -7,7 +7,7 @@ export function ProcessSteps({
 }) {
   const list = items ?? steps;
   return (
-    <ol className="mt-8 grid gap-4 md:grid-cols-5">
+    <ol className={`mt-8 grid gap-4 ${list.length > 5 ? "sm:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-5"}`}>
       {list.map((step, index) => (
         <li
           key={step.n}

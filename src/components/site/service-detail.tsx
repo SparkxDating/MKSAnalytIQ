@@ -97,7 +97,7 @@ export function ServiceDetail({ service }: { service: Service }) {
                   search={{ service: service.id }}
                   onClick={() => track("quote_click", { source: service.slug })}
                 >
-                  {service.cta} <ArrowRight className="size-4" aria-hidden />
+                  {service.heroCta ?? service.cta} <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
               <WhatsAppButton source={`service-${service.slug}`} message={`Hello, I need help with ${service.title}.`} />
@@ -166,7 +166,7 @@ export function ServiceDetail({ service }: { service: Service }) {
           <h2 className="text-2xl font-extrabold">{service.deliverablesTitle ?? "Deliverables"}</h2>
           <p className="mt-2 text-sm text-mute">Typical items. The written scope lists what your project includes.</p>
           <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-            {service.deliverables.map((item) => (
+            {(service.pageDeliverables ?? service.deliverables).map((item) => (
               <li key={item} className="flex gap-3 text-sm">
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
                 {item}
@@ -211,7 +211,7 @@ export function ServiceDetail({ service }: { service: Service }) {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
-        <h2 className="text-3xl font-extrabold tracking-tight">Relevant work</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight">{service.workTitle ?? "Relevant work"}</h2>
         {related.length ? (
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {related.map((project) => (
@@ -279,7 +279,15 @@ function ServiceBridges({ slug }: { slug: string }) {
         </Link>
         . When the brief is an internal system rather than a public site, see{" "}
         <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
-          custom software development
+          software development
+        </Link>
+        . Phone and tablet products are{" "}
+        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
+          app development
+        </Link>
+        . A reviewed AI feature on the site is{" "}
+        <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
+          AI development
         </Link>
         .
       </p>

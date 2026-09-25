@@ -127,8 +127,14 @@ export const services: {
   processSteps?: { n: string; title: string; text: string }[];
   /** Extra list card, same treatment as deliverables. */
   serviceMenu?: { title: string; intro?: string; items: string[] };
-  /** Bottom button label. Hero keeps `cta`. */
+  /** Bottom button label. Hero keeps `cta` unless `heroCta` is set. */
   closingCta?: string;
+  /** Hero button label. The services index keeps `cta`. */
+  heroCta?: string;
+  /** Service-page deliverable list. The services index keeps `deliverables`. */
+  pageDeliverables?: string[];
+  /** Replaces the default “Relevant work” heading when set. */
+  workTitle?: string;
   /** FAQ ids for this page only, in display order. */
   faqIds?: string[];
 }[] = [
@@ -228,19 +234,29 @@ export const services: {
       "A site gets launched without a clear page for the offer, or a tool is promised and the team has no screen they can actually operate.",
     solution:
       "We scope the pages or the application, build it in the open, and hand over what the written agreement says you keep.",
-    sections: [
-      {
-        title: "What this service is",
-        text: "Web development is the public website or the web application your team uses after launch. That includes business and corporate sites, landing pages, online shops, and custom web applications such as admin dashboards.",
-      },
-      {
-        title: "What is included",
-        text: "The scope lists the pages, how someone gets in touch, and any connection to forms, payments, a CRM or another system you already run. Handover is whatever the written agreement says you keep. Website maintenance after launch — updates, fixes and small changes — is included only when the scope says so.",
-      },
-      {
-        title: "How to start",
-        text: "Say whether you need a business site, an online shop or a web application, and what content or systems you already have. Book that conversation from the contact page or WhatsApp. The first reply is a scope, not a build.",
-      },
+    sections: [],
+    serviceMenu: {
+      title: "Web Development Services",
+      intro: "The written scope names which of these are in the project.",
+      items: [
+        "Business Websites",
+        "Corporate Websites",
+        "Landing Pages",
+        "Ecommerce",
+        "Web Applications",
+        "Dashboards",
+        "API Integrations",
+        "Website Maintenance",
+      ],
+    },
+    deliverablesTitle: "What We Deliver",
+    pageDeliverables: [
+      "A written scope of the pages or screens",
+      "The site or web application that scope describes",
+      "A form, call or WhatsApp path for enquiries",
+      "A connection to payments, a CRM or another system only when the scope lists it",
+      "Handover of what the written agreement says you keep",
+      "Maintenance after launch only when the scope includes it",
     ],
     deliverables: [
       "Business websites",
@@ -253,15 +269,52 @@ export const services: {
       "Website maintenance",
     ],
     cta: "Book Free Consultation",
+    heroCta: "Discuss Your Website",
+    closingCta: "Start a Web Project",
     related: ["software"],
     relatedServices: ["digital-marketing", "software-development", "app-development", "ai-development"],
     image: "/media/work/buildsite.jpg",
     imageAlt: "BuildSite, a custom web application developed by MKSAnalytIQ",
     seoTitle: "Web Development Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSAnalytIQ provides website and web application development in Noida, Delhi NCR and across India, including business websites, web apps, dashboards and custom digital solutions.",
+      "Business websites, landing pages, shops and web applications from MKSAnalytIQ in Noida, for companies across Delhi NCR and India.",
+    processTitle: "From Design to Deployment",
     processIntro:
-      "Website and web-app work follows the studio’s five steps: confirm the pages and the audience, approve the scope, build where you can see progress, launch, then change only what was agreed.",
+      "Six steps. You approve the plan before development, and maintenance after launch is included only when the scope says so.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Planning",
+        text: "The pages, who they are for, the content you already have, and how someone gets in touch.",
+      },
+      {
+        n: "02",
+        title: "Design",
+        text: "The layout of those pages, approved before development starts.",
+      },
+      {
+        n: "03",
+        title: "Development",
+        text: "The site or web application, built against the written scope.",
+      },
+      {
+        n: "04",
+        title: "Testing",
+        text: "Forms, key pages and any connection named in the scope, checked before launch.",
+      },
+      {
+        n: "05",
+        title: "Launch",
+        text: "The site goes live on the host agreed in the scope.",
+      },
+      {
+        n: "06",
+        title: "Maintenance",
+        text: "Updates, fixes and small changes, only when the scope includes them.",
+      },
+    ],
+    workTitle: "Relevant Projects",
+    faqIds: ["web-kinds", "web-apps-page", "web-handover", "web-care", "web-connect", "web-begin"],
     technologyNote:
       "Published studio websites and web apps have used Next.js, TypeScript and JavaScript. PostgreSQL and Prisma show up when the product stores its own data. A new project does not automatically use all of those. The scope names the stack.",
   },
@@ -1233,6 +1286,42 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "How do I start, and is the first conversation free?",
     a: "Yes. Book a free consultation or send a WhatsApp message with the offer and whether a page already exists. You receive a written scope before a campaign launches. The studio is in Sector 8, Noida, and the work is available across Delhi NCR and India.",
     tags: ["dm-page"],
+  },
+  {
+    id: "web-kinds",
+    q: "What kinds of websites can the scope include?",
+    a: "Business websites, corporate websites, landing pages and ecommerce sites. The written scope lists the pages. This page does not promise a design trend or a launch date.",
+    tags: ["web-page"],
+  },
+  {
+    id: "web-apps-page",
+    q: "Do you build web applications and dashboards?",
+    a: "Yes, when the brief is a tool your team uses in the browser rather than a public brochure site. Dashboards are part of that when the scope names the screens.",
+    tags: ["web-page"],
+  },
+  {
+    id: "web-handover",
+    q: "What do we receive at the end?",
+    a: "Whatever the written agreement says you keep: the live site or application, and a repository when that was agreed. This page is not the contract.",
+    tags: ["web-page"],
+  },
+  {
+    id: "web-care",
+    q: "Is website maintenance included?",
+    a: "Only when the scope says so. Maintenance then covers updates, fixes and small changes. It is not assumed after launch.",
+    tags: ["web-page"],
+  },
+  {
+    id: "web-connect",
+    q: "Can the site connect to ads or a system we already use?",
+    a: "A form, call or WhatsApp path can be part of the site. A payment provider, CRM or other system is included only when the scope names it. Marketing for the site is a separate digital marketing brief unless you ask for both.",
+    tags: ["web-page"],
+  },
+  {
+    id: "web-begin",
+    q: "How do I start a web project?",
+    a: "Use Discuss Your Website or Start a Web Project, or message on WhatsApp. Say whether you need a business site, a shop or a web application, and what content you already have. The first reply is a written scope, not a build. The studio is in Sector 8, Noida.",
+    tags: ["web-page"],
   },
 ];
 
