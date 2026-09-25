@@ -167,12 +167,41 @@ function Home() {
                 Grow Smarter.
               </span>
             </h1>
-            <p className="mt-5 max-w-[33.5rem] text-base leading-relaxed text-[#4c5d78]">
-              MKSAnalytIQ is a Noida-based technology and digital growth studio helping businesses across{" "}
+            <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-semibold text-ink sm:text-base">
+              <Link to="/services/$service" params={{ service: "digital-marketing" }} className="text-primary">
+                Digital Marketing
+              </Link>
+              <span aria-hidden className="text-[#7b8ba3]">
+                +
+              </span>
+              <Link to="/services/$service" params={{ service: "web-development" }} className="text-primary">
+                Web
+              </Link>
+              <span aria-hidden className="text-[#7b8ba3]">
+                +
+              </span>
+              <Link to="/services/$service" params={{ service: "software-development" }} className="text-primary">
+                Software
+              </Link>
+              <span aria-hidden className="text-[#7b8ba3]">
+                +
+              </span>
+              <Link to="/services/$service" params={{ service: "app-development" }} className="text-primary">
+                Apps
+              </Link>
+              <span aria-hidden className="text-[#7b8ba3]">
+                +
+              </span>
+              <Link to="/services/$service" params={{ service: "ai-development" }} className="text-primary">
+                AI
+              </Link>
+            </p>
+            <p className="mt-4 max-w-[33.5rem] text-base leading-relaxed text-[#4c5d78]">
+              MKSANALYTIQ is a Noida-based technology and digital growth studio serving businesses across{" "}
               <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
                 Delhi NCR
               </Link>{" "}
-              and India with digital marketing, web development, software, apps and AI solutions.
+              and India.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button
@@ -230,6 +259,10 @@ function Home() {
               <Link to="/google-ads-agency-noida" className="font-semibold text-primary">
                 Google Ads
               </Link>
+              . The same services are available across{" "}
+              <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
+                Delhi NCR
+              </Link>
               .
             </p>
           </div>
@@ -261,6 +294,19 @@ function Home() {
             </li>
           ))}
         </ul>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button
+            asChild
+            className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
+          >
+            <Link to="/contact" onClick={() => track("quote_click", { source: "home-services" })}>
+              Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+            </Link>
+          </Button>
+          <WhatsAppButton source="home-services" variant="line">
+            Chat on WhatsApp
+          </WhatsAppButton>
+        </div>
         <p className="mt-6 text-sm text-[#5c6b80]">
           <Link to="/services/$service" params={{ service: "social-media" }} className="font-semibold text-ink">
             Social media
@@ -282,11 +328,24 @@ function Home() {
             <p className="mt-4 text-sm leading-relaxed text-[#4c5d78]">
               A look at some of the products and platforms we’ve built across industries.
             </p>
-            <Button asChild className="mt-6 border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white hover:brightness-110">
-              <Link to="/portfolio">
-                View All Projects <ArrowRight className="size-4" aria-hidden />
-              </Link>
-            </Button>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button asChild className="border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white hover:brightness-110">
+                <Link to="/portfolio">
+                  View All Projects <ArrowRight className="size-4" aria-hidden />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_22px_rgba(80,90,255,0.22)] hover:brightness-110"
+              >
+                <Link to="/contact" onClick={() => track("quote_click", { source: "home-work" })}>
+                  Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+                </Link>
+              </Button>
+              <WhatsAppButton source="home-work" variant="line">
+                Chat on WhatsApp
+              </WhatsAppButton>
+            </div>
           </div>
           <ul className="flex gap-4 overflow-x-auto pb-2 lg:col-span-8 lg:grid lg:grid-cols-3 lg:overflow-visible">
             {featured.map((project) => (
@@ -426,8 +485,12 @@ function Home() {
             <div className="max-w-2xl lg:pl-40">
               <h2 className="font-display text-4xl font-extrabold tracking-tight sm:text-5xl">Let’s Build Something Great</h2>
               <p className="mt-3 text-sm leading-relaxed text-[#4c5d78] sm:text-base">
-                Ready to grow your business with digital marketing, web development, software, apps or AI? Let’s discuss
-                your project.
+                Ready to grow your business with digital marketing, web development, software, apps or AI? MKSANALYTIQ
+                is a Noida-based studio serving{" "}
+                <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
+                  Delhi NCR
+                </Link>{" "}
+                and India.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button

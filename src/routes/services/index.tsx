@@ -4,6 +4,7 @@ import { Button } from "@/components/site/button";
 import { SiteShell } from "@/components/site/shell";
 import { WhatsAppButton } from "@/components/site/whatsapp";
 import { extras, services } from "@/lib/content";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { pageMeta } from "@/lib/seo";
 
@@ -30,9 +31,18 @@ function ServicesPage() {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
             Hire one practice or several. Digital marketing, web development, custom software, app development and AI
             development are the main work. Social media sits with the marketing. Event management is available when a
-            launch or gathering is part of the brief.
+            launch or gathering is part of the brief. The Noida studio serves businesses across{" "}
+            <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
+              Delhi NCR
+            </Link>{" "}
+            and India.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Button asChild>
+              <Link to="/contact" onClick={() => track("quote_click", { source: "services" })}>
+                Book Free Consultation <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </Button>
             <WhatsAppButton source="services" message="Hello, I’d like to talk about a service." />
           </div>
         </div>

@@ -50,7 +50,7 @@ function ProcessPage() {
           <div className="flex items-end">
             <Button asChild>
               <Link to="/contact">
-                Request Free Consultation <ArrowRight className="size-4" aria-hidden />
+                Book Free Consultation <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
           </div>

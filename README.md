@@ -153,6 +153,18 @@ Implemented in the site today:
 - `public/sitemap.xml` and `public/robots.txt`
 - `theme-color` set to `#f7fbff`
 
+Canonical host is `https://www.mksanalytiq.in`. Titles, descriptions, canonical links, Open Graph URLs, JSON-LD and `public/sitemap.xml` are built from `site.url` in `src/lib/content.ts`. Do not add a second canonical on the apex host.
+
+The permanent redirect from `mksanalytiq.in` to `www.mksanalytiq.in` is **not in this repository**. There is no `vercel.json` redirect and no host middleware for it. Configure it on the DNS / hosting project that serves the domain:
+
+1. Attach both `mksanalytiq.in` and `www.mksanalytiq.in`.
+2. Make `www.mksanalytiq.in` the primary host.
+3. 301 redirect `http://mksanalytiq.in/*` and `https://mksanalytiq.in/*` to the same path on `https://www.mksanalytiq.in`.
+4. Also 301 `http://www.mksanalytiq.in/*` to `https://www.mksanalytiq.in/*` if the host does not force HTTPS already.
+5. Do not also canonicalise `www` back to the apex.
+
+Exception: the studio setup copy still tells the owner to register the Google OAuth redirect URI as `https://mksanalytiq.in/api/auth/callback/google`. A blanket apex redirect will break that callback until the Google client is updated to `https://www.mksanalytiq.in/api/auth/callback/google`. Until that auth change is made, exclude `/api/auth/*` on the apex host from the redirect.
+
 ---
 
 ## Local Development

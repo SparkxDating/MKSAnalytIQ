@@ -47,14 +47,14 @@ export const hero = {
   title: "Build Digital. Grow Smarter.",
   lede: "MKSAnalytIQ is a technology and digital growth studio in Noida, helping businesses across Delhi NCR and India with digital marketing, websites, software, apps and AI solutions.",
   trust: "Based in Noida • Serving Delhi NCR and India",
-  primaryCta: "Request Free Consultation",
+  primaryCta: "Book Free Consultation",
   secondaryCta: "Chat on WhatsApp",
 } as const;
 
 export const finalCta = {
   title: "Have a project in mind?",
-  text: "Tell us what you're trying to build, market or improve.",
-  primary: "Request Free Consultation",
+  text: "Tell us what you want to market, build or improve. The studio is in Noida and works with businesses across Delhi NCR and India.",
+  primary: "Book Free Consultation",
   secondary: "Chat on WhatsApp",
 } as const;
 
@@ -113,6 +113,10 @@ export const services: {
   imageAlt: string;
   seoTitle: string;
   seoDescription: string;
+  /** One sentence above the shared five-step process. */
+  processIntro?: string;
+  /** Factual tools used on published work. Not a promise for the next brief. */
+  technologyNote?: string;
 }[] = [
   {
     id: "marketing",
@@ -123,27 +127,23 @@ export const services: {
     blurb:
       "Performance marketing, social media, SEO, content and analytics for businesses that want enquiries they can actually follow up.",
     suitable:
-      "Businesses in Noida and across Delhi NCR that want Google or Meta enquiries, with a page and a follow-up path you can read.",
+      "Businesses in Noida, Delhi NCR and elsewhere in India that have an offer and want enquiries from search, ads or social, with a page and a follow-up path someone can answer.",
     problem:
       "Spend often goes out before the offer, the landing page and the tracking agree. Without that, it is hard to tell what a lead cost.",
     solution:
       "We treat the offer, ads, landing page, retargeting and reporting as one system. You approve a written scope before anything launches.",
     sections: [
       {
-        title: "Performance marketing",
-        text: "Performance marketing here means campaigns aimed at a number you care about — leads, bookings or sales. A typical scope can include Google Ads, Meta Ads, a landing page, conversion tracking and retargeting. Reporting shows what the spend produced, and you see it before the next month is planned.",
+        title: "What this service is",
+        text: "Digital marketing here means putting a defined offer in front of people who can enquire, then reading what that activity produced. A scope can include Google Ads, Meta Ads, SEO, content, social media and the landing page those channels share. This page does not promise a ranking or a number of leads.",
       },
       {
-        title: "Social media, SEO and content",
-        text: "Social media marketing can run beside the ads, or as its own monthly plan with a calendar you approve. SEO and content strategy mean service pages and articles that answer real questions, so search and the sales conversation describe the same offer. Nothing on this page promises a ranking.",
-      },
-      {
-        title: "Analytics, leads and conversion",
-        text: "Lead generation and conversion optimization, in this studio, are the path from an ad or a page to a form, call or WhatsApp someone can answer — plus a monthly read of spend, reach and enquiries. We keep what is working and change what is not. We do not publish invented results.",
+        title: "What is included",
+        text: "The written scope names the channels, whether a landing page is part of the work, how enquiries are tracked, and what the monthly report will show. SEO and content are pages that describe the same offer as the ads. Social media can sit inside this scope or be planned on its own. Retargeting is included only when the scope lists it.",
       },
       {
         title: "How to start",
-        text: "Book a consultation or send a WhatsApp message with the offer and whether a page already exists. You get a written scope before any campaign launches. The studio is in Noida and takes this work for businesses across Delhi NCR and India.",
+        text: "Book a free consultation or message on WhatsApp with the offer and whether a page already exists. You get a written scope before a campaign launches. The studio is in Sector 8, Noida, and this work is available across Delhi NCR and India.",
       },
     ],
     deliverables: [
@@ -155,14 +155,18 @@ export const services: {
       "Performance reporting",
       "SEO and content pages",
     ],
-    cta: "Request Free Consultation",
+    cta: "Book Free Consultation",
     related: ["marketing", "campaigns"],
-    relatedServices: ["web-development", "social-media", "software-development"],
+    relatedServices: ["web-development", "ai-development", "social-media"],
     image: "/media/desk.jpg",
     imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
     seoTitle: "Digital Marketing Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ provides digital marketing services in Noida and Delhi NCR, including performance marketing, social media, SEO, content and analytics.",
+    processIntro:
+      "A marketing engagement uses the same five steps as the rest of the studio: understand the offer, approve a written scope, prepare the page and campaigns, launch, then keep what is producing enquiries and change what is not.",
+    technologyNote:
+      "The channels used on this work are Google Ads, Meta Ads, SEO and content pages, and social calendars when they are in the scope. Tracking is the form, call or WhatsApp path the report is based on. There is no separate ad platform to disclose, and this page does not publish performance figures.",
   },
   {
     id: "web",
@@ -180,24 +184,16 @@ export const services: {
       "We scope the pages or the application, build it in the open, and hand over what the written agreement says you keep.",
     sections: [
       {
-        title: "Website development",
-        text: "Website development covers business websites, corporate websites and landing pages. The page, the offer and the way a person gets in touch are planned together — a short site for one service, or a larger company site with the sections you actually need.",
+        title: "What this service is",
+        text: "Web development is the public website or the web application your team uses after launch. That includes business and corporate sites, landing pages, online shops, and custom web applications such as admin dashboards.",
       },
       {
-        title: "E-commerce websites",
-        text: "E-commerce websites are in scope when you need products, a cart and a checkout your team can operate. Catalogue size, payments and any later channel connections are written down before the build starts.",
-      },
-      {
-        title: "Web applications and admin dashboards",
-        text: "Web applications and admin dashboards are for work that is more than a brochure: roles, records and the screens staff use. These are custom builds, scoped around the job, not a theme with the logo swapped.",
-      },
-      {
-        title: "API integrations and website maintenance",
-        text: "API integrations connect the site to forms, payments, a CRM or another system you already run. Website maintenance — updates, fixes and small changes after launch — is available when you want it, and is listed in the scope rather than assumed.",
+        title: "What is included",
+        text: "The scope lists the pages, how someone gets in touch, and any connection to forms, payments, a CRM or another system you already run. Handover is whatever the written agreement says you keep. Website maintenance after launch — updates, fixes and small changes — is included only when the scope says so.",
       },
       {
         title: "How to start",
-        text: "Say whether you need a business site, an online shop or a web application, and what content or systems you already have. The consultation fixes the pages, integrations and handover before anyone builds.",
+        text: "Say whether you need a business site, an online shop or a web application, and what content or systems you already have. Book that conversation from the contact page or WhatsApp. The first reply is a scope, not a build.",
       },
     ],
     deliverables: [
@@ -210,14 +206,18 @@ export const services: {
       "API integrations",
       "Website maintenance",
     ],
-    cta: "Request Free Consultation",
+    cta: "Book Free Consultation",
     related: ["software"],
-    relatedServices: ["software-development", "app-development", "digital-marketing", "ai-development"],
+    relatedServices: ["digital-marketing", "software-development", "app-development", "ai-development"],
     image: "/media/work/buildsite.jpg",
     imageAlt: "BuildSite, a custom web application developed by MKSAnalytIQ",
     seoTitle: "Web Development Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ provides website and web application development in Noida, Delhi NCR and across India, including business websites, web apps, dashboards and custom digital solutions.",
+    processIntro:
+      "Website and web-app work follows the studio’s five steps: confirm the pages and the audience, approve the scope, build where you can see progress, launch, then change only what was agreed.",
+    technologyNote:
+      "Published studio websites and web apps have used Next.js, TypeScript and JavaScript. PostgreSQL and Prisma show up when the product stores its own data. A new project does not automatically use all of those. The scope names the stack.",
   },
   {
     id: "software",
@@ -235,24 +235,16 @@ export const services: {
       "We scope the build, ship it in the open, and hand over what the written agreement says you keep — including a repository when that is part of the scope.",
     sections: [
       {
-        title: "Custom software and SaaS",
-        text: "Custom software for one operation, or SaaS development when the product needs accounts, roles and a way to charge. Published studio work includes multi-tenant products and internal tools. The scope says what ships and what is handed over.",
+        title: "What this service is",
+        text: "Software development is custom software, a SaaS product or an internal business system your own team can run. It covers web applications, dashboards, APIs and database-backed tools when the operation needs them.",
       },
       {
-        title: "Web applications, dashboards and business software",
-        text: "Web applications, business software and dashboards cover the screens a team uses to do the work: records, pipelines, billing and the rest of the operation. Database-backed applications are part of that when the data has to stay in your system.",
-      },
-      {
-        title: "API development",
-        text: "API development connects the product to the other tools you already use, or exposes your own data to a website or an app. The endpoints and the access rules are part of the written scope.",
-      },
-      {
-        title: "AI-enabled software",
-        text: "AI-enabled software means a feature inside the product — a guided flow, a draft, or an assistant a person reviews. It is an integration or a feature in the scope, not a claim that MKSAnalytIQ trains its own models.",
+        title: "What is included",
+        text: "The scope says what ships, who can sign in, which other systems it talks to, and whether a repository is part of the handover. An AI feature, if you need one, is a named part of that scope rather than an open-ended research project.",
       },
       {
         title: "How to start",
-        text: "Describe the operation the software has to support. The first conversation decides whether that is custom software, a SaaS product or a dashboard, and whether a repository is part of the handover.",
+        text: "Describe the operation the software has to support. The consultation decides whether that is custom software, a SaaS product or a dashboard, and what the handover includes.",
       },
     ],
     deliverables: [
@@ -266,7 +258,7 @@ export const services: {
       "AI-enabled software",
       "Repository handover",
     ],
-    cta: "Request Free Consultation",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["web-development", "app-development", "ai-development", "digital-marketing"],
     image: "/media/devices.jpg",
@@ -274,6 +266,10 @@ export const services: {
     seoTitle: "Software Development Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
+    processIntro:
+      "Software follows the same five steps: understand the operation, approve a written scope, build in the open, hand over what was agreed, then improve only against that scope.",
+    technologyNote:
+      "Published studio software has used Next.js, TypeScript, Python, NestJS, PostgreSQL and Prisma. Those are examples from shipped projects, not a stack every brief must use. The scope names what this one will use.",
   },
   {
     id: "app",
@@ -291,20 +287,16 @@ export const services: {
       "We write down the platforms, the screens and the handover, then build against that scope. Maintenance after launch is included only when the scope says so.",
     sections: [
       {
-        title: "Android, iOS and cross-platform apps",
-        text: "Android app development, iOS app development and cross-platform app development are chosen for the brief. Published studio projects have used Expo for cross-platform apps, Swift for an iOS app, and Kotlin for an Android component. A new project does not automatically use every one of those. The scope names the stack.",
+        title: "What this service is",
+        text: "App development is a custom Android, iOS or cross-platform application for customers or staff, with an admin side and an API when the app has to share data with a website or another system.",
       },
       {
-        title: "Business apps, admin panels and APIs",
-        text: "Business apps cover a workflow customers or staff repeat. An admin panel and API integration are included when the app has to share data with a website, a database or a system you already run.",
-      },
-      {
-        title: "App maintenance",
-        text: "App maintenance is updates after the first release, when you want them. What continues — fixes, store releases, small changes — is agreed in writing rather than assumed.",
+        title: "What is included",
+        text: "The scope names the platforms, the screens, the admin panel and any API. Published studio work has used Expo for cross-platform apps, Swift for an iOS app and Kotlin for an Android component. A new brief does not automatically include every platform. App maintenance after the first release is included only when the scope says so.",
       },
       {
         title: "How to start",
-        text: "Say who will use the app and whether you already know if it should be Android, iOS or cross-platform. The scope names the platforms, the admin panel and any API. You can book that conversation from Noida or remotely across Delhi NCR and India.",
+        text: "Say who will use the app and whether it should be Android, iOS or cross-platform, if you already know. You can book that conversation from Noida or remotely across Delhi NCR and India.",
       },
     ],
     deliverables: [
@@ -316,7 +308,7 @@ export const services: {
       "Business apps",
       "App maintenance",
     ],
-    cta: "Request Free Consultation",
+    cta: "Book Free Consultation",
     related: ["software"],
     relatedServices: ["software-development", "web-development", "ai-development"],
     image: "/media/work/spark-mobile.jpg",
@@ -324,6 +316,10 @@ export const services: {
     seoTitle: "App Development Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ develops custom mobile and business applications for companies in Noida, Delhi NCR and across India.",
+    processIntro:
+      "An app uses the same five steps: who it is for, a written scope of platforms and screens, a build you can review, a release, then updates only if maintenance was agreed.",
+    technologyNote:
+      "Where a published project names a mobile stack, it is Expo, Swift or Kotlin, sometimes with TypeScript and Supabase. The stack for a new app is chosen in the scope, not copied from another project.",
   },
   {
     id: "ai",
@@ -341,20 +337,16 @@ export const services: {
       "We scope the job: what the software should draft, route or answer, which integrations it uses, and who approves the output. MKSAnalytIQ does not claim a proprietary foundation model.",
     sections: [
       {
-        title: "AI-powered applications and chatbots",
-        text: "AI-powered applications and AI chatbots are built for a specific job — answering questions about your offer, guiding a form, or drafting a reply for a person to approve. The value is the workflow around the model, not a claim that the studio trains its own.",
+        title: "What this service is",
+        text: "AI development here is a product feature: a chatbot, a draft, a check or an automation inside a job your team already does. MKSAnalytIQ does not claim a proprietary foundation model. The useful part is the workflow and the review step around an external AI tool.",
       },
       {
-        title: "Automation and AI integrations",
-        text: "Business automation and workflow automation connect steps your team already does: intake, a draft, an approval, a handoff. AI integrations use external AI tools where they help that sequence. The tools and the limits are named in the scope.",
-      },
-      {
-        title: "Dashboards and business tools",
-        text: "AI dashboards and other intelligent business tools put that work in one place so someone can see what was drafted, what was approved and what still needs a person. They are business software with an AI feature, not an unsupervised system.",
+        title: "What is included",
+        text: "The scope names the job, the tool, what a person still approves, and where the result goes — a dashboard, a form or another system. Chatbots, workflow automation and AI-assisted drafts are the usual shapes. An unsupervised system is not what this service is.",
       },
       {
         title: "How to start",
-        text: "Describe the job — a chatbot, a draft step, or automation inside a system you already run. The consultation names the integration and what a person still approves. That is how an AI feature is scoped, not a research engagement.",
+        text: "Describe the job: a chatbot, a draft step, or automation inside a system you already run. The consultation names the integration and the approval step. That is a software scope, not a research engagement.",
       },
     ],
     deliverables: [
@@ -366,14 +358,18 @@ export const services: {
       "AI dashboards",
       "Intelligent business tools",
     ],
-    cta: "Request Free Consultation",
+    cta: "Book Free Consultation",
     related: ["software"],
-    relatedServices: ["software-development", "web-development", "app-development"],
+    relatedServices: ["software-development", "digital-marketing", "web-development", "app-development"],
     image: "/media/work/taxpilot.jpg",
     imageAlt: "TaxPilot AI, a guided software project developed by MKSAnalytIQ",
     seoTitle: "AI Development & Automation Company in Noida | MKSAnalytIQ",
     seoDescription:
       "MKSAnalytIQ builds AI-powered software, automation workflows, chatbots and intelligent business tools for companies in Noida, Delhi NCR and India.",
+    processIntro:
+      "AI work uses the same five steps as other software: define the job, approve the tools and the review step in writing, build that workflow, launch it to the people who will use it, then adjust only what the scope allows.",
+    technologyNote:
+      "Published examples include TaxPilot AI, a guided preparation tool, and AI Influencer OS, a workspace for drafts and approval. Integrations use external AI tools named in the scope. The studio does not claim that it trains its own models.",
   },
   {
     id: "social",
@@ -599,6 +595,7 @@ export const projects: {
     seoTitle: "Open CPaaS — Messaging and Communications Platform | MKSAnalytIQ",
     seoDescription:
       "Project overview of Open CPaaS: messaging, verify, voice, email, provider routing and an Android SMS gateway.",
+    serviceSlugs: ["software-development", "app-development"],
   },
   {
     slug: "taxpilot",
@@ -643,6 +640,7 @@ export const projects: {
     seoDescription:
       "Project overview of the Hindi, mobile-first eye-camp registration system for a free cataract camp in Varanasi.",
     builtFor: "Trishakti Seva Foundation and RJ Shankara Eye Hospital",
+    serviceSlugs: ["web-development", "event-management"],
   },
   {
     slug: "navi-zindagi",
@@ -659,6 +657,7 @@ export const projects: {
     seoDescription:
       "Project overview of the Navi Zindagi fundraising and volunteer site for flood-relief work in Nepal and Assam.",
     builtFor: "Navi Zindagi Foundation",
+    serviceSlugs: ["web-development"],
   },
   {
     slug: "influencer-os",
@@ -711,6 +710,7 @@ export const projects: {
     live: "",
     seoTitle: "BrokerFree — Real Estate CRM and Listings | MKSAnalytIQ",
     seoDescription: "Project overview of BrokerFree, a multi-tenant real estate system with CRM, listings and a pipeline.",
+    serviceSlugs: ["software-development"],
   },
   {
     slug: "brjbharat",
@@ -727,6 +727,7 @@ export const projects: {
     seoDescription:
       "Project overview of the bilingual Bhartiya Rashtriya Jansatta website, including forms, a news feed and an admin console.",
     builtFor: "Bhartiya Rashtriya Jansatta",
+    serviceSlugs: ["web-development"],
   },
   {
     slug: "carnispora",
@@ -755,6 +756,7 @@ export const projects: {
     live: "",
     seoTitle: "EdgeBot — Crypto Futures Trading Bot | MKSAnalytIQ",
     seoDescription: "Project overview of EdgeBot, a crypto futures trading bot built with Next.js.",
+    serviceSlugs: ["software-development"],
   },
   {
     slug: "spark",
@@ -768,6 +770,7 @@ export const projects: {
     live: "https://dating-app-me-5f01.vercel.app",
     seoTitle: "Spark — Dating App with Chat | MKSAnalytIQ",
     seoDescription: "Project overview of Spark, a dating app with accounts, a swipe deck, matches and chat.",
+    serviceSlugs: ["software-development", "web-development"],
   },
   {
     slug: "spark-mobile",
@@ -797,6 +800,7 @@ export const projects: {
     live: "",
     seoTitle: "KrushnaAI — Agent Marketplace | MKSAnalytIQ",
     seoDescription: "Project overview of KrushnaAI, an agent marketplace and agent-as-a-service product.",
+    serviceSlugs: ["ai-development", "software-development"],
   },
   {
     slug: "krushnalabs",
@@ -810,6 +814,7 @@ export const projects: {
     live: "https://krushnalabs.vercel.app",
     seoTitle: "KrushnaLabs — AI Software Builder | MKSAnalytIQ",
     seoDescription: "Project overview of KrushnaLabs, a product for building software by talking to AI.",
+    serviceSlugs: ["ai-development", "software-development"],
   },
   {
     slug: "ludo-kingdom",
@@ -823,6 +828,7 @@ export const projects: {
     live: "",
     seoTitle: "Ludo Kingdom — Multiplayer Mobile Game | MKSAnalytIQ",
     seoDescription: "Project overview of Ludo Kingdom, an Android and iOS Ludo app with multiplayer.",
+    serviceSlugs: ["app-development"],
   },
   {
     slug: "mediagrab",
@@ -837,6 +843,7 @@ export const projects: {
     seoTitle: "MediaGrab — Media Download Tool | MKSAnalytIQ",
     seoDescription:
       "Project overview of MediaGrab, a tool for downloading videos and images from X, Instagram, Facebook and YouTube.",
+    serviceSlugs: ["software-development", "web-development"],
   },
   {
     slug: "metasocial",
@@ -850,6 +857,7 @@ export const projects: {
     live: "https://metasocial-mu.vercel.app",
     seoTitle: "MetaSocial — Social Post Scheduler | MKSAnalytIQ",
     seoDescription: "Project overview of MetaSocial, a scheduler for posts, mentions, rules and AI drafts.",
+    serviceSlugs: ["digital-marketing", "ai-development"],
   },
   {
     slug: "omnisell",
@@ -863,6 +871,7 @@ export const projects: {
     live: "https://omnisell-swart.vercel.app",
     seoTitle: "OmniSell — Multi-Channel Ecommerce Software | MKSAnalytIQ",
     seoDescription: "Project overview of OmniSell, multi-channel ecommerce management.",
+    serviceSlugs: ["software-development", "web-development"],
   },
   {
     slug: "rajput-rishta",
@@ -876,6 +885,7 @@ export const projects: {
     live: "https://rajput-rishta-mocha.vercel.app",
     seoTitle: "Rajput Rishta — Community Matrimony Product | MKSAnalytIQ",
     seoDescription: "Project overview of Rajput Rishta, a community matrimony product for web and mobile.",
+    serviceSlugs: ["web-development", "app-development"],
   },
   {
     slug: "siteforge",
@@ -889,6 +899,7 @@ export const projects: {
     live: "",
     seoTitle: "SiteForge — Website Generation SaaS | MKSAnalytIQ",
     seoDescription: "Project overview of SiteForge, a SaaS for generating websites from a prompt.",
+    serviceSlugs: ["software-development", "web-development"],
   },
   {
     slug: "storageclean",
@@ -902,6 +913,7 @@ export const projects: {
     live: "",
     seoTitle: "StorageClean — iOS Storage App | MKSAnalytIQ",
     seoDescription: "Project overview of StorageClean, an iOS app for freeing device space.",
+    serviceSlugs: ["app-development"],
   },
   {
     slug: "tubeforge",
@@ -915,6 +927,7 @@ export const projects: {
     live: "",
     seoTitle: "TubeForge — YouTube Publishing Tool | MKSAnalytIQ",
     seoDescription: "Project overview of TubeForge, a YouTube channel tool for scripts, video and publishing.",
+    serviceSlugs: ["digital-marketing", "software-development"],
   },
 ];
 
@@ -952,6 +965,15 @@ export function servicesForProject(project: {
 
 export function projectsIn(categories: readonly ProjectCategory[]) {
   return projects.filter((project) => categories.includes(project.category));
+}
+
+/** Portfolio pages that name this service. Falls back to a short category match. */
+export function projectsForService(slug: string) {
+  const tagged = projects.filter((project) => project.serviceSlugs?.includes(slug));
+  if (tagged.length) return tagged.slice(0, 6);
+  const service = getService(slug);
+  if (!service) return [];
+  return projectsIn(service.related).slice(0, 3);
 }
 
 export type Testimonial = {
@@ -1099,6 +1121,36 @@ export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
     q: "Can you integrate AI into an existing business application?",
     a: "Yes, when that is the brief. It means adding a defined job — a draft, a chatbot, a check or a workflow — using AI tools named in the scope. MKSAnalytIQ does not claim a proprietary model, and the existing system is not changed beyond what the scope lists.",
     tags: ["ai", "software"],
+  },
+  {
+    id: "start-marketing",
+    q: "How do I start digital marketing with MKSAnalytIQ?",
+    a: "Book a free consultation or send a WhatsApp message with the offer and whether a landing page already exists. You receive a written scope before any campaign launches. Prices are not listed on this site.",
+    tags: ["marketing"],
+  },
+  {
+    id: "start-web",
+    q: "How do I start a website or web app project?",
+    a: "Tell us whether you need a business site, an online shop or a web application, and what content or systems you already have. The consultation turns that into a written scope before production starts.",
+    tags: ["web"],
+  },
+  {
+    id: "start-software",
+    q: "How do I start a custom software project?",
+    a: "Describe the operation the software has to support. The first conversation decides the shape of the build and whether a repository is part of the handover. Work starts after you approve the written scope.",
+    tags: ["software"],
+  },
+  {
+    id: "start-app",
+    q: "How do I start an app project?",
+    a: "Say who will use the app and which platforms you have in mind. The scope then names Android, iOS or cross-platform, plus any admin panel or API. You can start that conversation from Noida or remotely.",
+    tags: ["app"],
+  },
+  {
+    id: "start-ai",
+    q: "How do I start an AI or automation project?",
+    a: "Describe the job you want drafted, answered or routed, and who should approve the output. The consultation names the external tools and the limits. MKSAnalytIQ does not scope this as training a new foundation model.",
+    tags: ["ai"],
   },
 ];
 

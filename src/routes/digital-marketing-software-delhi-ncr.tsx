@@ -117,7 +117,7 @@ function DelhiNcrPage() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild>
               <Link to="/contact">
-                Request Free Consultation <ArrowRight className="size-4" aria-hidden />
+                Book Free Consultation <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
             <WhatsAppButton source="delhi-ncr" message="Hello, I need help with a project in Delhi NCR." />
@@ -177,7 +177,7 @@ function DelhiNcrPage() {
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Button asChild>
             <Link to="/contact">
-              Request Free Consultation <ArrowRight className="size-4" aria-hidden />
+              Book Free Consultation <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>
           <Button asChild variant="line">

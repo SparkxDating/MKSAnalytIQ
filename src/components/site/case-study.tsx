@@ -199,7 +199,7 @@ export function CaseStudy({ project }: { project: Project }) {
               Tell us what you’re trying to build or promote. The first conversation is to see if the work is a fit.
             </p>
             <Button asChild className="mt-4 w-full">
-              <Link to="/contact">Request Free Consultation</Link>
+              <Link to="/contact">Book Free Consultation</Link>
             </Button>
             <WhatsAppButton
               source={`case-${project.slug}`}

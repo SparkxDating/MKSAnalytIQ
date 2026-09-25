@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import { track } from "@/lib/analytics";
-import { faqsFor, projectsIn, relatedServices, steps, site, type services } from "@/lib/content";
+import { faqsFor, projectsForService, relatedServices, steps, site, type services } from "@/lib/content";
 import { absoluteUrl, areaServedPlaces, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { Button } from "./button";
 import { FaqList } from "./faq";
@@ -14,7 +14,7 @@ import { WhatsAppButton } from "./whatsapp";
 type Service = (typeof services)[number];
 
 export function ServiceDetail({ service }: { service: Service }) {
-  const related = projectsIn(service.related);
+  const related = projectsForService(service.slug);
   const questions = faqsFor(service.id);
   const path = `/services/${service.slug}`;
   const linked = relatedServices(service.relatedServices);
@@ -119,6 +119,13 @@ export function ServiceDetail({ service }: { service: Service }) {
         </article>
       </section>
 
+      <section className="mx-auto max-w-6xl px-5 pt-4">
+        <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+          <h2 className="text-2xl font-extrabold">Who it is for</h2>
+          <p className="mt-3 text-sm leading-relaxed text-mute">{service.suitable}</p>
+        </article>
+      </section>
+
       <section className="mx-auto max-w-6xl space-y-4 px-5 py-4">
         {service.sections.map((section) => (
           <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
@@ -140,16 +147,22 @@ export function ServiceDetail({ service }: { service: Service }) {
               </li>
             ))}
           </ul>
-          <p className="mt-5 text-sm leading-relaxed text-mute">
-            <span className="font-semibold text-ink">Suitable for: </span>
-            {service.suitable}
-          </p>
         </div>
       </section>
+
+      {service.technologyNote ? (
+        <section className="mx-auto max-w-6xl px-5 pb-4">
+          <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+            <h2 className="text-2xl font-extrabold">Technologies and solutions</h2>
+            <p className="mt-3 text-sm leading-relaxed text-mute">{service.technologyNote}</p>
+          </article>
+        </section>
+      ) : null}
 
       {linked.length ? (
         <section className="mx-auto max-w-6xl px-5 pb-4">
           <h2 className="text-2xl font-extrabold">Related services</h2>
+          <ServiceBridges slug={service.slug} />
           <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
             {linked.map((item) => (
               <li key={item.slug}>
@@ -165,7 +178,8 @@ export function ServiceDetail({ service }: { service: Service }) {
       <section className="mx-auto max-w-6xl px-5 py-12">
         <h2 className="text-3xl font-extrabold tracking-tight">Process</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
-          {steps.length} steps, the same shape as every other engagement: you always know what happens next.
+          {service.processIntro ??
+            `${steps.length} steps, the same shape as every other engagement: you always know what happens next.`}
         </p>
         <ProcessSteps />
       </section>
@@ -203,4 +217,84 @@ export function ServiceDetail({ service }: { service: Service }) {
       </section>
     </>
   );
+}
+
+function ServiceBridges({ slug }: { slug: string }) {
+  const linkClass = "font-semibold text-primary hover:text-ink";
+  if (slug === "digital-marketing") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
+        Campaigns usually need a page to land on, which is{" "}
+        <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
+          web development
+        </Link>
+        . When the follow-up is a chatbot or an automated draft, that work is{" "}
+        <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
+          AI development
+        </Link>
+        .
+      </p>
+    );
+  }
+  if (slug === "web-development") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
+        A site that also has to be marketed sits with{" "}
+        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+          digital marketing
+        </Link>
+        . When the brief is an internal system rather than a public site, see{" "}
+        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+          custom software development
+        </Link>
+        .
+      </p>
+    );
+  }
+  if (slug === "software-development") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
+        Public sites are{" "}
+        <Link to="/services/$service" params={{ service: "web-development" }} className={linkClass}>
+          web development
+        </Link>
+        . Phone and tablet products are{" "}
+        <Link to="/services/$service" params={{ service: "app-development" }} className={linkClass}>
+          app development
+        </Link>
+        , and a reviewed AI feature inside the product is{" "}
+        <Link to="/services/$service" params={{ service: "ai-development" }} className={linkClass}>
+          AI development
+        </Link>
+        .
+      </p>
+    );
+  }
+  if (slug === "app-development") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
+        The admin side, API and shared backend are usually{" "}
+        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+          custom software development
+        </Link>
+        .
+      </p>
+    );
+  }
+  if (slug === "ai-development") {
+    return (
+      <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
+        AI features ship as software, so the build sits with{" "}
+        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+          custom software development
+        </Link>
+        . When the job is leads or content rather than a product feature, see{" "}
+        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+          digital marketing
+        </Link>
+        .
+      </p>
+    );
+  }
+  return null;
 }
